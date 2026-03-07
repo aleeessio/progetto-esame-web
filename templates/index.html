@@ -1,21 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OmniDrive</title>
+
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #bbb;
+            color: #000;
+        }
+
+        /* HEADER */
+        header {
+            background: #bbb;
+            padding: 15px 20px;
+            border-bottom: 1px solid #999;
+            position: relative;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: auto;
+        }
+
+        .left-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-family: "Comic Sans MS", "Comic Sans";
+            font-weight: 400;
+            color: #FF6347;
+            font-size: 2rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .v-divider {
+            border-left: 1px solid #555;
+            align-self: stretch;
+            margin: 0 15px;
+        }
+
+
+
+
+    </style>
 </head>
 
 <body>
+    <!--HEADER-->
     <header>
+        <div class = "header-container">
+            <div class = "left-header">
+                <a href="index.html" style="text-decoration: none;"><div class="logo">OmniRide</div></a>
+            </div>
+            <nav>
+                <form method="POST">
+                    <button class="btn-lang">EN</button>
+                </form>
 
-
+                <!-- TEMA CHIARO/SCURO
+                <form method="POST">
+                    {% if theme == "white" %}
+                        <button class="btn-theme">white</button>
+                    {% elif theme == "black" %}
+                        <button class="btn-theme">black</button>
+                    {% endif %}
+                </form>
+                -->
+                <div class="v-divider"></div>
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="register.html" class="btn-register">Register</a>
+                <a href="profile.html" class="btn-dashboard" style="display: none;">Profile</a>
+            </nav>
+        </div>
     </header>
 
+    <!--FOOTER-->
+    <footer class="footer">
+        <div class="footer-division">
+            <!--Column Left-->
+            <div class="footer-col">
+                <a href="index.html" style="text-decoration: none;"><div class="logo">OmniRide</div></a>
+                <p>FRASI MOTIVAZIONALI SUL NOSTRO SITO WEB</p>
+            </div>
 
-    <footer>
+            <!--Column Centre-->
+            <div class="footer-col">
+                <h1>Links</h1>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
 
-        
+            <!--Column Right-->
+            <div class="footer-col">
+                <h1>Newsletter</h1>
+                <p>Iscriviti alla Newsletter</p>
+                <form class="newsletter">
+                    <input type="email" placeholder="Insert your email">
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <!--Bottom-->
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a href="privacy_policy.html">Privacy Policy</a>
+                <a href="terms_conditions.html">Terms and Conditions</a>
+            </div>    
+        </div>
     </footer>
 </body>
