@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniRide - Register</title>
+
+    <style>
+        /*------- RESET -------*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /*------- COLORS -------*/
+        :root {
+            --background-page: #f4f4f4;
+            --background-div: #ffffff;
+            --font-color: #1a1a1a;
+            --logo-color: #FF6347;
+            --border-color: #999;
+            --icon-color: #1a1a1a;
+        }
+
+        .dark-mode {
+            --background-page: #1d1d1d;
+            --background-div: #242424;
+            --font-color: #ffffff;
+            --logo-color: #FF6347;
+            --border-color: #333;
+            --icon-color: #f1c40f;
+        }
+
+        body {
+            background-color: var(--background-page);
+            color: var(--font-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /*------- HEADER -------*/
+        header {
+            background: var(--background-div);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: auto;
+        }
+
+        .logo {
+            font-weight: 400;
+            color: var(--logo-color);
+            font-size: 2rem;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-theme {
+            background-color: var(--background-div);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-theme svg {
+            width: 24px;
+            height: 24px;
+            color: var(--icon-color);
+            transition: color 0.4s ease;
+        }
+
+        .v-divider {
+            border-left: 1px solid var(--border-color);
+            align-self: stretch;
+            margin: 0 15px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .b-login {
+            background: var(--background-div);
+            color: var(--font-color);
+            border: 1px solid var(--border-color);
+            transition: background 0.4s;
+        }
+
+        .b-login:hover { background: var(--logo-color); }
+
+        .b-register {
+            background: var(--background-div);
+            color: var(--font-color);
+            border: 1px solid var(--border-color);
+            transition: background 0.4s;
+        }
+
+        .b-register:hover { background: var(--logo-color); }
+
+        /*------- MAIN / FORM -------*/
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .register-box {
+            background: var(--background-div);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .register-box h2 {
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: var(--font-color);
+        }
+
+        .form-group input {
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--background-page);
+            color: var(--font-color);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--logo-color);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--background-div);
+            color: var(--font-color);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.4s;
+        }
+
+        .btn-submit:hover { background: var(--logo-color); }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: var(--logo-color);
+            text-decoration: none;
+        }
+
+        /*------- FLASH MESSAGES -------*/
+        .flashes {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .flashes li {
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .flashes li.error   { background: #ffe0e0; color: #c0392b; border: 1px solid #c0392b; }
+        .flashes li.success { background: #e0ffe4; color: #27ae60; border: 1px solid #27ae60; }
+
+        /*------- FOOTER -------*/
+        footer {
+            background-color: var(--background-div);
+            color: var(--font-color);
+            padding: 40px 80px 20px;
+        }
+
+        .footer-division {
+            display: flex;
+            justify-content: space-between;
+            gap: 60px;
+            margin-bottom: 30px;
+        }
+
+        .footer-columns { flex: 1; }
+
+        .footer-columns h1 { color: var(--logo-color); margin-bottom: 20px; }
+
+        .footer-columns p { line-height: 1.5; margin-top: 20px; margin-bottom: 20px; }
+
+        .footer-columns ul { list-style: none; padding: 0; }
+
+        .footer-columns ul li { margin-bottom: 10px; }
+
+        .footer-columns ul li a {
+            color: var(--font-color);
+            text-decoration: none;
+            transition: color 0.4s;
+        }
+
+        .footer-columns ul li a:hover { color: var(--logo-color); }
+
+        .newsletter { display: flex; flex-direction: column; gap: 10px; }
+
+        .newsletter input {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--background-page);
+            color: var(--font-color);
+        }
+
+        .newsletter input::placeholder { color: var(--border-color); }
+
+        .newsletter button {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: var(--background-div);
+            color: var(--font-color);
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.4s;
+        }
+
+        .newsletter button:hover { background: var(--logo-color); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            margin-right: 20px;
+            color: #777;
+            text-decoration: none;
+            transition: color 0.4s;
+        }
+
+        .footer-links a:hover { color: var(--logo-color); }
+    </style>
+</head>
+
+<body>
+    <!--HEADER-->
+    <header>
+        <div class="header-container">
+            <a href="{{ url_for('index') }}" class="logo">OmniRide</a>
+            <nav>
+                <button id="theme-toggle" class="btn-theme">
+                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg id="moon-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <div class="v-divider"></div>
+                <a href="{{ url_for('login') }}" class="btn b-login">Login</a>
+                <a href="{{ url_for('register') }}" class="btn b-register">Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <!--MAIN-->
+    <main class="main-content">
+        <div class="register-box">
+            <h2>Create an account</h2>
+
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Form -->
+            <form method="POST" action="{{ url_for('register') }}">
+                <div class="form-group">
+                    <label for="name">Full name</label>
+                    <input type="text" id="name" name="name" placeholder="Will Smith" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="repeat_email">Email confirm</label>
+                    <input type="email" id="repeat_email" name="repeat_email" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Al least 6 characters" required>
+                </div>
+                <div class="form-group">
+                    <label for="repeat_password">Password confirm</label>
+                    <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat the password" required>
+                </div>
+                <button type="submit" class="btn-submit">Register</button>
+            </form>
+
+            <p class="login-link">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+        </div>
+    </main>
+
+    <!--FOOTER-->
+    <footer>
+        <div class="footer-division">
+            <div class="footer-columns">
+                <a href="{{ url_for('index') }}" class="logo">OmniRide</a>
+                <p>Let's ride!</p>
+            </div>
+            <div class="footer-columns">
+                <h1>Links</h1>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="#">Search</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-columns">
+                <h1>Newsletter</h1>
+                <p>Subscribe to our newsletter</p>
+                <form class="newsletter">
+                    <input type="email" placeholder="Insert your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms and Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btnTheme = document.getElementById('theme-toggle');
+        const sunIcon  = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        btnTheme.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const dark = document.body.classList.contains('dark-mode');
+            sunIcon.style.display  = dark ? 'none'  : 'block';
+            moonIcon.style.display = dark ? 'block' : 'none';
+        });
+    </script>
+</body>
+
+</html>
