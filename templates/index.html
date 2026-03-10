@@ -71,6 +71,7 @@
             font-weight: 400;
             color: var(--logo-color);
             font-size: 2rem;
+            text-decoration: none;
         }
 
         nav {
@@ -281,7 +282,7 @@
     <header>
         <div class = "header-container">
             <div class = "left-header">
-                <a href="index.html" style="text-decoration: none;"><div class="logo">OmniRide</div></a>
+                <a href="{{ url_for('index') }}" style="text-decoration: none;"><div class="logo">OmniRide</div></a>
             </div>
             <div>
                 <nav>
@@ -347,10 +348,10 @@
             <!--Column Right-->
             <div class="footer-columns">
                 <h1>Newsletter</h1>
-                <p>Iscriviti alla Newsletter</p>
+                <p>Subscribe to our newsletter</p>
                 <form class="newsletter">
                     <input type="email" placeholder="Insert your email">
-                    <button type="submit">Register</button>
+                    <button type="submit">Subscribe</button>
                 </form>
             </div>
         </div>

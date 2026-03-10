@@ -46,20 +46,15 @@ def register():
     if request.method == 'POST':
         name = request.form.get("name", "").strip()
         email = request.form.get("email", "").strip()
-        repeat_email = request.form.get("repeat_email", "").strip()
         password = request.form.get("password", "").strip()
         repeat_password = request.form.get("repeat_password", "").strip()
 
         ############################ Start errors check ############################
         
-        check_nullness = [len(name), len(email), len(repeat_email), len(password), len(repeat_email)]
+        check_nullness = [len(name), len(email), len(password), len(repeat_password)]
 
         if 0 in check_nullness:
             flash("Riempi ogni campo!", "error")
-            return redirect(url_for('register'))
-        
-        if email != repeat_email:
-            flash("Emails don't match!", "error")
             return redirect(url_for('register'))
         
         if password != repeat_password:
@@ -101,6 +96,18 @@ def register():
 @app.route('/login')
 def login():
     return render_template("login.html")
+
+@app.route('/search')
+def search():
+    return render_template("search.html")
+
+@app.route('/profile')
+def profile():
+    return render_template("profile.html")
+
+@app.route('/contanct')
+def contact():
+    return render_template("contact.html")
 
 # -------------------------------
 
