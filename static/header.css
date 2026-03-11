@@ -1,0 +1,116 @@
+/*------- HEADER -------*/
+        header {
+            background: var(--background-div);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: auto;
+        }
+
+        .left-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+            color: var(--logo-color);
+            font-size: 2rem;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--font-color);
+            text-decoration: none;
+        }
+
+        .btn-theme {
+            background-color: var(--background-div);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-theme svg {
+            width: 24px;
+            height: 24px;
+            color: var(--icon-color);
+            transition: color 0.4s ease;
+        }
+
+        .v-divider {
+            border-left: 1px solid var(--border-color);
+            align-self: stretch;
+            margin: 0 15px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .b-lang {
+            background: transparent;
+            color: var(--font-color);
+            border: 0px;
+            cursor: pointer;
+            padding: 1rem;
+        }
+
+        .b-login {
+            background: var(--background-div);
+            color: var(--font-color);
+            border: 1px solid var(--border-color);
+            transition: background 0.4s;
+        }
+
+        .b-login:hover {
+            background: var(--logo-color);
+        }
+
+        .b-register {
+            background: var(--background-div);
+            color: var(--font-color);
+            border: 1px solid var(--border-color);
+            transition: background 0.4s;
+        }
+
+        .b-register:hover {
+            background: var(--logo-color);
+        }
+
+        .b-profile {
+            background: var(--background-div);
+            color: var(--font-color);
+            border: 1px solid var(--border-color);
+            transition: background 0.4s;
+        }
+
+        .b-profile:hover {
+            background: var(--logo-color);
+        }

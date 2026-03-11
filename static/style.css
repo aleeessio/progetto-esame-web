@@ -1,0 +1,36 @@
+/*------- RESET -------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/*------- COLORS -------*/
+:root {
+  --background-page: #f4f4f4;
+  --background-div: #ffffff;
+  --font-color: #1a1a1a;
+  --logo-color: #FF6347;
+  --border-color: #999;
+  --icon-color: #1a1a1a;
+}
+
+.dark-mode {
+  --background-page: #1d1d1d;
+  --background-div: #242424;
+  --font-color: #ffffff;
+  --logo-color: #FF6347;
+  --border-color: #333;
+  --icon-color: #f1c40f;
+}
+
+body {
+  background-color: var(--background-page);
+  color: var(--font-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
