@@ -1,92 +1,92 @@
 /*------- MAIN / FORM -------*/
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 20px;
-        }
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
 
-        .register-box {
-            background: var(--background-div);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 40px;
-            width: 100%;
-            max-width: 480px;
-        }
+.register-box {
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+}
 
-        .register-box h2 {
-            margin-bottom: 30px;
-            font-size: 1.6rem;
-        }
+.register-box h2 {
+    margin-bottom: 30px;
+    font-size: 1.6rem;
+}
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 18px;
-        }
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
 
-        .form-group label {
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            color: var(--font-color);
-        }
+.form-group label {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: var(--font-color);
+}
 
-        .form-group input {
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: var(--background-page);
-            color: var(--font-color);
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
+.form-group input {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-page);
+    color: var(--font-color);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
 
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--logo-color);
-        }
+.form-group input:focus {
+    outline: none;
+    border-color: var(--logo-color);
+}
 
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: var(--background-div);
-            color: var(--font-color);
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.4s;
-        }
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-div);
+    color: var(--font-color);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.4s;
+}
 
-        .btn-submit:hover { background: var(--logo-color); }
+.btn-submit:hover { background: var(--logo-color); }
 
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.9rem;
-        }
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
 
-        .login-link a {
-            color: var(--logo-color);
-            text-decoration: none;
-        }
+.login-link a {
+    color: var(--logo-color);
+    text-decoration: none;
+}
 
-        /*------- FLASH MESSAGES -------*/
-        .flashes {
-            list-style: none;
-            margin-bottom: 20px;
-        }
+/*------- FLASH MESSAGES -------*/
+.flashes {
+    list-style: none;
+    margin-bottom: 20px;
+}
 
-        .flashes li {
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
+.flashes li {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
 
-        .flashes li.error   { background: #ffe0e0; color: #c0392b; border: 1px solid #c0392b; }
-        .flashes li.success { background: #e0ffe4; color: #27ae60; border: 1px solid #27ae60; }
+.flashes li.error   { background: #ffe0e0; color: #c0392b; border: 1px solid #c0392b; }
+.flashes li.success { background: #e0ffe4; color: #27ae60; border: 1px solid #27ae60; }

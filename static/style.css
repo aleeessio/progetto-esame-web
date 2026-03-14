@@ -28,9 +28,25 @@
 body {
   background-color: var(--background-page);
   color: var(--font-color);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 1s ease, color 1s ease;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
+}
+
+a {
+  transition: background-color 1s ease, color 1s ease;
+}
+
+button {
+  transition: background-color 1s ease, color 1s ease;
+}
+
+input {
+  transition: background-color 1s ease, color 1s ease;
+}
+
+form {
+  transition: background-color 1s ease, color 1s ease;
 }
