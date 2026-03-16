@@ -142,17 +142,29 @@
         //CHANGE THEME
         const btnTheme = document.getElementById('theme-toggle');
         const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
+        const moonIcon = document.getElementById('moon-icon');   
         const body = document.body;
+        
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.toggle('dark-mode');
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        } else {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+
         btnTheme.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
 
             if (body.classList.contains('dark-mode')) {
                 sunIcon.style.display = 'none';
                 moonIcon.style.display = 'block';
+                localStorage.setItem('theme', 'dark');
             } else {
                 sunIcon.style.display = 'block';
                 moonIcon.style.display = 'none';
+                localStorage.setItem('theme', 'light');
             }
         });
     </script>
