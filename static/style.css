@@ -14,6 +14,8 @@
   --logo-color: #FF6347;
   --border-color: #999;
   --icon-color: #1a1a1a;
+  --success-color: #00c853;
+  --error-color: #f44336;
 }
 
 .dark-mode {
@@ -23,6 +25,8 @@
   --logo-color: #FF6347;
   --border-color: #333;
   --icon-color: #f1c40f;
+  --success-color: #00c853;
+  --error-color: #f44336;
 }
 
 body {

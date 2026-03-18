@@ -102,10 +102,10 @@ nav a {
 .b-register:hover { background: var(--logo-color); }
 
 .b-profile {
-    background: var(--background-div);
+    background: var(--logo-color);
     color: var(--font-color);
     border: 1px solid var(--border-color);
     transition: background 0.4s;
 }
 
-.b-profile:hover { background: var(--logo-color); }
+.b-profile:hover { background: #ad230b; }

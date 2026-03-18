@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}" type="text/css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}" type="text/css">
+    
     <style>
         /*------- MAIN -------*/
         .main-content {
@@ -22,6 +23,21 @@
 </head>
 
 <body>
+    <div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            <span class="message-text">{{ message }}</span>
+                            <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
     <!--HEADER-->
     <header>
         <div class = "header-container">

@@ -10,10 +10,26 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='login-register.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}" type="text/css">
 
 </head>
 
 <body>
+    <div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            <span class="message-text">{{ message }}</span>
+                            <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
     <!--HEADER-->
     <header>
         <div class="header-container">
@@ -48,10 +64,13 @@
 
                     <!--Buttons Login/Register/Profile-->
                     <div class="v-divider"></div>
-                    <a href="{{ url_for('login') }}" class="btn b-login">Login</a>
-                    <a href="{{ url_for('register') }}" class="btn b-register">Register</a>
-                    <a href="profile.html" class="btn b-profile" style="display: none;">Profile</a>
-                </nav>
+                    {% if session.user_id %}
+                        <a href="{{ url_for('profile') }}" class="btn b-profile">Profile</a>
+                        <a href="{{ url_for('logout') }}" class="btn b-login">Logout</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="btn b-login">Login</a>
+                        <a href="{{ url_for('register') }}" class="btn b-register">Register</a>
+                    {% endif %}
             </div>
         </div>
     </header>
@@ -60,17 +79,6 @@
     <main class="main-content">
         <div class="register-box">
             <h2>Create an account</h2>
-
-            <!-- Flash messages -->
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <ul class="flashes">
-                        {% for category, message in messages %}
-                            <li class="{{ category }}">{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
 
             <!-- Form -->
             <form method="POST" action="{{ url_for('register') }}">
