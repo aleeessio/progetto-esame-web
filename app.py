@@ -100,28 +100,32 @@ def login():
         pwd = request.form.get("password", "").strip()
 
         with db_connect() as db:
-            stored_email = db.execute(
-                'SELECT id FROM users where email = ?', (email,)
+            user = db.execute(
+                'SELECT id, name, password FROM users where email = ?', (email,)
             ).fetchone()
 
-        if stored_email is None:
+        if user is None:
             flash("Register first!", 'error')
             return redirect(url_for('register'))
 
-        with db_connect() as db:
-            stored_hash = db.execute(
-                'SELECT password FROM users where email = ?', (email,)
-            ).fetchone()
-        auth = check_password_hash(stored_hash[0], pwd)
+        auth = check_password_hash(user['password'], pwd)
 
         if auth:
+            session['user_id'] = user['id']
+            session['user_name'] = user['name']
+
             flash("Logged in!", 'success')
-            return redirect(url_for('login'))
+            return redirect(url_for('index'))
         else:
             flash("Password incorrect!", 'error')
             return redirect(url_for('login'))
 
     return render_template("login.html")
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/search')
 def search():

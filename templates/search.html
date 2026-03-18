@@ -57,9 +57,13 @@
                     
                     <!--Buttons Login/Register/Profile-->
                     <div class="v-divider"></div>
-                    <a href="{{ url_for('login') }}" class="btn b-login">Login</a>
-                    <a href="{{ url_for('register') }}" class="btn b-register">Register</a>
-                    <a href="{{ url_for('profile') }}" class="btn b-profile" style="display: none;">Profile</a>
+                    {% if session.user_id %}
+                        <a href="{{ url_for('profile') }}" class="btn b-profile">Profile</a>
+                        <a href="{{ url_for('logout') }}" class="btn b-login">Logout</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="btn b-login">Login</a>
+                        <a href="{{ url_for('register') }}" class="btn b-register">Register</a>
+                    {% endif %}
                 </nav>
             </div>
         </div>
