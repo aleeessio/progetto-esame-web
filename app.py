@@ -86,7 +86,7 @@ def register():
             db.commit()
 
         flash("Registration succeded, login!", 'success')
-        return redirect(url_for('register'))
+        return redirect(url_for('login'))
 
         ############################ End DB update ############################
     
