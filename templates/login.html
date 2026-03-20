@@ -66,10 +66,17 @@
                     
                     <!--Buttons Login/Register/Profile-->
                     <div class="v-divider"></div>
+                    {% if session.get('is_admin') %}
+                        <a href="{{ url_for('admin') }}" class="btn b-login">Manage</a>
+                        <a href="{{ url_for('logout') }}" class="btn b-login">Logout</a>
+                    {% endif %}
+
                     {% if session.user_id %}
                         <a href="{{ url_for('profile') }}" class="btn b-profile">Profile</a>
                         <a href="{{ url_for('logout') }}" class="btn b-login">Logout</a>
-                    {% else %}
+                    {% endif %}
+
+                    {% if not session.get('is_admin') and not session.user_id %}
                         <a href="{{ url_for('login') }}" class="btn b-login">Login</a>
                         <a href="{{ url_for('register') }}" class="btn b-register">Register</a>
                     {% endif %}

@@ -32,10 +32,16 @@
 	color: var(--error-color);
 }
 
-.flash-message.info {
+/* .flash-message.info {
 	background-color: rgba(158, 158, 158, 0.15);
 	border: 1px solid var(--border-color);
 	color: var(--font-color);
+} */
+
+.flash-message.info {
+    background: #fff9e0;
+    color: #b8860b;
+    border: 1px solid #b8860b;
 }
 
 .close-btn {

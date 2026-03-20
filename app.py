@@ -7,6 +7,8 @@ app = Flask(__name__)
 app.secret_key = 'temprorary-secret-key'
 
 DB_USERS_PATH = 'data.db'
+ADMIN_EMAIL = "2.2@22"
+ADMIN_PWD = "12" 
 
 # -------------------------------
 # Database config
@@ -99,6 +101,16 @@ def login():
         email = request.form.get("email", "").strip()
         pwd = request.form.get("password", "").strip()
 
+        if email == ADMIN_EMAIL:
+            if pwd == ADMIN_PWD:
+                session['is_admin'] = True
+                flash("Welcome admin!", 'success')
+                return redirect(url_for('admin'))
+            
+            else:
+                flash("Password incorrect!", 'error')
+                return redirect(url_for('login'))
+
         with db_connect() as db:
             user = db.execute(
                 'SELECT id, name, password FROM users where email = ?', (email,)
@@ -126,6 +138,46 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
+@app.route('/admin')
+def admin():
+    if not session.get('is_admin'):
+        flash("Access denied!", 'error')
+        return redirect(url_for('index'))
+    
+    return render_template("admin.html")
+
+@app.route('/add_vehicle')
+def add_vehicle():
+    return redirect(url_for('admin'))
+
+@app.route('/user_list')
+def user_list():
+    if not session.get('is_admin'):
+        return redirect(url_for('index'))
+    
+    with db_connect() as db:
+        users = db.execute(
+            'SELECT id, name, email FROM users'
+        ).fetchall()
+    
+    return render_template("user_list.html", users=users)
+
+@app.route('/remove_user', methods=['POST'])
+def remove_user():
+    if not session.get('is_admin'):
+        return redirect(url_for('index'))
+    
+    index = request.form.get('user_id')
+
+    with db_connect() as db:
+        db.execute(
+            'DELETE FROM users WHERE id = ?', (index,)
+        )
+        db.commit()
+
+    flash("User removed!", 'info')
+    return redirect(url_for('user_list'))
 
 @app.route('/search')
 def search():

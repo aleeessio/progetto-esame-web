@@ -1,0 +1,137 @@
+/*------- MAIN -------*/
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+}
+
+/*------- TABLE BOX -------*/
+.table-box {
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1000px;
+    overflow-x: auto;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.table-header h2 {
+    font-size: 1.6rem;
+}
+
+/*------- BACK BUTTON -------*/
+.btn-back {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-div);
+    color: var(--font-color);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.4s;
+}
+
+.btn-back:hover { background: var(--logo-color); }
+
+/*------- TABLE -------*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+thead {
+    border-bottom: 1px solid var(--border-color);
+}
+
+thead th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--border-color);
+    font-weight: normal;
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: var(--background-page);
+}
+
+tbody td {
+    padding: 14px 16px;
+}
+
+/*------- EMPTY STATE -------*/
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--border-color);
+    font-size: 0.9rem;
+}
+
+/*------- SEARCH USER -------*/
+.search-input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-page);
+    color: var(--font-color);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--logo-color);
+}
+
+/*------- REMOVE USER -------*/
+.td-delete {
+    width: 40px;
+    text-align: center;
+}
+
+.btn-delete {
+    display: none;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--font-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+tbody tr:hover .btn-delete {
+    display: inline-block;
+}
+
+.btn-delete:hover {
+    background: #ffe0e0;
+    color: #c0392b;
+    border-color: #c0392b;
+}

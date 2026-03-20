@@ -1,0 +1,48 @@
+/*------- MAIN -------*/
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+/*------- ADMIN BOX -------*/
+.admin-box {
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.admin-box h2 {
+    margin-bottom: 30px;
+    font-size: 1.6rem;
+}
+
+/*------- BUTTONS -------*/
+.admin-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-div);
+    color: var(--font-color);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    transition: background 0.4s;
+}
+
+.btn-submit:hover { background: var(--logo-color); }
