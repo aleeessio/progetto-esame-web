@@ -44,6 +44,12 @@
     border: 1px solid #b8860b;
 }
 
+.flash-message.logout {
+    background: #fff9e0;
+    color: #b8860b;
+    border: 1px solid #b8860b;
+}
+
 .close-btn {
 	background: none;
 	border: none;

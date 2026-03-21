@@ -136,6 +136,11 @@ def login():
 
 @app.route('/logout')
 def logout():
+    flash("Are you sure?", 'logout')
+    return redirect(request.referrer)
+
+@app.route('/confirm_logout')
+def confirm_logout():
     session.clear()
     return redirect(url_for('index'))
 
@@ -149,7 +154,10 @@ def admin():
 
 @app.route('/add_vehicle')
 def add_vehicle():
-    return redirect(url_for('admin'))
+    if not session.get('is_admin'):
+        return redirect(url_for('index'))
+    else:
+        return render_template("add_vehicle.html")
 
 @app.route('/user_list')
 def user_list():

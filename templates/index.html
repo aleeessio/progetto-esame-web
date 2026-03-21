@@ -30,7 +30,12 @@
                     {% for category, message in messages %}
                         <div class="flash-message {{ category }}">
                             <span class="message-text">{{ message }}</span>
-                            <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+                            {% if category == 'logout' %}
+                                <a href="{{ url_for('confirm_logout') }}" style="text-decoration: none;" class="close-btn">Yes</a>
+                                <button type="submit" class="close-btn" onclick="this.parentElement.style.display='none'">No</button>
+                            {% else %}
+                                <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
@@ -74,7 +79,7 @@
                     <!--Buttons Login/Register/Profile-->
                     <div class="v-divider"></div>
                     {% if session.get('is_admin') %}
-                        <a href="{{ url_for('admin') }}" class="btn b-login">Manage</a>
+                        <a href="{{ url_for('admin') }}" class="btn b-profile">Manage</a>
                         <a href="{{ url_for('logout') }}" class="btn b-login">Logout</a>
                     {% endif %}
 
