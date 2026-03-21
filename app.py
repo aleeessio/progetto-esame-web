@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
+import json
 import os
 
 app = Flask(__name__)
@@ -19,7 +20,7 @@ def db_connect():
     conn.row_factory = sqlite3.Row
     return conn 
 
-def database_init():
+def user_db_init():
     with db_connect() as db:
         db.execute('''
             CREATE TABLE IF NOT EXISTS users (
@@ -30,6 +31,23 @@ def database_init():
             )
         ''')
         db.commit()
+
+def bike_db_init():
+    with db_connect() as db:
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS bikes (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   type TEXT NOT NULL,
+                   transmission TEXT NOT NULL,
+                   suspensions TEXT NOT NULL,
+                   accessories  TEXT CHECK(json_valid(accessories)),
+                   terrain TEXT NOT NULL
+            )
+        ''')
+
+def db_init():
+    user_db_init()
+    bike_db_init()
 
 # -------------------------------
 
@@ -152,12 +170,37 @@ def admin():
     
     return render_template("admin.html")
 
-@app.route('/add_vehicle')
+@app.route('/add_vehicle', methods=['GET', 'POST'])
 def add_vehicle():
     if not session.get('is_admin'):
         return redirect(url_for('index'))
-    else:
-        return render_template("add_vehicle.html")
+    
+    if request.method == 'POST':
+        vehicle_type = request.form.get('vehicle_type')
+
+        if vehicle_type == "bike":
+            bike_type = request.form.get('type')
+            transmission = request.form.get('transmission')
+            suspensions = request.form.get('suspensions')
+            accessories = json.dumps(request.form.getlist('accessories'))
+            terrain = request.form.get('terrain')
+
+            with db_connect() as db:
+                db.execute(
+                    'INSERT INTO bikes (type, transmission, suspensions, accessories, terrain) VALUES (?, ?, ?, ?, ?)', (bike_type, transmission, suspensions, accessories, terrain)
+                )
+                db.commit()
+            
+            flash("Vehicle added!", 'success')
+            return redirect(url_for('add_vehicle'))
+    
+    return render_template("add_vehicle.html")
+    
+@app.route('/list_vehicles')
+def list_vehicles():
+    if not session.get('is_admin'):
+        return redirect(url_for('index'))
+    return redirect(url_for('admin'))
 
 @app.route('/user_list')
 def user_list():
@@ -211,5 +254,5 @@ def terms_conditions():
 
 
 if __name__ == '__main__':
-    database_init()
+    db_init()
     app.run(debug=True, port=1234)

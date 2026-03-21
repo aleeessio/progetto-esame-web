@@ -1,0 +1,136 @@
+/*------- MAIN -------*/
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+}
+
+/*------- FORM BOX -------*/
+.form-box {
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 560px;
+}
+
+.form-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.form-box-header h2 {
+    font-size: 1.6rem;
+}
+
+/*------- BACK BUTTON -------*/
+.btn-back {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-div);
+    color: var(--font-color);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.4s;
+}
+
+.btn-back:hover { background: var(--logo-color); }
+
+/*------- FORM GROUPS -------*/
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: var(--font-color);
+}
+
+.form-group input,
+.form-select {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-page);
+    color: var(--font-color);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--logo-color);
+}
+
+/*------- MULTI-VALUE ACCESSORIES -------*/
+.multi-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.multi-input-row input {
+    flex: 1;
+}
+
+.btn-remove-field {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-div);
+    color: var(--font-color);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn-remove-field:hover {
+    background: #ffe0e0;
+    color: #c0392b;
+    border-color: #c0392b;
+}
+
+.btn-add-field {
+    margin-top: 4px;
+    padding: 7px 14px;
+    border: 1px dashed var(--border-color);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--font-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.btn-add-field:hover {
+    border-color: var(--logo-color);
+    color: var(--logo-color);
+}
+
+/*------- SUBMIT -------*/
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-div);
+    color: var(--font-color);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.4s;
+}
+
+.btn-submit:hover { background: var(--logo-color); }

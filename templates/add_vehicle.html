@@ -10,16 +10,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_vehicle.css') }}" type="text/css">
     
-    <style>
-        /*------- MAIN -------*/
-        .main-content {
-            flex: 1;
-        }
-
-
-        
-    </style>
 </head>
 
 <body>
@@ -98,7 +90,63 @@
     </header>
 
     <main class="main-content">
+        <div class="form-box">
+            <div class="form-box-header">
+                <h2>Add Vehicle</h2>
+                <a href="{{ url_for('admin') }}" class="btn-back">Back</a>
+            </div>
 
+            <form method="POST" action="{{ url_for('add_vehicle') }}">
+
+                <!-- Vehicle type selector -->
+                <div class="form-group">
+                    <label for="vehicle_type">Vehicle type</label>
+                    <select id="vehicle_type" name="vehicle_type" class="form-select" onchange="showForm(this.value)">
+                        <option value="">-- Select --</option>
+                        <option value="bike">Bike</option>
+                    </select>
+                </div>
+
+                <!-- Bike form -->
+                <div id="form-bike" class="vehicle-form" style="display:none;">
+
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <input type="text" id="type" name="type" placeholder="e.g. Mountain, Road, City">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transmission">Transmission</label>
+                        <input type="text" id="transmission" name="transmission" placeholder="e.g. 21-speed Shimano">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="suspensions">Suspensions</label>
+                        <input type="text" id="suspensions" name="suspensions" placeholder="e.g. Front fork, Full">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="terrain">Terrain</label>
+                        <input type="text" id="terrain" name="terrain" placeholder="e.g. Off-road, Urban">
+                    </div>
+
+                    <!-- Accessories (multi-value) -->
+                    <div class="form-group">
+                        <label>Accessories</label>
+                        <div id="accessories-list">
+                            <div class="multi-input-row">
+                                <input type="text" name="accessories" placeholder="e.g. Helmet">
+                                <button type="button" class="btn-remove-field" onclick="removeField(this)">✕</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-field" onclick="addField()">+</button>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit" style="display:none;">Add Vehicle</button>
+            </form>
+        </div>
     </main>
 
     <!--FOOTER-->
@@ -170,6 +218,39 @@
                 localStorage.setItem('theme', 'light');
             }
         });
+
+        // VEHICLE FORM TOGGLE
+        function showForm(type) {
+            document.querySelectorAll('.vehicle-form').forEach(f => f.style.display = 'none');
+            document.getElementById('btn-submit').style.display = 'none';
+
+            if (type) {
+                const form = document.getElementById('form-' + type);
+                if (form) {
+                    form.style.display = 'block';
+                    document.getElementById('btn-submit').style.display = 'block';
+                }
+            }
+        }
+
+        // MULTI-VALUE ACCESSORIES
+        function addField() {
+            const list = document.getElementById('accessories-list');
+            const row  = document.createElement('div');
+            row.className = 'multi-input-row';
+            row.innerHTML = `
+                <input type="text" name="accessories" placeholder="e.g. Lock, Lights">
+                <button type="button" class="btn-remove-field" onclick="removeField(this)">✕</button>
+            `;
+            list.appendChild(row);
+        }
+
+        function removeField(btn) {
+            const list = document.getElementById('accessories-list');
+            if (list.children.length > 1) {
+                btn.parentElement.remove();
+            }
+        }
     </script>
 </body>
 </html>
