@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='add_vehicle.css') }}" type="text/css">
-    
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='checkbox.css') }}" type="text/css">
+
 </head>
 
 <body>
@@ -102,49 +103,539 @@
                 <div class="form-group">
                     <label for="vehicle_type">Vehicle type</label>
                     <select id="vehicle_type" name="vehicle_type" class="form-select" onchange="showForm(this.value)">
-                        <option value="">-- Select --</option>
+                        <option value="" disabled selected hidden>Select a Vehicle</option>
+                        <option value="car">Car</option>
+                        <option value="supercar">SuperCar</option>
                         <option value="bike">Bike</option>
+                        <option value="scooter">Scooter</option>
+                        <option value="motorcycle">Motorcycle</option>
+                        <option value="camper">Camper</option>
                     </select>
                 </div>
 
-                <!-- Bike form -->
-                <div id="form-bike" class="vehicle-form" style="display:none;">
-
+                <!-- Car form -->
+                <div id="form-car" class="vehicle-form">
                     <div class="form-group">
-                        <label for="type">Type</label>
-                        <input type="text" id="type" name="type" placeholder="e.g. Mountain, Road, City">
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Brand</option>
+                            <option value="audi">Audi</option>
+                            <option value="bmw">BMW</option>
+                            <option value="fiat">Fiat</option>
+                            <option value="ford">Ford</option>
+                            <option value="jeep">Jeep</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="peugeot">Peugeot</option>
+                            <option value="volkswagen">Volkswagen</option>                           
+                            <option value="toyota">Toyota</option>
+                        </select>
                     </div>
-
+                    <div class="form-group">
+                        <label for="rent_length">Rent Length (Months)</label>
+                        <input type="number" id="rent_length" name="rent_length" class="form-select" min="1" max="24" placeholder="1 - 24" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Monthly Price (€)</label>
+                        <input type="number" id="price" name="price" class="form-select" min="1" max="5000" placeholder="1 - 5000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <select id="color" name="color" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Color</option>
+                            <option value="black">Black</option>
+                            <option value="white">White</option>
+                            <option value="silver">Silver</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="transmission">Transmission</label>
-                        <input type="text" id="transmission" name="transmission" placeholder="e.g. 21-speed Shimano">
+                        <select id="transmission" name="transmission" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Transmission Type</option>
+                            <option value="manual">Manual</option>
+                            <option value="automatic">Automatic</option>
+                            <option value="semi-automatic">Semi-Automatic</option>
+                        </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="suspensions">Suspensions</label>
-                        <input type="text" id="suspensions" name="suspensions" placeholder="e.g. Front fork, Full">
+                        <label for="fuel">Fuel</label>
+                        <select id="fuel" name="fuel" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Fuel Type</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="electric">Electric</option>
+                        </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="terrain">Terrain</label>
-                        <input type="text" id="terrain" name="terrain" placeholder="e.g. Off-road, Urban">
+                        <label for="power">Power (kW)</label>
+                        <input type="number" id="power" name="power" class="form-select" min="1" max="2000" placeholder="1 - 2000" required>
                     </div>
-
-                    <!-- Accessories (multi-value) -->
                     <div class="form-group">
-                        <label>Accessories</label>
-                        <div id="accessories-list">
-                            <div class="multi-input-row">
-                                <input type="text" name="accessories" placeholder="e.g. Helmet">
-                                <button type="button" class="btn-remove-field" onclick="removeField(this)">✕</button>
-                            </div>
-                        </div>
-                        <button type="button" class="btn-add-field" onclick="addField()">+</button>
+                        <label for="traction">Traction</label>
+                        <select id="traction" name="traction" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Traction Type</option>
+                            <option value="front">Front</option>
+                            <option value="rear">Rear</option>
+                            <option value="all-wheel">All-Wheel</option>
+                        </select>
                     </div>
-
+                    <div class="form-group">
+                        <label for="number_of_seats">Number of Seats</label>
+                        <select id="number_of_seats" name="number_of_seats" class="form-select" required>
+                            <option value="" disabled selected hidden>Select Number of Seats</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6+">6+</option>
+                        </select>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-submit" id="btn-submit" style="display:none;">Add Vehicle</button>
+                <!-- SuperCar form -->
+                <div id="form-supercar" class="vehicle-form">
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Brand</option>
+                            <option value="audi">Audi</option>
+                            <option value="bmw">BMW</option>
+                            <option value="bugatti">Bugatti</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option value="jaguar">Jaguar</option>
+                            <option value="lamborghini">Lamborghini</option>
+                            <option value="lotus">Lotus</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="pagani">Pagani</option>
+                            <option value="porsche">Porsche</option>                          
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rent_length">Rent Length (Days)</label>
+                        <input type="number" id="rent_length" name="rent_length" class="form-select" min="1" max="120" placeholder="1 - 120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Daily Price (€)</label>
+                        <input type="number" id="price" name="price" class="form-select" min="1" max="5000" placeholder="1 - 5000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <select id="color" name="color" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Color</option>
+                            <option value="black">Black</option>
+                            <option value="white">White</option>
+                            <option value="silver">Silver</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transmission">Transmission</label>
+                        <select id="transmission" name="transmission" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Transmission Type</option>
+                            <option value="manual">Manual</option>
+                            <option value="automatic">Automatic</option>
+                            <option value="semi-automatic">Semi-Automatic</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fuel">Fuel</label>
+                        <select id="fuel" name="fuel" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Fuel Type</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="electric">Electric</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="power">Power (kW)</label>
+                        <input type="number" id="power" name="power" class="form-select" min="1" max="2000" placeholder="1 - 2000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="traction">Traction</label>
+                        <select id="traction" name="traction" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Traction Type</option>
+                            <option value="front">Front</option>
+                            <option value="rear">Rear</option>
+                            <option value="all-wheel">All-Wheel</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="number_of_seats">Number of Seats</label>
+                        <select id="number_of_seats" name="number_of_seats" class="form-select" required>
+                            <option value="" disabled selected hidden>Select Number of Seats</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6+">6+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inside_color">Inside Color</label>
+                        <select id="inside_color" name="inside_color" class="form-select" required>
+                            <option value="" disabled selected hidden>Select an Inside Color</option>
+                            <option value="black">Black</option>
+                            <option value="white">White</option>
+                            <option value="silver">Silver</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inside_material">Inside Material</label>
+                        <select id="inside_material" name="inside_material" class="form-select" required>
+                            <option value="" disabled selected hidden>Select an Inside Material</option>
+                            <option value="leather">Leather</option>
+                            <option value="fabric">Fabric</option>
+                            <option value="vinyl">Vinyl</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Bike form -->
+                <div id="form-bike" class="vehicle-form">
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Type</option>
+                            <option value="mountain">Mountain</option>
+                            <option value="road">Road</option>
+                            <option value="city">City</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Brand</option>
+                            <option value="trek">Trek</option>
+                            <option value="giant">Giant</option>
+                            <option value="specialized">Specialized</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rent_length">Rent Length (Days)</label>
+                        <input type="number" id="rent_length" name="rent_length" class="form-select" min="1" max="120" placeholder="1 - 120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Daily Price (€)</label>
+                        <input type="number" id="price" name="price" class="form-select" min="1" max="500" placeholder="1 - 500" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="frame_size">Frame Size</label>
+                        <select id="frame_size" name="frame_size" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Frame Size</option>
+                            <option value="small">Small</option>
+                            <option value="medium">Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="traction">Traction</label>
+                        <select id="traction" name="traction" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Traction Type</option>
+                            <option value="electric">Electric</option>
+                            <option value="manual">Manual</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="suspensions">Suspension</label>
+                        <select id="suspensions" name="suspensions" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Suspension Type</option>
+                            <option value="front">Front</option>
+                            <option value="rear">Rear</option>
+                            <option value="full">Full</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="terrain">Terrain</label>
+                        <select id="terrain" name="terrain" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Terrain Type</option>
+                            <option value="off-road">Off-Road</option>
+                            <option value="urban">Urban</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Scooter form -->
+                <div id="form-scooter" class="vehicle-form">
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Brand</option>
+                            <option value="yamaha">Yamaha</option>
+                            <option value="honda">Honda</option>
+                            <option value="ducati">Ducati</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rent_length">Rent Length (Months)</label>
+                        <input type="number" id="rent_length" name="rent_length" class="form-select" min="1" max="24" placeholder="1 - 24" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Monthly Price (€)</label>
+                        <input type="number" id="price" name="price" class="form-select" min="1" max="1000" placeholder="1 - 1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <select id="color" name="color" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Color</option>
+                            <option value="black">Black</option>
+                            <option value="white">White</option>
+                            <option value="silver">Silver</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="engine">Engine</label>
+                        <select id="engine" name="engine" class="form-select" required>
+                            <option value="" disabled selected hidden>Select an Engine Type</option>
+                            <option value="50cc">50cc</option>
+                            <option value="100cc">100cc</option>
+                            <option value="125cc">125cc</option>
+                            <option value="250cc">250cc</option>
+                            <option value="300cc">300cc+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fuel">Fuel</label>
+                        <select id="fuel" name="fuel" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Fuel Type</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="electric">Electric</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="power">Power (kW)</label>
+                        <input type="number" id="power" name="power" class="form-select" min="1" max="2000" placeholder="1 - 2000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="required_license">Required License</label>
+                        <select id="required_license" name="required_license" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a License Type</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="A">A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="number_of_seats">Number of Seats</label>
+                        <select id="number_of_seats" name="number_of_seats" class="form-select" required>
+                            <option value="" disabled selected hidden>Select Number of Seats</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="storage_capacity">Storage Capacity (L)</label>
+                        <input type="number" id="storage_capacity" name="storage_capacity" class="form-select" min="1" max="1000" placeholder="1 - 1000" required>
+                    </div>
+                    <div class="form-group checkbox-inline">
+                        <input type="checkbox" id="windshield" name="windshield">
+                        <label for="windshield">Windshield</label>
+                    </div>
+                </div>
+
+                <!-- Motorcycle form -->
+                <div id="form-motorcycle" class="vehicle-form">
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Brand</option>
+                            <option value="yamaha">Yamaha</option>
+                            <option value="honda">Honda</option>
+                            <option value="ducati">Ducati</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rent_length">Rent Length (Months)</label>
+                        <input type="number" id="rent_length" name="rent_length" class="form-select" min="1" max="24" placeholder="1 - 24" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Monthly Price (€)</label>
+                        <input type="number" id="price" name="price" class="form-select" min="1" max="1000" placeholder="1 - 1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="style">Style</label>
+                        <select id="style" name="style" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Style</option>
+                            <option value="sport">Sport</option>
+                            <option value="cruiser">Cruiser</option>
+                            <option value="touring">Touring</option>
+                            <option value="enduro">Enduro</option>  
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <select id="color" name="color" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Color</option>
+                            <option value="black">Black</option>
+                            <option value="white">White</option>
+                            <option value="silver">Silver</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="engine">Engine</label>
+                        <select id="engine" name="engine" class="form-select" required>
+                            <option value="" disabled selected hidden>Select an Engine Type</option>
+                            <option value="125cc">125cc</option>
+                            <option value="250cc">250cc</option>
+                            <option value="300cc">300cc+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fuel">Fuel</label>
+                        <select id="fuel" name="fuel" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Fuel Type</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="electric">Electric</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="power">Power (kW)</label>
+                        <input type="number" id="power" name="power" class="form-select" min="1" max="2000" placeholder="1 - 2000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="required_license">Required License</label>
+                        <select id="required_license" name="required_license" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a License Type</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="A">A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="number_of_seats">Number of Seats</label>
+                        <select id="number_of_seats" name="number_of_seats" class="form-select" required>
+                            <option value="" disabled selected hidden>Select Number of Seats</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="storage_capacity">Storage Capacity (L)</label>
+                        <input type="number" id="storage_capacity" name="storage_capacity" class="form-select" min="1" max="1000" placeholder="1 - 1000" required>
+                    </div>
+                </div>
+
+                <!-- Camper form -->
+                <div id="form-camper" class="vehicle-form">
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Brand</option>
+                            <option value="adriatik">Adriatik</option>
+                            <option value="arctic">Arctic</option>
+                            <option value="carado">Carado</option>
+                            <option value="ci">CI</option>
+                            <option value="dethleffs">Dethleffs</option>
+                            <option value="elios">Elios</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rent_length">Rent Length (Months)</label>
+                        <input type="number" id="rent_length" name="rent_length" class="form-select" min="1" max="24" placeholder="1 - 24" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Monthly Price (€)</label>
+                        <input type="number" id="price" name="price" class="form-select" min="1" max="5000" placeholder="1 - 5000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <select id="color" name="color" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Color</option>
+                            <option value="black">Black</option>
+                            <option value="white">White</option>
+                            <option value="silver">Silver</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fuel">Fuel</label>
+                        <select id="fuel" name="fuel" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Fuel Type</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="electric">Electric</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type" class="form-select" required>
+                            <option value="" disabled selected hidden>Select a Type</option>
+                            <option value="standard">Standard</option>
+                            <option value="luxury">Luxury</option>
+                            <option value="compact">Compact</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sleeping_beds">Sleeping Beds</label>
+                        <select id="sleeping_beds" name="sleeping_beds" class="form-select" required>
+                            <option value="" disabled selected hidden>Select Number of Sleeping Beds</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6+">6+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="approved_seats">Approved Seats</label>
+                        <select id="approved_seats" name="approved_seats" class="form-select" required>
+                            <option value="" disabled selected hidden>Select Number of Approved Seats</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6+">6+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="type_bathroom">Type of Bathroom</label>
+                        <select id="type_bathroom" name="type_bathroom" class="form-select" required>
+                            <option value="" disabled selected hidden>Select Type of Bathroom</option>
+                            <option value="shower">Shower</option>
+                            <option value="toilet">Toilet</option>
+                            <option value="combined">Combined</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-inline">
+                        <input type="checkbox" id="climate_control" name="climate_control">
+                        <label for="climate_control">Climate Control</label>
+                    </div>
+                    <div class="form-group checkbox-inline">
+                        <input type="checkbox" id="pets_allowed" name="pets_allowed">
+                        <label for="pets_allowed">Pets Allowed</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit">Add Vehicle</button>
             </form>
         </div>
     </main>
@@ -219,38 +710,39 @@
             }
         });
 
-        // VEHICLE FORM TOGGLE
+        /* VEHICLE FORM TOGGLE
         function showForm(type) {
-            document.querySelectorAll('.vehicle-form').forEach(f => f.style.display = 'none');
-            document.getElementById('btn-submit').style.display = 'none';
+            document.querySelectorAll('.vehicle-form').forEach(f => f.classList.remove('active'));
+            document.getElementById('btn-submit').classList.remove('active');
 
             if (type) {
                 const form = document.getElementById('form-' + type);
                 if (form) {
-                    form.style.display = 'block';
-                    document.getElementById('btn-submit').style.display = 'block';
+                    form.classList.add('active');
+                    document.getElementById('btn-submit').classList.add('active');
+                }
+            }
+        }*/
+
+        // VEHICLE FORM TOGGLE
+        function showForm(type) {
+            document.querySelectorAll('.vehicle-form').forEach(f => {
+                f.classList.remove('active');
+                f.querySelectorAll('input, select').forEach(field => {field.disabled = true;});
+            });
+
+            document.getElementById('btn-submit').classList.remove('active');
+
+            if (type) {
+                const form = document.getElementById('form-' + type);
+                if (form) {
+                    form.classList.add('active');
+                    document.getElementById('btn-submit').classList.add('active');
+                    form.querySelectorAll('input, select').forEach(field => {field.disabled = false;});
                 }
             }
         }
 
-        // MULTI-VALUE ACCESSORIES
-        function addField() {
-            const list = document.getElementById('accessories-list');
-            const row  = document.createElement('div');
-            row.className = 'multi-input-row';
-            row.innerHTML = `
-                <input type="text" name="accessories" placeholder="e.g. Lock, Lights">
-                <button type="button" class="btn-remove-field" onclick="removeField(this)">✕</button>
-            `;
-            list.appendChild(row);
-        }
-
-        function removeField(btn) {
-            const list = document.getElementById('accessories-list');
-            if (list.children.length > 1) {
-                btn.parentElement.remove();
-            }
-        }
     </script>
 </body>
 </html>

@@ -28,6 +28,18 @@
     font-size: 1.6rem;
 }
 
+.vehicle-form, #btn-submit {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden; 
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.vehicle-form.active, #btn-submit.active {
+    max-height: 1000px; 
+    opacity: 1;
+}
+
 /*------- BACK BUTTON -------*/
 .btn-back {
     padding: 8px 16px;
@@ -51,9 +63,16 @@
 }
 
 .form-group label {
-    margin-bottom: 6px;
-    font-size: 0.9rem;
-    color: var(--font-color);
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;     
+    color: var(--border-color);
+    transition: color 0.3s ease;
+}
+.form-group:focus-within label {
+    color: var(--logo-color);
 }
 
 .form-group input,
@@ -73,49 +92,20 @@
     border-color: var(--logo-color);
 }
 
-/*------- MULTI-VALUE ACCESSORIES -------*/
-.multi-input-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 8px;
-}
-
-.multi-input-row input {
-    flex: 1;
-}
-
-.btn-remove-field {
-    padding: 8px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background: var(--background-div);
-    color: var(--font-color);
+.form-select {
+    -webkit-appearance: none; 
+    appearance: none;         
     cursor: pointer;
-    font-size: 0.85rem;
-    transition: background 0.3s, color 0.3s, border-color 0.3s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center; 
+    padding-right: 40px; 
 }
 
-.btn-remove-field:hover {
-    background: #ffe0e0;
-    color: #c0392b;
-    border-color: #c0392b;
-}
-
-.btn-add-field {
-    margin-top: 4px;
-    padding: 7px 14px;
-    border: 1px dashed var(--border-color);
-    border-radius: 6px;
-    background: transparent;
+.form-select option {
+    background-color: var(--background-div);
     color: var(--font-color);
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: border-color 0.3s, color 0.3s;
-}
-
-.btn-add-field:hover {
-    border-color: var(--logo-color);
-    color: var(--logo-color);
+    font-weight: normal;
 }
 
 /*------- SUBMIT -------*/

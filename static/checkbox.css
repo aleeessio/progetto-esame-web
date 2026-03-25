@@ -1,0 +1,42 @@
+.form-group.checkbox-inline {
+    flex-direction: row; 
+    align-items: center;
+    gap: 12px;
+}
+
+
+.form-group.checkbox-inline label {
+    margin-bottom: 0; 
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-inline input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px; 
+    background-color: var(--background-page); 
+    cursor: pointer;
+    transition: all 0.3s ease; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+.checkbox-inline input[type="checkbox"]:focus,
+.checkbox-inline input[type="checkbox"]:hover {
+    outline: none;
+    border-color: var(--logo-color);
+}
+
+.checkbox-inline input[type="checkbox"]:checked {
+    background-color: var(--logo-color);
+    border-color: var(--logo-color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 14px;
+    background-position: center;
+    background-repeat: no-repeat;
+}

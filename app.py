@@ -30,7 +30,42 @@ def user_db_init():
                    password TEXT NOT NULL
             )
         ''')
-        db.commit()
+
+def car_db_init():
+    with db_connect() as db:
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS cars (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   brand TEXT NOT NULL,
+                   rent_length INTEGER NOT NULL,
+                   price REAL NOT NULL,
+                   color TEXT NOT NULL,
+                   transmission TEXT NOT NULL,
+                   fuel TEXT NOT NULL,
+                   power INTEGER NOT NULL,
+                   traction TEXT NOT NULL,
+                   number_of_seats TEXT NOT NULL
+            )
+        ''')
+
+def supercar_db_init():
+    with db_connect() as db:
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS supercars (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   brand TEXT NOT NULL,
+                   rent_length INTEGER NOT NULL,
+                   price REAL NOT NULL,
+                   color TEXT NOT NULL,
+                   transmission TEXT NOT NULL,
+                   fuel TEXT NOT NULL,
+                   power INTEGER NOT NULL,
+                   traction TEXT NOT NULL,
+                   number_of_seats TEXT NOT NULL,
+                   inside_color TEXT NOT NULL,
+                   inside_material TEXT NOT NULL
+            )
+        ''')
 
 def bike_db_init():
     with db_connect() as db:
@@ -38,17 +73,81 @@ def bike_db_init():
             CREATE TABLE IF NOT EXISTS bikes (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    type TEXT NOT NULL,
-                   transmission TEXT NOT NULL,
+                   brand TEXT NOT NULL,
+                   rent_length INTEGER NOT NULL,
+                   price REAL NOT NULL,
+                   frame_size TEXT NOT NULL,
+                   traction TEXT NOT NULL,
                    suspensions TEXT NOT NULL,
-                   accessories  TEXT CHECK(json_valid(accessories)),
                    terrain TEXT NOT NULL
+            )
+        ''')
+
+def scooter_db_init():
+    with db_connect() as db:
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS scooters (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   brand TEXT NOT NULL,
+                   rent_length INTEGER NOT NULL,
+                   price REAL NOT NULL,
+                   color TEXT NOT NULL,
+                   engine TEXT NOT NULL,
+                   fuel TEXT NOT NULL,
+                   power INTEGER NOT NULL,
+                   required_license TEXT NOT NULL,
+                   number_of_seats TEXT NOT NULL,
+                   storage_capacity INTEGER NOT NULL,
+                   windshield BOOLEAN NOT NULL
+            )
+        ''')
+
+def motorcycle_db_init():
+    with db_connect() as db:
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS motorcycles (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   brand TEXT NOT NULL,
+                   rent_length INTEGER NOT NULL,
+                   price REAL NOT NULL,
+                   style TEXT NOT NULL,
+                   color TEXT NOT NULL,
+                   engine TEXT NOT NULL,
+                   fuel TEXT NOT NULL,
+                   power INTEGER NOT NULL,
+                   required_license TEXT NOT NULL,
+                   number_of_seats TEXT NOT NULL,
+                   storage_capacity INTEGER NOT NULL
+            )
+        ''')
+
+def camper_db_init():
+    with db_connect() as db:
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS campers (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   brand TEXT NOT NULL,
+                   rent_length INTEGER NOT NULL,
+                   price REAL NOT NULL,
+                   color TEXT NOT NULL,
+                   fuel TEXT NOT NULL, 
+                   type TEXT NOT NULL,
+                   sleeping_beds TEXT NOT NULL,
+                   approved_seats INTEGER NOT NULL,
+                   type_bathroom TEXT NOT NULL,
+                   climate_control BOOLEAN NOT NULL,
+                   pets_allowed BOOLEAN NOT NULL
             )
         ''')
 
 def db_init():
     user_db_init()
+    car_db_init()
+    supercar_db_init()
     bike_db_init()
-
+    scooter_db_init()
+    motorcycle_db_init()
+    camper_db_init()    
 # -------------------------------
 
 
@@ -178,20 +277,137 @@ def add_vehicle():
     if request.method == 'POST':
         vehicle_type = request.form.get('vehicle_type')
 
+        #CAR
+        if vehicle_type == "car":
+            brand = request.form.get('brand')
+            rent_length = request.form.get('rent_length')
+            price = request.form.get('price')
+            color = request.form.get('color')
+            transmission = request.form.get('transmission')
+            fuel = request.form.get('fuel')
+            power = request.form.get('power')
+            traction = request.form.get('traction')
+            number_of_seats = request.form.get('number_of_seats')
+
+            with db_connect() as db:
+                db.execute(
+                    'INSERT INTO cars (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats)
+                )
+                db.commit()
+            
+            flash("Car added!", 'success')
+            return redirect(url_for('add_vehicle'))
+        
+        #SUPERCAR
+        if vehicle_type == "supercar":
+            brand = request.form.get('brand')
+            rent_length = request.form.get('rent_length')
+            price = request.form.get('price')
+            color = request.form.get('color')
+            transmission = request.form.get('transmission')
+            fuel = request.form.get('fuel')
+            power = request.form.get('power')
+            traction = request.form.get('traction')
+            number_of_seats = request.form.get('number_of_seats')
+            inside_color = request.form.get("inside_color")
+            inside_material = request.form.get("inside_material")
+
+            with db_connect() as db:
+                db.execute(
+                    'INSERT INTO supercars (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats, inside_color, inside_material) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats, inside_color, inside_material)
+                )
+                db.commit()
+            
+            flash("SuperCar added!", 'success')
+            return redirect(url_for('add_vehicle'))
+
+        #BIKE
         if vehicle_type == "bike":
             bike_type = request.form.get('type')
-            transmission = request.form.get('transmission')
+            brand = request.form.get('brand')
+            rent_length = request.form.get('rent_length')
+            price = request.form.get('price')
+            frame_size = request.form.get('frame_size')
+            traction = request.form.get('traction')
             suspensions = request.form.get('suspensions')
-            accessories = json.dumps(request.form.getlist('accessories'))
             terrain = request.form.get('terrain')
 
             with db_connect() as db:
                 db.execute(
-                    'INSERT INTO bikes (type, transmission, suspensions, accessories, terrain) VALUES (?, ?, ?, ?, ?)', (bike_type, transmission, suspensions, accessories, terrain)
+                    'INSERT INTO bikes (type, brand, rent_length, price, frame_size, traction, suspensions, terrain) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (bike_type, brand, rent_length, price, frame_size, traction, suspensions, terrain)
                 )
                 db.commit()
             
-            flash("Vehicle added!", 'success')
+            flash("Bike added!", 'success')
+            return redirect(url_for('add_vehicle'))
+        
+        #SCOOTER
+        if vehicle_type == "scooter":
+            brand = request.form.get('brand')
+            rent_length = request.form.get('rent_length')
+            price = request.form.get('price')
+            color = request.form.get('color')
+            engine = request.form.get('engine')
+            fuel = request.form.get('fuel')
+            power = request.form.get('power')
+            required_license = request.form.get('required_license')
+            number_of_seats = request.form.get('number_of_seats')
+            storage_capacity = request.form.get('storage_capacity')
+            windshield = request.form.get('windshield') == "on"
+
+            with db_connect() as db:
+                db.execute(
+                    'INSERT INTO scooters (brand, rent_length, price, color, engine, fuel, power, required_license, number_of_seats, storage_capacity, windshield) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, engine, fuel, power, required_license, number_of_seats, storage_capacity, windshield)
+                )
+                db.commit()
+            
+            flash("Scooter added!", 'success')
+            return redirect(url_for('add_vehicle'))
+        
+        #MOTORCYCLE
+        if vehicle_type == "motorcycle":
+            brand = request.form.get('brand')
+            rent_length = request.form.get('rent_length')
+            price = request.form.get('price')
+            style = request.form.get('style')
+            color = request.form.get('color')
+            engine = request.form.get('engine')
+            fuel = request.form.get('fuel')
+            power = request.form.get('power')
+            required_license = request.form.get('required_license')
+            number_of_seats = request.form.get('number_of_seats')
+            storage_capacity = request.form.get('storage_capacity')
+
+            with db_connect() as db:
+                db.execute(
+                    'INSERT INTO motorcycles (brand, rent_length, price, style, color, engine, fuel, power, required_license, number_of_seats, storage_capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, style, color, engine, fuel, power, required_license, number_of_seats, storage_capacity)
+                )
+                db.commit()
+            
+            flash("Motorcycle added!", 'success')
+            return redirect(url_for('add_vehicle'))
+        
+        #CAMPER
+        if vehicle_type == "camper":
+            brand = request.form.get('brand')
+            rent_length = request.form.get('rent_length')
+            price = request.form.get('price')
+            color = request.form.get('color')
+            fuel = request.form.get('fuel') 
+            camper_type = request.form.get('type')
+            sleeping_beds = request.form.get('sleeping_beds')
+            approved_seats = request.form.get('approved_seats')
+            type_bathroom = request.form.get('type_bathroom')
+            climate_control = request.form.get('climate_control') == "on"
+            pets_allowed = request.form.get('pets_allowed') == "on"
+
+            with db_connect() as db:
+                db.execute(
+                    'INSERT INTO campers (brand, rent_length, price, color, fuel, type, sleeping_beds, approved_seats, type_bathroom, climate_control, pets_allowed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, fuel, camper_type, sleeping_beds, approved_seats, type_bathroom, climate_control, pets_allowed)
+                )
+                db.commit()
+            
+            flash("Camper added!", 'success')
             return redirect(url_for('add_vehicle'))
     
     return render_template("add_vehicle.html")
