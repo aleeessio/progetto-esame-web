@@ -1,195 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniDrive - Register</title>
+{% block title %}
+    Register
+{% endblock title %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='login_register.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}" type="text/css">
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login_register.css') }}"
+          type="text/css">
 
+{% endblock extra_css %}
 
-</head>
+{% block content %}
+    <div class="register-box">
+        <h2>Create an account</h2>
 
-<body>
-    <div>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div id="flash-container">
-                    {% for category, message in messages %}
-                        <div class="flash-message {{ category }}">
-                            <span class="message-text">{{ message }}</span>
-                            {% if category == 'logout' %}
-                                <a href="{{ url_for('confirm_logout') }}" style="text-decoration: none;" class="close-btn">Yes</a>
-                                <button type="submit" class="close-btn" onclick="this.parentElement.style.display='none'">No</button>
-                            {% else %}
-                                <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+        <!-- Form -->
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="form-group">
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" placeholder="Will Smith" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="name@example.com"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Al least 6 characters"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="repeat_password">Password confirm</label>
+                <input type="password"
+                       id="repeat_password"
+                       name="repeat_password"
+                       placeholder="Repeat the password"
+                       required>
+            </div>
+            <button type="submit" class="btn-submit">Register</button>
+        </form>
+
+        <p class="login-link">
+            Already have an account? <a href="{{ url_for('login') }}">Login</a>
+        </p>
     </div>
-
-    <!--HEADER-->
-    <header>
-        <div class="header-container">
-            <div class = "left-header">
-                <a href="{{ url_for('index') }}" style="text-decoration: none;"><div class="logo">OmniDrive</div></a>
-            </div>
-            <div>
-                <nav>
-                    <!--Button Language-->
-                    <form method="POST">
-                        <button class="btn b-lang">EN</button>
-                    </form>
-
-                    <!--Buttons Theme-->
-                    <button id="theme-toggle" class="btn-theme">
-                        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg id="moon-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-
-                    <!--Buttons Login/Register/Profile-->
-                    <div class="v-divider"></div>
-                    {% if session.get('is_admin') %}
-                        <a href="{{ url_for('admin') }}" class="btn b-profile">Manage</a>
-                        <a href="{{ url_for('logout') }}" class="btn b-login">Logout</a>
-                    {% endif %}
-
-                    {% if session.user_id %}
-                        <a href="{{ url_for('profile') }}" class="btn b-profile">Profile</a>
-                        <a href="{{ url_for('logout') }}" class="btn b-login">Logout</a>
-                    {% endif %}
-
-                    {% if not session.get('is_admin') and not session.user_id %}
-                        <a href="{{ url_for('login') }}" class="btn b-login">Login</a>
-                        <a href="{{ url_for('register') }}" class="btn b-register">Register</a>
-                    {% endif %}
-            </div>
-        </div>
-    </header>
-
-    <!--MAIN-->
-    <main class="main-content">
-        <div class="register-box">
-            <h2>Create an account</h2>
-
-            <!-- Form -->
-            <form method="POST" action="{{ url_for('register') }}">
-                <div class="form-group">
-                    <label for="name">Full name</label>
-                    <input type="text" id="name" name="name" placeholder="Will Smith" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Al least 6 characters" required>
-                </div>
-                <div class="form-group">
-                    <label for="repeat_password">Password confirm</label>
-                    <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat the password" required>
-                </div>
-                <button type="submit" class="btn-submit">Register</button>
-            </form>
-
-            <p class="login-link">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
-        </div>
-    </main>
-
-    <!--FOOTER-->
-    <footer>
-        <div class="footer-division">
-
-            <!--Column Left-->
-            <div class="footer-columns">
-                <a href="{{ url_for('index') }}" class="logo">OmniDrive</a>
-                <p>Let's drive!</p>
-            </div>
-
-            <!--Column Centre-->
-            <div class="footer-columns">
-                <h1>Links</h1>
-                <ul>
-                    <li><a href="{{ url_for('index') }}">Home</a></li>
-                    <li><a href="{{ url_for('search') }}">Search</a></li>
-                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                </ul>
-            </div>
-
-            <!--Column Right-->
-            <div class="footer-columns">
-                <h1>Newsletter</h1>
-                <p>Subscribe to our newsletter</p>
-                <form class="newsletter">
-                    <input type="email" placeholder="Insert your email">
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-
-        <!--Bottom-->
-        <div class="footer-bottom">
-            <div class="footer-links">
-                <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
-                <a href="{{ url_for('terms_conditions') }}">Terms and Conditions</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        //CHANGE THEME
-        const btnTheme = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');   
-        const body = document.body;
-        
-        if (localStorage.getItem('theme') === 'dark') {
-            body.classList.toggle('dark-mode');
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        } else {
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        }
-
-        btnTheme.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-
-            if (body.classList.contains('dark-mode')) {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    </script>
-</body>
-
-</html>
+{% endblock content %}

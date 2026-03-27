@@ -6,6 +6,10 @@
   font-family: Arial, sans-serif;
 }
 
+.main-content {
+  flex: 1;
+}
+
 /*------- COLORS -------*/
 :root {
   --background-page: #f4f4f4;
