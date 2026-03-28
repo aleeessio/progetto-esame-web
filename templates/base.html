@@ -54,16 +54,7 @@
                         {% for category, message in messages %}
                             <div class="flash-message {{ category }}">
                                 <span class="message-text">{{ message }}</span>
-                                {% if category == 'logout' %}
-                                    <a href="{{ url_for('confirm_logout') }}"
-                                       style="text-decoration: none"
-                                       class="close-btn">Yes</a>
-                                    <button type="submit"
-                                            class="close-btn"
-                                            onclick="this.parentElement.style.display='none'">No</button>
-                                {% else %}
-                                    <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
-                                {% endif %}
+                                <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
                             </div>
                         {% endfor %}
                     </div>

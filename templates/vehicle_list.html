@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Vehicle List
+{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/user_list.css') }}"
+          type="text/css">
+    <style>
+        .vehicle-table-container { display: none; }
+        .vehicle-table-container.active { display: block; }
+    </style>
+{% endblock extra_css %}
+
+{% block content %}
+    <div class="table-box">
+        <div class="table-header">
+            <h2>Registered Vehicles</h2>
+            <a href="{{ url_for('admin') }}" class="btn-back">Back</a>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div class="form-group" style="margin-bottom: 0;">
+                <select id="vehicle_type"
+                        class="form-select"
+                        onchange="showTable(this.value)"
+                        style="max-width: 250px">
+                    <option value="car">Cars</option>
+                    <option value="supercar">SuperCars</option>
+                    <option value="bike">Bikes</option>
+                    <option value="scooter">Scooters</option>
+                    <option value="motorcycle">Motorcycles</option>
+                    <option value="camper">Campers</option>
+                </select>
+            </div>
+        </div>
+
+        <input type="text"
+               id="search-input"
+               class="search-input"
+               placeholder="Search by ID, brand, rent length or price...">
+
+        <div id="table-car" class="vehicle-table-container active">
+            {% if cars %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Brand</th>
+                            <th>Rent Length</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cars %}
+                            <tr>
+                                <td>{{ item['id'] }}</td>
+                                <td>{{ item['brand'] }}</td>
+                                <td>{{ item['rent_length'] }}</td>
+                                <td>{{ item['price'] }}</td>
+                                <td class="td-delete">
+                                    <form method="POST" action="{{ url_for('remove_vehicle') }}">
+                                        <input type="hidden" name="vehicle_type" value="cars">
+                                        <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
+                                        <button type="submit" class="btn-delete">✕</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="empty-state">No Cars registered yet.</p>
+            {% endif %}
+        </div>
+
+        <div id="table-supercar" class="vehicle-table-container">
+            {% if supercars %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Brand</th>
+                            <th>Rent Length</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in supercars %}
+                            <tr>
+                                <td>{{ item['id'] }}</td>
+                                <td>{{ item['brand'] }}</td>
+                                <td>{{ item['rent_length'] }}</td>
+                                <td>{{ item['price'] }}</td>
+                                <td class="td-delete">
+                                    <form method="POST" action="{{ url_for('remove_vehicle') }}">
+                                        <input type="hidden" name="vehicle_type" value="supercars">
+                                        <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
+                                        <button type="submit" class="btn-delete">✕</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="empty-state">No SuperCars registered yet.</p>
+            {% endif %}
+        </div>
+
+        <div id="table-bike" class="vehicle-table-container">
+            {% if bikes %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Brand</th>
+                            <th>Rent Length</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in bikes %}
+                            <tr>
+                                <td>{{ item['id'] }}</td>
+                                <td>{{ item['brand'] }}</td>
+                                <td>{{ item['rent_length'] }}</td>
+                                <td>{{ item['price'] }}</td>
+                                <td class="td-delete">
+                                    <form method="POST" action="{{ url_for('remove_vehicle') }}">
+                                        <input type="hidden" name="vehicle_type" value="bikes">
+                                        <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
+                                        <button type="submit" class="btn-delete">✕</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="empty-state">No Bikes registered yet.</p>
+            {% endif %}
+        </div>
+
+        <div id="table-scooter" class="vehicle-table-container">
+            {% if scooters %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Brand</th>
+                            <th>Rent Length</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in scooters %}
+                            <tr>
+                                <td>{{ item['id'] }}</td>
+                                <td>{{ item['brand'] }}</td>
+                                <td>{{ item['rent_length'] }}</td>
+                                <td>{{ item['price'] }}</td>
+                                <td class="td-delete">
+                                    <form method="POST" action="{{ url_for('remove_vehicle') }}">
+                                        <input type="hidden" name="vehicle_type" value="scooters">
+                                        <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
+                                        <button type="submit" class="btn-delete">✕</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="empty-state">No Scooters registered yet.</p>
+            {% endif %}
+        </div>
+
+        <div id="table-motorcycle" class="vehicle-table-container">
+            {% if motorcycles %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Brand</th>
+                            <th>Rent Length</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in motorcycles %}
+                            <tr>
+                                <td>{{ item['id'] }}</td>
+                                <td>{{ item['brand'] }}</td>
+                                <td>{{ item['rent_length'] }}</td>
+                                <td>{{ item['price'] }}</td>
+                                <td class="td-delete">
+                                    <form method="POST" action="{{ url_for('remove_vehicle') }}">
+                                        <input type="hidden" name="vehicle_type" value="motorcycles">
+                                        <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
+                                        <button type="submit" class="btn-delete">✕</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="empty-state">No Motorcycles registered yet.</p>
+            {% endif %}
+        </div>
+
+        <div id="table-camper" class="vehicle-table-container">
+            {% if campers %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Brand</th>
+                            <th>Rent Length</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in campers %}
+                            <tr>
+                                <td>{{ item['id'] }}</td>
+                                <td>{{ item['brand'] }}</td>
+                                <td>{{ item['rent_length'] }}</td>
+                                <td>{{ item['price'] }}</td>
+                                <td class="td-delete">
+                                    <form method="POST" action="{{ url_for('remove_vehicle') }}">
+                                        <input type="hidden" name="vehicle_type" value="campers">
+                                        <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
+                                        <button type="submit" class="btn-delete">✕</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="empty-state">No Campers registered yet.</p>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/vehicles_user_list.js') }}"></script>
+{% endblock extra_js %}

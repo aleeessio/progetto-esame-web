@@ -9,3 +9,14 @@ searchInput.addEventListener('input', () => {
         row.style.display = text.includes(query) ? '' : 'none';
     });
 });
+
+function showTable(vehicleType) {
+    document.querySelectorAll('.vehicle-table-container').forEach(function (el) {
+        el.classList.remove('active');
+    });
+
+    const selectedTable = document.getElementById('table-' + vehicleType);
+    if (selectedTable) {
+        selectedTable.classList.add('active');
+    }
+}

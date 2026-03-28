@@ -22,13 +22,8 @@
 	justify-content: space-between;
 	align-items: center;
 	gap: 20px;
-
-	/* L'EFFETTO SOPRAELEVATO */
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 	backdrop-filter: blur(10px);
-	/* Effetto vetro sfocato stile iOS */
-
-	/* Animazione di entrata dall'alto con effetto rimbalzo */
 	animation: slideDownFlash 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 	opacity: 0;
 	transform: translateY(-40px);
@@ -46,8 +41,7 @@
 	border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.flash-message.info,
-.flash-message.logout {
+.flash-message.info {
 	background-color: rgba(255, 249, 224, 0.95);
 	color: #b8860b;
 	border: 1px solid rgba(184, 134, 11, 0.3);

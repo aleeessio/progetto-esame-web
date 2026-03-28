@@ -253,12 +253,8 @@ def login():
 
 @app.route('/logout')
 def logout():
-    flash("Are you sure?", 'logout')
-    return redirect(request.referrer)
-
-@app.route('/confirm_logout')
-def confirm_logout():
     session.clear()
+    flash("Logged out!", 'success')
     return redirect(url_for('index'))
 
 @app.route('/admin')
@@ -412,11 +408,45 @@ def add_vehicle():
     
     return render_template("add_vehicle.html")
     
-@app.route('/list_vehicles')
-def list_vehicles():
+@app.route('/vehicle_list')
+def vehicle_list():
     if not session.get('is_admin'):
         return redirect(url_for('index'))
-    return redirect(url_for('admin'))
+    
+    with db_connect() as db:
+        cars = db.execute('SELECT id, brand, rent_length, price FROM cars').fetchall()
+        supercars = db.execute('SELECT id, brand, rent_length, price FROM supercars').fetchall()
+        bikes = db.execute('SELECT id, brand, rent_length, price FROM bikes').fetchall()
+        scooters = db.execute('SELECT id, brand, rent_length, price FROM scooters').fetchall()
+        motorcycles = db.execute('SELECT id, brand, rent_length, price FROM motorcycles').fetchall()
+        campers = db.execute('SELECT id, brand, rent_length, price FROM campers').fetchall()
+    
+    return render_template("vehicle_list.html", 
+                           cars=cars, supercars=supercars, bikes=bikes, 
+                           scooters=scooters, motorcycles=motorcycles, campers=campers)
+
+@app.route('/remove_vehicle', methods=['POST'])
+def remove_vehicle():
+    if not session.get('is_admin'):
+        return redirect(url_for('index'))
+    
+    vehicle_id = request.form.get('vehicle_id')
+    vehicle_type = request.form.get('vehicle_type')
+
+    allowed_tables = ['cars', 'supercars', 'bikes', 'scooters', 'motorcycles', 'campers']
+    
+    if vehicle_type not in allowed_tables:
+        flash("Tipo di veicolo non valido!", 'error')
+        return redirect(url_for('vehicle_list'))
+
+    with db_connect() as db:
+        db.execute(
+            f'DELETE FROM {vehicle_type} WHERE id = ?', (vehicle_id,)
+        )
+        db.commit()
+
+    flash("Vehicle removed!", 'info')
+    return redirect(url_for('vehicle_list'))
 
 @app.route('/user_list')
 def user_list():
