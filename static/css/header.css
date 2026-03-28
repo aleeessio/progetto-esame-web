@@ -1,10 +1,12 @@
 /*------- HEADER -------*/
 header {
-    background: var(--background-div);
+    background: var(--background-header);
     padding: 15px 20px;
     border-bottom: 1px solid var(--border-color);
-    transition: background-color 1s ease, color 1s ease;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: background-color 1s ease, color 1s ease, box-shadow 1s ease;
     position: relative;
+    z-index: 10;
 }
 
 .header-container {
@@ -19,14 +21,6 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.logo {
-    font-family: Arial, sans-serif;
-    font-weight: 400;
-    color: var(--logo-color);
-    font-size: 2rem;
-    text-decoration: none;
 }
 
 nav {
@@ -90,7 +84,9 @@ nav a {
     transition: background 0.4s;
 }
 
-.b-login:hover { background: var(--logo-color); }
+.b-login:hover {
+    background: var(--logo-color);
+}
 
 .b-register {
     background: var(--background-div);
@@ -99,7 +95,9 @@ nav a {
     transition: background 0.4s;
 }
 
-.b-register:hover { background: var(--logo-color); }
+.b-register:hover {
+    background: var(--logo-color);
+}
 
 .b-profile {
     background: var(--logo-color);
@@ -108,4 +106,6 @@ nav a {
     transition: background 0.4s;
 }
 
-.b-profile:hover { background: #ad230b; }
+.b-profile:hover {
+    background: #ad230b;
+}

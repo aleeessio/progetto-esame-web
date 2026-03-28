@@ -1,21 +1,22 @@
 /*------- FOOTER -------*/
 footer {
-  background-color: var(--background-div);
-  color: var(--font-color);
-  padding: 40px 80px 20px;
-  font-family: Arial, sans-serif;
-  transition: background-color 1s ease, color 1s ease;
+    background-color: var(--background-footer);
+    color: var(--font-color);
+    padding: 40px 80px 20px;
+    font-family: Arial, sans-serif;
+    transition: background-color 1s ease, color 1s ease;
+    border-top: 1px solid var(--border-color);
 }
 
 .footer-division {
-  display: flex;
-	justify-content: space-between;
-	gap: 60px;
-	margin-bottom: 30px;
-  }
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    margin-bottom: 30px;
+}
 
 .footer-columns {
-  flex: 1;
+    flex: 1;
 }
 
 /*------- SX column -------*/
@@ -27,7 +28,7 @@ footer {
 .footer-columns p {
     line-height: 1.5;
     margin-top: 20px;
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 /*------- Centre column -------*/
@@ -36,7 +37,7 @@ footer {
     padding: 0;
 }
 
-.footer-columns ul li{
+.footer-columns ul li {
     margin-bottom: 10px;
 }
 
@@ -46,7 +47,9 @@ footer {
     transition: color 0.4s;
 }
 
-.footer-columns ul li a:hover { color: var(--logo-color); }
+.footer-columns ul li a:hover {
+    color: var(--logo-color);
+}
 
 /*------- DX column -------*/
 .newsletter {
@@ -63,7 +66,9 @@ footer {
     color: var(--font-color);
 }
 
-.newsletter input::placeholder { color: var(--border-color);}
+.newsletter input::placeholder {
+    color: var(--border-color);
+}
 
 .newsletter button {
     padding: 12px;
@@ -98,5 +103,7 @@ footer {
     text-decoration: none;
     transition: color 0.4s;
 }
-        
-.footer-links a:hover { color: var(--logo-color);}
+
+.footer-links a:hover {
+    color: var(--logo-color);
+}

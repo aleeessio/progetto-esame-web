@@ -1,62 +1,90 @@
 #flash-container {
-  position: fixed;
-  top: 20px;       
-  right: 20px;    
-  z-index: 9999;   
-  width: 300px;
-  left: 50%;
-  transform: translateX(-50%);    
+	position: fixed;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 999999;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	width: max-content;
+	max-width: 90%;
+	pointer-events: none;
 }
 
 .flash-message {
-	padding: 12px 15px;
-	margin: 10px 0;
-	border-radius: 8px;
-	font-size: 0.95rem;
-	font-weight: 500;
+	pointer-events: auto;
+	padding: 16px 24px;
+	border-radius: 12px;
+	font-size: 1rem;
+	font-weight: 600;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	animation: fadeIn 0.3s ease-in-out;
+	gap: 20px;
+
+	/* L'EFFETTO SOPRAELEVATO */
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+	backdrop-filter: blur(10px);
+	/* Effetto vetro sfocato stile iOS */
+
+	/* Animazione di entrata dall'alto con effetto rimbalzo */
+	animation: slideDownFlash 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+	opacity: 0;
+	transform: translateY(-40px);
 }
 
 .flash-message.success {
-	background-color: rgba(0, 200, 83, 0.15);
-	border: 1px solid var(--success-color);
-	color: var(--success-color);
+	background-color: rgba(0, 200, 83, 0.9);
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .flash-message.error {
-	background-color: rgba(244, 67, 54, 0.15);
-	border: 1px solid var(--error-color);
-	color: var(--error-color);
+	background-color: rgba(244, 67, 54, 0.9);
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* .flash-message.info {
-	background-color: rgba(158, 158, 158, 0.15);
-	border: 1px solid var(--border-color);
-	color: var(--font-color);
-} */
-
-.flash-message.info {
-    background: #fff9e0;
-    color: #b8860b;
-    border: 1px solid #b8860b;
-}
-
+.flash-message.info,
 .flash-message.logout {
-    background: #fff9e0;
-    color: #b8860b;
-    border: 1px solid #b8860b;
+	background-color: rgba(255, 249, 224, 0.95);
+	color: #b8860b;
+	border: 1px solid rgba(184, 134, 11, 0.3);
 }
 
+.flash-message.fade-out {
+	animation: slideUpFlash 0.4s ease-in forwards;
+}
+
+@keyframes slideDownFlash {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideUpFlash {
+	to {
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+}
+
+
+/* Pulsanti nei flash */
 .close-btn {
 	background: none;
 	border: none;
 	color: inherit;
 	font-size: 1.2rem;
+	font-weight: bold;
 	cursor: pointer;
-	transition: transform 0.2s;
+	transition: transform 0.2s, opacity 0.2s;
+	opacity: 0.8;
 }
 
-.close-btn:hover { transform: scale(1.2); }
+.close-btn:hover {
+	transform: scale(1.1);
+	opacity: 1;
+}

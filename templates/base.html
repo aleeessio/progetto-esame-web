@@ -9,6 +9,11 @@
             {% endblock title %}
         </title>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700;800&display=swap"
+              rel="stylesheet">
+
         <link rel="stylesheet"
               href="{{ url_for('static', filename='css/style.css') }}"
               type="text/css">
@@ -34,6 +39,14 @@
     </head>
 
     <body>
+        <script>
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        </script>
+        <div class="page-overlay" id="page-overlay">
+            <div class="overlay-brand logo logo-fade">OmniDrive</div>
+        </div>
         <div>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -184,36 +197,7 @@
             </div>
         </footer>
 
-        <script>
-        //CHANGE THEME
-        const btnTheme = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');   
-        const body = document.body;
-        
-        if (localStorage.getItem('theme') === 'dark') {
-            body.classList.toggle('dark-mode');
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        } else {
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        }
-
-        btnTheme.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-
-            if (body.classList.contains('dark-mode')) {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-        </script>
+        <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 
         {% block extra_js %}
         {% endblock extra_js %}
