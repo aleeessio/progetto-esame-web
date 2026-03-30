@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 import sqlite3
 import json
 import os
@@ -8,6 +9,9 @@ app = Flask(__name__)
 app.secret_key = 'temprorary-secret-key'
 
 DB_USERS_PATH = 'data.db'
+IMG_PATH = os.path.join('static', 'imgs')
+IMG_ALLOWED = {'jpg', 'pgn', 'webp', 'jpeg'}
+
 ADMIN_EMAIL = "2.2@22"
 ADMIN_PWD = "12" 
 
@@ -44,7 +48,8 @@ def car_db_init():
                    fuel TEXT NOT NULL,
                    power INTEGER NOT NULL,
                    traction TEXT NOT NULL,
-                   number_of_seats TEXT NOT NULL
+                   number_of_seats TEXT NOT NULL,
+                   img TEXT
             )
         ''')
 
@@ -63,7 +68,8 @@ def supercar_db_init():
                    traction TEXT NOT NULL,
                    number_of_seats TEXT NOT NULL,
                    inside_color TEXT NOT NULL,
-                   inside_material TEXT NOT NULL
+                   inside_material TEXT NOT NULL,
+                   img TEXT
             )
         ''')
 
@@ -79,7 +85,8 @@ def bike_db_init():
                    frame_size TEXT NOT NULL,
                    traction TEXT NOT NULL,
                    suspensions TEXT NOT NULL,
-                   terrain TEXT NOT NULL
+                   terrain TEXT NOT NULL,
+                   img TEXT
             )
         ''')
 
@@ -98,7 +105,8 @@ def scooter_db_init():
                    required_license TEXT NOT NULL,
                    number_of_seats TEXT NOT NULL,
                    storage_capacity INTEGER NOT NULL,
-                   windshield BOOLEAN NOT NULL
+                   windshield BOOLEAN NOT NULL,
+                   img TEXT
             )
         ''')
 
@@ -117,7 +125,8 @@ def motorcycle_db_init():
                    power INTEGER NOT NULL,
                    required_license TEXT NOT NULL,
                    number_of_seats TEXT NOT NULL,
-                   storage_capacity INTEGER NOT NULL
+                   storage_capacity INTEGER NOT NULL,
+                   img TEXT
             )
         ''')
 
@@ -136,7 +145,8 @@ def camper_db_init():
                    approved_seats INTEGER NOT NULL,
                    type_bathroom TEXT NOT NULL,
                    climate_control BOOLEAN NOT NULL,
-                   pets_allowed BOOLEAN NOT NULL
+                   pets_allowed BOOLEAN NOT NULL,
+                   img TEXT
             )
         ''')
 
@@ -150,6 +160,16 @@ def db_init():
     camper_db_init()    
 # -------------------------------
 
+# -------------------------------
+# Extra functions
+# -------------------------------
+
+def is_img_allowed(fname):
+    if '.' not in fname:
+        return False
+    return fname.rsplit('.', 1)[-1].lower() in IMG_ALLOWED
+
+# -------------------------------
 
 
 # -------------------------------
@@ -286,9 +306,20 @@ def add_vehicle():
             number_of_seats = request.form.get('number_of_seats')
 
             with db_connect() as db:
-                db.execute(
+                data = db.execute(
                     'INSERT INTO cars (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats)
                 )
+
+                curr_id = data.lastrowid
+                fname = None
+                input_file = request.files.get('img')
+                if input_file and input_file.filename and is_img_allowed(input_file.filename):
+                    fname = secure_filename(input_file.filename)
+                    new_folder = os.path.join(IMG_PATH, 'cars', str(curr_id))
+                    os.makedirs(new_folder, exist_ok=True)
+                    input_file.save(os.path.join(new_folder, fname))
+                
+                db.execute('UPDATE cars SET img = ? WHERE id = ?', (fname, curr_id))
                 db.commit()
             
             flash("Car added!", 'success')
