@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import sqlite3
-import json
 import os
+import shutil
 
 app = Flask(__name__)
 app.secret_key = 'temprorary-secret-key'
@@ -169,6 +169,18 @@ def is_img_allowed(fname):
         return False
     return fname.rsplit('.', 1)[-1].lower() in IMG_ALLOWED
 
+def img_handler(db_conn, vehicle_type, vehicle_id):
+    fname = None
+    input_file = request.files.get('img')
+    if input_file and input_file.filename and is_img_allowed(input_file.filename):
+                    fname = secure_filename(input_file.filename)
+                    new_folder = os.path.join(IMG_PATH, vehicle_type, str(vehicle_id))
+                    os.makedirs(new_folder, exist_ok=True)
+                    input_file.save(os.path.join(new_folder, fname))
+    
+    db_conn.execute(f'UPDATE {vehicle_type} SET img = ? WHERE id = ?', (fname, vehicle_id))
+    db_conn.commit()
+
 # -------------------------------
 
 
@@ -311,16 +323,7 @@ def add_vehicle():
                 )
 
                 curr_id = data.lastrowid
-                fname = None
-                input_file = request.files.get('img')
-                if input_file and input_file.filename and is_img_allowed(input_file.filename):
-                    fname = secure_filename(input_file.filename)
-                    new_folder = os.path.join(IMG_PATH, 'cars', str(curr_id))
-                    os.makedirs(new_folder, exist_ok=True)
-                    input_file.save(os.path.join(new_folder, fname))
-                
-                db.execute('UPDATE cars SET img = ? WHERE id = ?', (fname, curr_id))
-                db.commit()
+                img_handler(db, 'cars', curr_id)
             
             flash("Car added!", 'success')
             return redirect(url_for('add_vehicle'))
@@ -340,10 +343,12 @@ def add_vehicle():
             inside_material = request.form.get("inside_material")
 
             with db_connect() as db:
-                db.execute(
+                data = db.execute(
                     'INSERT INTO supercars (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats, inside_color, inside_material) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats, inside_color, inside_material)
                 )
-                db.commit()
+
+                curr_id = data.lastrowid
+                img_handler(db, 'supercars', curr_id)
             
             flash("SuperCar added!", 'success')
             return redirect(url_for('add_vehicle'))
@@ -360,10 +365,12 @@ def add_vehicle():
             terrain = request.form.get('terrain')
 
             with db_connect() as db:
-                db.execute(
+                data = db.execute(
                     'INSERT INTO bikes (type, brand, rent_length, price, frame_size, traction, suspensions, terrain) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (bike_type, brand, rent_length, price, frame_size, traction, suspensions, terrain)
                 )
-                db.commit()
+
+                curr_id = data.lastrowid
+                img_handler(db, 'bikes', curr_id)
             
             flash("Bike added!", 'success')
             return redirect(url_for('add_vehicle'))
@@ -383,10 +390,12 @@ def add_vehicle():
             windshield = request.form.get('windshield') == "on"
 
             with db_connect() as db:
-                db.execute(
+                data = db.execute(
                     'INSERT INTO scooters (brand, rent_length, price, color, engine, fuel, power, required_license, number_of_seats, storage_capacity, windshield) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, engine, fuel, power, required_license, number_of_seats, storage_capacity, windshield)
                 )
-                db.commit()
+
+                curr_id = data.lastrowid
+                img_handler(db, 'scooters', curr_id)
             
             flash("Scooter added!", 'success')
             return redirect(url_for('add_vehicle'))
@@ -406,10 +415,12 @@ def add_vehicle():
             storage_capacity = request.form.get('storage_capacity')
 
             with db_connect() as db:
-                db.execute(
+                data = db.execute(
                     'INSERT INTO motorcycles (brand, rent_length, price, style, color, engine, fuel, power, required_license, number_of_seats, storage_capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, style, color, engine, fuel, power, required_license, number_of_seats, storage_capacity)
                 )
-                db.commit()
+
+                curr_id = data.lastrowid
+                img_handler(db, 'motorcycles', curr_id)
             
             flash("Motorcycle added!", 'success')
             return redirect(url_for('add_vehicle'))
@@ -429,10 +440,12 @@ def add_vehicle():
             pets_allowed = request.form.get('pets_allowed') == "on"
 
             with db_connect() as db:
-                db.execute(
+                data = db.execute(
                     'INSERT INTO campers (brand, rent_length, price, color, fuel, type, sleeping_beds, approved_seats, type_bathroom, climate_control, pets_allowed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, fuel, camper_type, sleeping_beds, approved_seats, type_bathroom, climate_control, pets_allowed)
                 )
-                db.commit()
+
+                curr_id = data.lastrowid
+                img_handler(db, 'campers', curr_id)
             
             flash("Camper added!", 'success')
             return redirect(url_for('add_vehicle'))
@@ -475,6 +488,10 @@ def remove_vehicle():
             f'DELETE FROM {vehicle_type} WHERE id = ?', (vehicle_id,)
         )
         db.commit()
+
+    curr_veichle_imgs = os.path.join(IMG_PATH, vehicle_type, vehicle_id)
+    if os.path.isdir(curr_veichle_imgs):
+        shutil.rmtree(curr_veichle_imgs)
 
     flash("Vehicle removed!", 'info')
     return redirect(url_for('vehicle_list'))
