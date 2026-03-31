@@ -1,0 +1,222 @@
+/*------- MAIN LAYOUT -------*/
+.detail-layout {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    /* Usa l'animazione globale di OmniDrive */
+    animation: premiumFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+/*------- BACK BUTTON -------*/
+.detail-header {
+    margin-bottom: 20px;
+}
+
+.detail-header .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-div);
+    color: var(--font-color);
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.detail-header .btn-back:hover {
+    background: var(--logo-color);
+    color: #fff;
+    border-color: var(--logo-color);
+}
+
+/*------- DETAIL CONTAINER -------*/
+.detail-container {
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    overflow: hidden;
+    /* Flex column posiziona l'immagine in alto e le info in basso */
+    display: flex;
+    flex-direction: column;
+    transition: background-color 1s ease, border-color 1s ease, box-shadow 1s ease;
+}
+
+/*------- IMAGE SECTION (TOP) -------*/
+.detail-image-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--background-page);
+    padding: 40px 20px;
+    border-bottom: 1px solid var(--border-color);
+    min-height: 300px;
+}
+
+.detail-image-section img {
+    max-width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    border-radius: 8px;
+    /* Ombra leggera attorno all'immagine per farla risaltare */
+    filter: drop-shadow(0 10px 15px var(--shadow-color));
+}
+
+.detail-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--border-color);
+}
+
+.detail-img-placeholder span {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+/*------- INFO SECTION (BOTTOM) -------*/
+.detail-info-section {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/*------- INFO TOP (Title & Price) -------*/
+.info-top {
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 25px;
+}
+
+.vehicle-badge {
+    display: inline-block;
+    background: var(--logo-color);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.vehicle-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 800;
+    color: var(--font-color);
+}
+
+.vehicle-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--logo-color);
+}
+
+.vehicle-price span {
+    font-size: 1.1rem;
+    color: var(--font-color);
+    opacity: 0.6;
+    font-weight: normal;
+}
+
+/*------- TECHNICAL SPECS -------*/
+.info-body h3 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--font-color);
+}
+
+.specs-grid {
+    display: grid;
+    /* Crea card responsive che si adattano allo spazio */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--background-page);
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spec-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px var(--shadow-color);
+    border-color: var(--logo-color);
+}
+
+.spec-icon {
+    font-size: 1.8rem;
+    background: var(--background-div);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+}
+
+.spec-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.spec-label {
+    font-size: 0.85rem;
+    color: var(--font-color);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.spec-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--font-color);
+}
+
+/*------- FOOTER / CHECKOUT BUTTON -------*/
+.info-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-checkout {
+    background: var(--logo-color);
+    color: #fff;
+    border: none;
+    padding: 16px 48px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+}
+
+.btn-checkout:hover {
+    background: #e5533d;
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.6);
+}

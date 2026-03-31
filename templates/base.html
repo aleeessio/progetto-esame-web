@@ -44,9 +44,11 @@
                 document.body.classList.add('dark-mode');
             }
         </script>
+
         <div class="page-overlay" id="page-overlay">
             <div class="overlay-brand logo logo-fade">OmniDrive</div>
         </div>
+
         <div>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}

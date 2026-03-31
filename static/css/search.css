@@ -1,117 +1,130 @@
-/* ---------------------------------------------------------------
-   LAYOUT GENERALE
-   --------------------------------------------------------------- */
 .search-layout {
     display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
     align-items: flex-start;
-    min-height: calc(100vh - 200px);
+    animation: premiumFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ---------------------------------------------------------------
-   SIDEBAR
-   --------------------------------------------------------------- */
+/* ------- SIDEBAR FILTRI ------- */
 .search-sidebar {
-    width: 280px;
-    min-width: 280px;
-    border-right: 1px solid var(--border-color);
-    padding: 30px 24px;
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+    flex-shrink: 0;
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px var(--shadow-color);
     position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
+    top: 100px;
 }
 
-.sidebar-section {
-    margin-bottom: 28px;
-}
-
-.sidebar-label {
-    font-size: 0.75rem;
+.sidebar-label,
+.sidebar-label-row span {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--font-color);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--border-color);
-    margin-bottom: 12px;
+    letter-spacing: 1px;
+    display: block;
 }
 
 .sidebar-label-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-top: 24px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
 }
 
 .reset-link {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--logo-color);
     text-decoration: none;
+    font-weight: bold;
 }
 
 .reset-link:hover {
     text-decoration: underline;
 }
 
-/* Griglia selezione tipo veicolo */
+/* ------- SELEZIONE TIPO (CHIPS) ------- */
 .type-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 12px;
 }
 
 .type-chip {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    padding: 10px 6px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--background-div);
-    color: var(--font-color);
+    justify-content: center;
+    padding: 16px 10px;
+    background: var(--background-page);
+    border: 2px solid transparent;
+    border-radius: 12px;
     text-decoration: none;
-    font-size: 0.78rem;
-    transition: border-color 0.2s, background 0.2s;
-    text-align: center;
-}
-
-.type-chip span:first-child {
-    font-size: 1.4rem;
+    color: var(--font-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .type-chip:hover {
+    background: var(--background-div);
     border-color: var(--logo-color);
+    transform: translateY(-2px);
 }
 
 .type-chip.active {
-    border-color: var(--logo-color);
     background: var(--logo-color);
-    color: #fff;
+    color: white;
+    border-color: var(--logo-color);
+    box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
 }
 
-/* Filtri */
-.filter-form {
-    display: flex;
-    flex-direction: column;
+.chip-icon {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
 }
 
+.chip-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* ------- FORM FILTRI ------- */
 .filter-group {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .filter-group label {
     display: block;
-    font-size: 0.82rem;
-    margin-bottom: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
     color: var(--font-color);
+    opacity: 0.8;
 }
 
 .filter-select {
     width: 100%;
-    padding: 8px 10px;
+    padding: 12px 14px;
+    border-radius: 8px;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
     background: var(--background-page);
     color: var(--font-color);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    appearance: none;
 }
 
 .filter-select:focus {
@@ -122,174 +135,192 @@
 .price-range {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .price-range input {
-    flex: 1;
-    padding: 8px 10px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
     background: var(--background-page);
     color: var(--font-color);
-    font-size: 0.9rem;
-    min-width: 0;
-}
-
-.price-range input:focus {
-    outline: none;
-    border-color: var(--logo-color);
-}
-
-.price-range span {
-    color: var(--border-color);
+    text-align: center;
 }
 
 .btn-filter {
     width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background: var(--background-div);
-    color: var(--font-color);
-    font-size: 0.95rem;
+    padding: 14px;
+    background-color: var(--logo-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
 }
 
 .btn-filter:hover {
-    background: var(--logo-color);
-}
-
-/* ---------------------------------------------------------------
-   AREA RISULTATI
-   --------------------------------------------------------------- */
-.search-results {
-    flex: 1;
-    padding: 30px 32px;
-    min-width: 0;
-}
-
-.results-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-    color: var(--border-color);
-    font-size: 1rem;
-}
-
-.results-header {
-    margin-bottom: 20px;
-}
-
-.results-count {
-    font-size: 0.85rem;
-    color: var(--border-color);
-}
-
-/* Griglia card risultati */
-.results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-}
-
-/* ---------------------------------------------------------------
-   VEHICLE CARD
-   --------------------------------------------------------------- */
-.vehicle-card {
-    background: var(--background-div);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s;
-    cursor: pointer;
-}
-
-.vehicle-card:hover {
-    border-color: var(--logo-color);
+    background-color: var(--logo-color);
     transform: translateY(-2px);
 }
 
-.card-img {
+/* ------- AREA RISULTATI (LISTA ORIZZONTALE) ------- */
+.search-results {
+    width: 850px;
+    min-width: 850px;
+    max-width: 850px;
+    flex-shrink: 0;
+}
+
+.results-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.vehicle-card {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    height: 150px;
+    height: 220px;
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.vehicle-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border-color: var(--logo-color);
+}
+
+/* Immagine a sinistra */
+.card-img {
+    width: 350px;
+    height: 220px;
+    flex-shrink: 0;
     background: var(--background-page);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
 }
 
 .card-img-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
     color: var(--border-color);
-    font-size: 0.85rem;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px;
 }
 
+/* Contenuto a destra */
 .card-body {
-    padding: 14px 16px;
+    flex: 1;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .card-title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 4px;
-    text-transform: capitalize;
+    font-size: 1.6rem;
+    font-weight: 800;
 }
 
 .card-price {
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 1.8rem;
     color: var(--logo-color);
-    margin-bottom: 10px;
+    font-weight: 800;
+    text-align: right;
 }
 
-.card-price span {
-    font-size: 0.78rem;
-    font-weight: normal;
-    color: var(--border-color);
-}
-
+/* Specifiche in riga */
 .card-specs {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    gap: 15px;
+    margin: 15px 0;
 }
 
 .card-specs span {
-    font-size: 0.75rem;
-    padding: 3px 8px;
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
     background: var(--background-page);
-    text-transform: capitalize;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* ---------------------------------------------------------------
-   RESPONSIVE
-   --------------------------------------------------------------- */
-@media (max-width: 768px) {
-    .search-layout {
-        flex-direction: column;
-    }
+.btn-rent {
+    align-self: flex-end;
+    width: auto;
+    padding: 12px 40px;
+    background-color: transparent;
+    border: 2px solid var(--logo-color);
+    color: var(--logo-color);
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+}
 
-    .search-sidebar {
-        width: 100%;
-        min-width: unset;
-        height: auto;
-        position: static;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
+.vehicle-card:hover .btn-rent {
+    background-color: var(--logo-color);
+    color: white;
+}
+
+/* ------- STATI VUOTI (PLACEHOLDERS) ------- */
+.results-placeholder {
+    background: var(--background-div);
+    border: 1px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--font-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.results-placeholder h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.results-placeholder p {
+    opacity: 0.7;
 }

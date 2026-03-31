@@ -498,7 +498,7 @@ def remove_vehicle():
         )
         db.commit()
 
-    curr_veichle_imgs = os.path.join(IMG_PATH, vehicle_type, vehicle_id)
+    curr_veichle_imgs = os.path.join(IMG_PATH, str(vehicle_type), str(vehicle_id))
     if os.path.isdir(curr_veichle_imgs):
         shutil.rmtree(curr_veichle_imgs)
 
@@ -562,11 +562,15 @@ def search():
                     params.append(val)
 
         elif vehicle_type == 'bike':
-            for field in ('type', 'traction', 'frame_size', 'suspensions', 'terrain'):
+            for field in ('traction', 'frame_size', 'suspensions', 'terrain'):
                 val = request.args.get(field)
                 if val:
                     conditions.append(f'{field} = ?')
                     params.append(val)
+            specific_type = request.args.get('specific_type')
+            if specific_type:
+                conditions.append('type = ?')
+                params.append(specific_type)
 
         elif vehicle_type == 'scooter':
             for field in ('brand', 'engine', 'fuel', 'required_license', 'number_of_seats'):
@@ -583,11 +587,15 @@ def search():
                     params.append(val)
 
         elif vehicle_type == 'camper':
-            for field in ('brand', 'fuel', 'type', 'sleeping_beds', 'approved_seats', 'type_bathroom'):
+            for field in ('brand', 'fuel', 'sleeping_beds', 'approved_seats', 'type_bathroom'):
                 val = request.args.get(field)
                 if val:
                     conditions.append(f'{field} = ?')
                     params.append(val)
+            specific_type = request.args.get('specific_type')
+            if specific_type:
+                conditions.append('type = ?')
+                params.append(specific_type)
 
         where = 'WHERE ' + ' AND '.join(conditions) if conditions else ''
 
@@ -627,6 +635,32 @@ def privacy_policy():
 @app.route('/terms_conditions')
 def terms_conditions():
     return render_template("terms_conditions.html")
+
+@app.route('/vehicle/<vehicle_type>/<int:vehicle_id>')
+def vehicle_detail(vehicle_type, vehicle_id):
+    table = TYPE_TO_TABLE.get(vehicle_type)
+    
+    if not table:
+        flash("Tipo di veicolo non trovato.", "error")
+        return redirect(url_for('search'))
+
+    with db_connect() as db:
+        vehicle = db.execute(
+            f'SELECT * FROM {table} WHERE id = ?', (vehicle_id,)
+        ).fetchone()
+
+    if not vehicle:
+        flash("Veicolo non trovato.", "error")
+        return redirect(url_for('search'))
+
+    # Converti in dizionario per poter aggiungere l'URL dell'immagine se serve
+    v_dict = dict(vehicle)
+    if v_dict.get('img'):
+        v_dict['img_url'] = f"imgs/{table}/{v_dict['id']}/{v_dict['img']}"
+    else:
+        v_dict['img_url'] = None
+
+    return render_template('vehicle.html', vehicle=v_dict, vehicle_type=vehicle_type)
 
 # -------------------------------
 

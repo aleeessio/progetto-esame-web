@@ -28,38 +28,75 @@ btnTheme.addEventListener('click', () => {
 
 
 // PAGE TRANSITION LOGIC
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.getElementById("page-overlay");
 
-    setTimeout(() => {
-        overlay.classList.add("is-revealed");
-    }, 50);
+    if (overlay) {
+        const previousUrl = document.referrer.split('?')[0].split('#')[0];
+        const currentUrl = window.location.href.split('?')[0].split('#')[0];
 
-    const links = document.querySelectorAll('a[href]');
+        if (previousUrl === currentUrl && previousUrl !== "") {
+            overlay.classList.remove("is-covering-prep", "is-covering-active");
+            overlay.style.transition = 'none';
+
+            void overlay.offsetWidth;
+            overlay.classList.add("is-revealed");
+
+            setTimeout(() => {
+                overlay.style.transition = '';
+            }, 50);
+
+        } else {
+            setTimeout(() => {
+                overlay.classList.add("is-revealed");
+            }, 100);
+        }
+    }
+
+    const links = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"])');
 
     links.forEach(link => {
-        link.addEventListener('click', function (e) {
-            const targetUrl = this.getAttribute('href');
+        link.addEventListener('click', (e) => {
+            if (!overlay) return;
 
-            if (this.target === '_blank' || targetUrl.startsWith('#') || targetUrl === '' || e.ctrlKey || e.metaKey) {
+            const targetBaseUrl = link.href.split('?')[0].split('#')[0];
+            const currentBaseUrl = window.location.href.split('?')[0].split('#')[0];
+
+            if (targetBaseUrl === currentBaseUrl) {
                 return;
             }
 
             e.preventDefault();
 
+            overlay.style.transition = '';
             overlay.classList.remove("is-revealed");
             overlay.classList.add("is-covering-prep");
 
-            void overlay.offsetWidth;
+            void overlay.offsetWidth; // Forza reflow
 
-            overlay.classList.remove("is-covering-prep");
             overlay.classList.add("is-covering-active");
 
             setTimeout(() => {
-                window.location.href = this.href;
+                window.location.href = link.href;
             }, 320);
         });
     });
+});
+
+// 3. FIX TASTO INDIETRO (Bfcache)
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+        const overlay = document.getElementById("page-overlay");
+        if (overlay) {
+            overlay.style.transition = 'none';
+            overlay.classList.remove("is-covering-prep", "is-covering-active");
+            overlay.classList.add("is-revealed");
+
+            void overlay.offsetWidth;
+
+            overlay.style.transition = '';
+        }
+    }
 });
 
 // AUTO-DISMISS FLASH MESSAGES

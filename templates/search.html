@@ -1,318 +1,335 @@
 {% extends "base.html" %}
 
-{% block title %}Search{% endblock %}
+{% block title %}
+    Search
+{% endblock title %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
-{% endblock %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/search.css') }}">
+
+    <!--evita la presenza dell'overlay nella pagina quando si sceglie il veicolo e NON blocca l'animazione quando si esce/entra dalla/nella pagina-->
+    {% if request.args %}
+        <script>
+        (function() {
+            const isFromSearch = document.referrer.includes('/search');
+            const hasParams = window.location.search.length > 0;
+
+            if (isFromSearch && hasParams) {
+                const style = document.createElement('style');
+                style.id = 'instant-hide-overlay';
+                style.textContent = `
+                    #page-overlay {
+                        transform: translateY(-100%) !important;
+                        transition: none !important;
+                    }
+                `;
+                document.head.appendChild(style);
+
+                window.addEventListener('DOMContentLoaded', function() {
+                    requestAnimationFrame(() => {
+                        const overlay = document.getElementById('page-overlay');
+                        if (overlay) overlay.classList.add('is-revealed');
+                        
+                        const styleTag = document.getElementById('instant-hide-overlay');
+                        if (styleTag) setTimeout(() => styleTag.remove(), 50);
+                    });
+                });
+            }
+        })();
+        </script>
+    {% endif %}
+{% endblock extra_css %}
 
 {% block content %}
+    <div class="search-layout">
 
-<div class="search-layout">
-
-    <!-- ===================== SIDEBAR SINISTRA ===================== -->
-    <aside class="search-sidebar">
-
-        <!-- Selezione tipo veicolo -->
-        <div class="sidebar-section">
-            <div class="sidebar-label">Vehicle type</div>
-            <div class="type-grid">
-                {% set types = [
-                    ('car',        '🚗', 'Car'),
-                    ('supercar',   '🏎️', 'Supercar'),
-                    ('bike',       '🚲', 'Bike'),
-                    ('scooter',    '🛵', 'Scooter'),
-                    ('motorcycle', '🏍️', 'Motorcycle'),
-                    ('camper',     '🚐', 'Camper'),
-                ] %}
-                {% for type_val, icon, label in types %}
-                    <a href="{{ url_for('search', type=type_val) }}"
-                       class="type-chip {% if vehicle_type == type_val %}active{% endif %}">
-                        <span>{{ icon }}</span>
-                        <span>{{ label }}</span>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Filtri (visibili solo se tipo selezionato) -->
-        {% if vehicle_type %}
-        <form method="GET" action="{{ url_for('search') }}" class="filter-form">
-            <input type="hidden" name="type" value="{{ vehicle_type }}">
+        <aside class="search-sidebar">
 
             <div class="sidebar-section">
-                <div class="sidebar-label-row">
-                    <span class="sidebar-label">Filters</span>
-                    <a href="{{ url_for('search', type=vehicle_type) }}" class="reset-link">Reset</a>
+                <div class="sidebar-label">Vehicle type</div>
+                <div class="type-grid">
+                    {% set types = [('car', '🚗', 'Car'), ('supercar', '🏎️', 'Supercar'), ('bike', '🚲', 'Bike'), ('scooter', '🛵', 'Scooter'), ('motorcycle', '🏍️', 'Motorcycle'), ('camper', '🚐', 'Camper')] %}
+                    {% for type_val, icon, label in types %}
+                        <a href="{{ url_for('search', type=type_val) }}"
+                           class="type-chip {% if vehicle_type == type_val %}active{% endif %}">
+                            <span class="chip-icon">{{ icon }}</span>
+                            <span class="chip-label">{{ label }}</span>
+                        </a>
+                    {% endfor %}
                 </div>
-
-                <!-- Prezzo -->
-                <div class="filter-group">
-                    <label>Price (€)</label>
-                    <div class="price-range">
-                        <input type="number" name="price_min" placeholder="Min"
-                               value="{{ args.get('price_min', '') }}" min="0">
-                        <span>–</span>
-                        <input type="number" name="price_max" placeholder="Max"
-                               value="{{ args.get('price_max', '') }}" min="0">
-                    </div>
-                </div>
-
-                <!-- Filtri CAR / SUPERCAR -->
-                {% if vehicle_type in ('car', 'supercar') %}
-
-                    <div class="filter-group">
-                        <label>Brand</label>
-                        <select name="brand" class="filter-select">
-                            <option value="">All</option>
-                            {% if vehicle_type == 'car' %}
-                                {% for b in ['Audi','BMW','Fiat','Ford','Jeep','Mercedes','Peugeot','Volkswagen','Toyota'] %}
-                                    <option value="{{ b|lower }}" {% if args.get('brand') == b|lower %}selected{% endif %}>{{ b }}</option>
-                                {% endfor %}
-                            {% else %}
-                                {% for b in ['Audi','BMW','Bugatti','Ferrari','Jaguar','Lamborghini','Lotus','Mercedes','Pagani','Porsche'] %}
-                                    <option value="{{ b|lower }}" {% if args.get('brand') == b|lower %}selected{% endif %}>{{ b }}</option>
-                                {% endfor %}
-                            {% endif %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Transmission</label>
-                        <select name="transmission" class="filter-select">
-                            <option value="">All</option>
-                            {% for t in ['manual','automatic','semi-automatic'] %}
-                                <option value="{{ t }}" {% if args.get('transmission') == t %}selected{% endif %}>{{ t|capitalize }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Fuel</label>
-                        <select name="fuel" class="filter-select">
-                            <option value="">All</option>
-                            {% for f in ['petrol','diesel','hybrid','electric'] %}
-                                <option value="{{ f }}" {% if args.get('fuel') == f %}selected{% endif %}>{{ f|capitalize }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Seats</label>
-                        <select name="number_of_seats" class="filter-select">
-                            <option value="">All</option>
-                            {% for s in ['2','4','5','6+'] %}
-                                <option value="{{ s }}" {% if args.get('number_of_seats') == s %}selected{% endif %}>{{ s }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                {% elif vehicle_type == 'bike' %}
-
-                    <div class="filter-group">
-                        <label>Type</label>
-                        <select name="type" class="filter-select">
-                            <option value="">All</option>
-                            {% for t in ['city','mountain','road','gravel','trekking'] %}
-                                <option value="{{ t }}" {% if args.get('type') == t %}selected{% endif %}>{{ t|capitalize }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Traction</label>
-                        <select name="traction" class="filter-select">
-                            <option value="">All</option>
-                            <option value="muscular" {% if args.get('traction') == 'muscular' %}selected{% endif %}>Muscular</option>
-                            <option value="electric" {% if args.get('traction') == 'electric' %}selected{% endif %}>Electric</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Suspensions</label>
-                        <select name="suspensions" class="filter-select">
-                            <option value="">All</option>
-                            {% for s in ['rigid','front','full'] %}
-                                <option value="{{ s }}" {% if args.get('suspensions') == s %}selected{% endif %}>{{ s|capitalize }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Terrain</label>
-                        <select name="terrain" class="filter-select">
-                            <option value="">All</option>
-                            {% for t in ['asphalt','light off-road','heavy off-road'] %}
-                                <option value="{{ t }}" {% if args.get('terrain') == t %}selected{% endif %}>{{ t|capitalize }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                {% elif vehicle_type == 'scooter' %}
-
-                    <div class="filter-group">
-                        <label>Engine</label>
-                        <select name="engine" class="filter-select">
-                            <option value="">All</option>
-                            {% for e in ['50cc','125cc','150cc+','300cc+'] %}
-                                <option value="{{ e }}" {% if args.get('engine') == e %}selected{% endif %}>{{ e }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Fuel</label>
-                        <select name="fuel" class="filter-select">
-                            <option value="">All</option>
-                            <option value="petrol" {% if args.get('fuel') == 'petrol' %}selected{% endif %}>Petrol</option>
-                            <option value="electric" {% if args.get('fuel') == 'electric' %}selected{% endif %}>Electric</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>License</label>
-                        <select name="required_license" class="filter-select">
-                            <option value="">All</option>
-                            {% for l in ['AM','A1','A2','A','B'] %}
-                                <option value="{{ l }}" {% if args.get('required_license') == l %}selected{% endif %}>{{ l }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                {% elif vehicle_type == 'motorcycle' %}
-
-                    <div class="filter-group">
-                        <label>Style</label>
-                        <select name="style" class="filter-select">
-                            <option value="">All</option>
-                            {% for s in ['naked','touring','sport','enduro','custom'] %}
-                                <option value="{{ s }}" {% if args.get('style') == s %}selected{% endif %}>{{ s|capitalize }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Engine</label>
-                        <select name="engine" class="filter-select">
-                            <option value="">All</option>
-                            {% for e in ['up to 300cc','301-600cc','601-900cc','900cc+'] %}
-                                <option value="{{ e }}" {% if args.get('engine') == e %}selected{% endif %}>{{ e }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>License</label>
-                        <select name="required_license" class="filter-select">
-                            <option value="">All</option>
-                            {% for l in ['A2','A'] %}
-                                <option value="{{ l }}" {% if args.get('required_license') == l %}selected{% endif %}>{{ l }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                {% elif vehicle_type == 'camper' %}
-
-                    <div class="filter-group">
-                        <label>Type</label>
-                        <select name="type" class="filter-select">
-                            <option value="">All</option>
-                            {% for t in ['standard','luxury','compact'] %}
-                                <option value="{{ t }}" {% if args.get('type') == t %}selected{% endif %}>{{ t|capitalize }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Sleeping Beds</label>
-                        <select name="sleeping_beds" class="filter-select">
-                            <option value="">All</option>
-                            {% for b in ['2','4','5','6+'] %}
-                                <option value="{{ b }}" {% if args.get('sleeping_beds') == b %}selected{% endif %}>{{ b }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Fuel</label>
-                        <select name="fuel" class="filter-select">
-                            <option value="">All</option>
-                            {% for f in ['petrol','diesel','hybrid','electric'] %}
-                                <option value="{{ f }}" {% if args.get('fuel') == f %}selected{% endif %}>{{ f|capitalize }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                {% endif %}
-
-                <button type="submit" class="btn-filter">Apply filters</button>
-            </div>
-        </form>
-        {% endif %}
-
-    </aside>
-
-    <!-- ===================== AREA RISULTATI ===================== -->
-    <section class="search-results">
-
-        {% if not vehicle_type %}
-            <div class="results-placeholder">
-                <p>← Select a vehicle type to start</p>
             </div>
 
-        {% elif results %}
-            <div class="results-header">
-                <span class="results-count">{{ results|length }} result{% if results|length != 1 %}s{% endif %}</span>
-            </div>
-            <div class="results-grid">
-                {% for v in results %}
-                <div class="vehicle-card">
-                    <div class="card-img">
-                        {% if v.img_url %}
-                            <img src="{{ url_for('static', filename=v.img_url) }}" alt="{{ v.get('brand', vehicle_type) }}">
-                        {% else %}
-                            <div class="card-img-placeholder">No photo</div>
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">{{ v.get('brand', vehicle_type|capitalize) }}</div>
-                        <div class="card-price">€ {{ v.price }} <span>/ {% if vehicle_type in ('supercar',) %}day{% else %}month{% endif %}</span></div>
-                        <div class="card-specs">
-                            {% if vehicle_type in ('car', 'supercar') %}
-                                <span>{{ v.transmission|capitalize }}</span>
-                                <span>{{ v.fuel|capitalize }}</span>
-                                <span>{{ v.number_of_seats }} seats</span>
-                            {% elif vehicle_type == 'bike' %}
-                                <span>{{ v.type|capitalize }}</span>
-                                <span>{{ v.traction|capitalize }}</span>
-                                <span>{{ v.terrain|capitalize }}</span>
-                            {% elif vehicle_type == 'scooter' %}
-                                <span>{{ v.engine }}</span>
-                                <span>{{ v.fuel|capitalize }}</span>
-                                <span>License {{ v.required_license }}</span>
-                            {% elif vehicle_type == 'motorcycle' %}
-                                <span>{{ v.style|capitalize }}</span>
-                                <span>{{ v.engine }}</span>
-                                <span>License {{ v.required_license }}</span>
-                            {% elif vehicle_type == 'camper' %}
-                                <span>{{ v.type|capitalize }}</span>
-                                <span>{{ v.sleeping_beds }} beds</span>
-                                <span>{{ v.fuel|capitalize }}</span>
-                            {% endif %}
+            {% if vehicle_type %}
+                <form method="GET" action="{{ url_for('search') }}" class="filter-form">
+                    <input type="hidden" name="type" value="{{ vehicle_type }}">
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-label-row">
+                            <span class="sidebar-label">Filters</span>
+                            <a href="{{ url_for('search', type=vehicle_type) }}" class="reset-link">Reset</a>
                         </div>
+
+                        <div class="filter-group">
+                            <label>Price (€)</label>
+                            <div class="price-range">
+                                <input type="number"
+                                       name="price_min"
+                                       placeholder="Min"
+                                       value="{{ args.get('price_min', '') }}"
+                                       min="0">
+                                <span>–</span>
+                                <input type="number"
+                                       name="price_max"
+                                       placeholder="Max"
+                                       value="{{ args.get('price_max', '') }}"
+                                       min="0">
+                            </div>
+                        </div>
+
+                        {% if vehicle_type in ('car', 'supercar') %}
+                            <div class="filter-group">
+                                <label>Brand</label>
+                                <select name="brand" class="filter-select">
+                                    <option value="">All Brands</option>
+                                    {% if vehicle_type == 'car' %}
+                                        {% for b in ['audi','bmw','fiat','ford','jeep','mercedes','peugeot','volkswagen','toyota'] %}
+                                            <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|capitalize }}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for b in ['audi','bmw','bugatti','ferrari','jaguar','lamborghini','lotus','mercedes','pagani','porsche'] %}
+                                            <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|capitalize }}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Transmission</label>
+                                <select name="transmission" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for t in ['manual','automatic','semi-automatic'] %}
+                                        <option value="{{ t }}"
+                                                {% if args.get('transmission') == t %}selected{% endif %}>
+                                            {{ t|capitalize }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Fuel</label>
+                                <select name="fuel" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for f in ['petrol','diesel','hybrid','electric'] %}
+                                        <option value="{{ f }}" {% if args.get('fuel') == f %}selected{% endif %}>{{ f|capitalize }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        {% elif vehicle_type == 'bike' %}
+                            <div class="filter-group">
+                                <label>Type</label>
+                                <select name="specific_type" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for t in ['city','mountain','road','gravel','trekking'] %}
+                                        <option value="{{ t }}"
+                                                {% if args.get('specific_type') == t %}selected{% endif %}>
+                                            {{ t|capitalize }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Traction</label>
+                                <select name="traction" class="filter-select">
+                                    <option value="">All</option>
+                                    <option value="manual"
+                                            {% if args.get('traction') == 'manual' %}selected{% endif %}>
+                                        Manual
+                                    </option>
+                                    <option value="electric"
+                                            {% if args.get('traction') == 'electric' %}selected{% endif %}>
+                                        Electric
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Terrain</label>
+                                <select name="terrain" class="filter-select">
+                                    <option value="">All</option>
+                                    <option value="off-road"
+                                            {% if args.get('terrain') == 'off-road' %}selected{% endif %}>
+                                        Off-Road
+                                    </option>
+                                    <option value="urban"
+                                            {% if args.get('terrain') == 'urban' %}selected{% endif %}>Urban</option>
+                                </select>
+                            </div>
+
+                        {% elif vehicle_type == 'scooter' %}
+                            <div class="filter-group">
+                                <label>Brand</label>
+                                <select name="brand" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for b in ['yamaha','honda','ducati'] %}
+                                        <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|capitalize }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Engine</label>
+                                <select name="engine" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for e in ['50cc','100cc','125cc','250cc','300cc+'] %}
+                                        <option value="{{ e }}" {% if args.get('engine') == e %}selected{% endif %}>{{ e }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>License</label>
+                                <select name="required_license" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for l in ['A1','A2','A'] %}
+                                        <option value="{{ l }}"
+                                                {% if args.get('required_license') == l %}selected{% endif %}>
+                                            {{ l }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        {% elif vehicle_type == 'motorcycle' %}
+                            <div class="filter-group">
+                                <label>Style</label>
+                                <select name="style" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for s in ['sport','cruiser','touring','enduro'] %}
+                                        <option value="{{ s }}" {% if args.get('style') == s %}selected{% endif %}>{{ s|capitalize }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Engine</label>
+                                <select name="engine" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for e in ['125cc','250cc','300cc+'] %}
+                                        <option value="{{ e }}" {% if args.get('engine') == e %}selected{% endif %}>{{ e }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>License</label>
+                                <select name="required_license" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for l in ['A1','A2','A'] %}
+                                        <option value="{{ l }}"
+                                                {% if args.get('required_license') == l %}selected{% endif %}>
+                                            {{ l }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        {% elif vehicle_type == 'camper' %}
+                            <div class="filter-group">
+                                <label>Type</label>
+                                <select name="specific_type" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for t in ['standard','luxury','compact'] %}
+                                        <option value="{{ t }}"
+                                                {% if args.get('specific_type') == t %}selected{% endif %}>
+                                            {{ t|capitalize }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Fuel</label>
+                                <select name="fuel" class="filter-select">
+                                    <option value="">All</option>
+                                    {% for f in ['petrol','diesel','hybrid','electric'] %}
+                                        <option value="{{ f }}" {% if args.get('fuel') == f %}selected{% endif %}>{{ f|capitalize }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% endif %}
+
+                        <button type="submit" class="btn-filter">Apply Filters</button>
                     </div>
+                </form>
+            {% endif %}
+        </aside>
+
+        <section class="search-results">
+            {% if not vehicle_type %}
+                <div class="results-placeholder">
+                    <div class="placeholder-icon">🔍</div>
+                    <h3>Start Your Search</h3>
+                    <p>Select a vehicle type from the sidebar to view our catalog.</p>
                 </div>
-                {% endfor %}
-            </div>
+            {% elif results %}
+                <div class="results-grid">
+                    {% for v in results %}
+                        <div class="vehicle-card">
+                            <div class="card-img">
+                                {% if v.img_url %}
+                                    <img src="{{ url_for('static', filename=v.img_url) }}"
+                                         alt="{{ v.get('brand') }}">
+                                {% else %}
+                                    <div class="card-img-placeholder">No Photo</div>
+                                {% endif %}
+                            </div>
 
-        {% else %}
-            <div class="results-placeholder">
-                <p>No vehicles found for the selected filters.</p>
-            </div>
-        {% endif %}
+                            <div class="card-body">
+                                <div class="card-top">
+                                    <div class="card-title">{{ v.get('brand', vehicle_type|capitalize) }}</div>
+                                    <div class="card-price">
+                                        €{{ v.price|int }}
+                                        <span>/
+                                            {% if vehicle_type in ('supercar', 'bike') %}
+                                                day
+                                            {% else %}
+                                                month
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
 
-    </section>
-
-</div>
-
-{% endblock %}
+                                <div class="card-specs">
+                                    {% if vehicle_type in ('car', 'supercar') %}
+                                        <span><i class="icon">⚙️</i> {{ v.transmission|capitalize }}</span>
+                                        <span><i class="icon">⛽</i> {{ v.fuel|capitalize }}</span>
+                                        <span><i class="icon">💺</i> {{ v.number_of_seats }} seats</span>
+                                    {% elif vehicle_type == 'bike' %}
+                                        <span><i class="icon">🚲</i> {{ v.type|capitalize }}</span>
+                                        <span><i class="icon">⚡</i> {{ v.traction|capitalize }}</span>
+                                        <span><i class="icon">🏔️</i> {{ v.terrain|capitalize }}</span>
+                                    {% elif vehicle_type == 'scooter' %}
+                                        <span><i class="icon">🏍️</i> {{ v.engine }}</span>
+                                        <span><i class="icon">⛽</i> {{ v.fuel|capitalize }}</span>
+                                        <span><i class="icon">🪪</i> {{ v.required_license }}</span>
+                                    {% elif vehicle_type == 'motorcycle' %}
+                                        <span><i class="icon">🏁</i> {{ v.style|capitalize }}</span>
+                                        <span><i class="icon">🏍️</i> {{ v.engine }}</span>
+                                        <span><i class="icon">🪪</i> {{ v.required_license }}</span>
+                                    {% elif vehicle_type == 'camper' %}
+                                        <span><i class="icon">🚐</i> {{ v.type|capitalize }}</span>
+                                        <span><i class="icon">🛏️</i> {{ v.sleeping_beds }} beds</span>
+                                        <span><i class="icon">⛽</i> {{ v.fuel|capitalize }}</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ url_for('vehicle_detail', vehicle_type=vehicle_type, vehicle_id=v.id) }}"
+                                   class="btn-rent">View Details</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="results-placeholder">
+                    <div class="placeholder-icon">😔</div>
+                    <h3>No Vehicles Found</h3>
+                    <p>Try adjusting your filters to find what you're looking for.</p>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+{% endblock content %}
