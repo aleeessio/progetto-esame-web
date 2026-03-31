@@ -15,6 +15,15 @@ IMG_ALLOWED = {'jpg', 'pgn', 'webp', 'jpeg'}
 ADMIN_EMAIL = "2.2@22"
 ADMIN_PWD = "12" 
 
+TYPE_TO_TABLE = {
+    'car':        'cars',
+    'supercar':   'supercars',
+    'bike':       'bikes',
+    'scooter':    'scooters',
+    'motorcycle': 'motorcycles',
+    'camper':     'campers',
+}
+
 # -------------------------------
 # Database config
 # -------------------------------
@@ -526,7 +535,82 @@ def remove_user():
 
 @app.route('/search')
 def search():
-    return render_template("search.html")
+    vehicle_type = request.args.get('type', '')
+    table        = TYPE_TO_TABLE.get(vehicle_type)
+    results      = []
+
+    if table:
+        conditions = []
+        params     = []
+
+        # Filtri comuni a tutti i veicoli
+        price_min = request.args.get('price_min')
+        price_max = request.args.get('price_max')
+        if price_min:
+            conditions.append('price >= ?')
+            params.append(price_min)
+        if price_max:
+            conditions.append('price <= ?')
+            params.append(price_max)
+
+        # Filtri specifici per tipo
+        if vehicle_type in ('car', 'supercar'):
+            for field in ('brand', 'color', 'transmission', 'fuel', 'traction', 'number_of_seats'):
+                val = request.args.get(field)
+                if val:
+                    conditions.append(f'{field} = ?')
+                    params.append(val)
+
+        elif vehicle_type == 'bike':
+            for field in ('type', 'traction', 'frame_size', 'suspensions', 'terrain'):
+                val = request.args.get(field)
+                if val:
+                    conditions.append(f'{field} = ?')
+                    params.append(val)
+
+        elif vehicle_type == 'scooter':
+            for field in ('brand', 'engine', 'fuel', 'required_license', 'number_of_seats'):
+                val = request.args.get(field)
+                if val:
+                    conditions.append(f'{field} = ?')
+                    params.append(val)
+
+        elif vehicle_type == 'motorcycle':
+            for field in ('brand', 'style', 'engine', 'fuel', 'required_license'):
+                val = request.args.get(field)
+                if val:
+                    conditions.append(f'{field} = ?')
+                    params.append(val)
+
+        elif vehicle_type == 'camper':
+            for field in ('brand', 'fuel', 'type', 'sleeping_beds', 'approved_seats', 'type_bathroom'):
+                val = request.args.get(field)
+                if val:
+                    conditions.append(f'{field} = ?')
+                    params.append(val)
+
+        where = 'WHERE ' + ' AND '.join(conditions) if conditions else ''
+
+        with db_connect() as db:
+            results = db.execute(
+                f'SELECT * FROM {table} {where}', params
+            ).fetchall()
+
+        # Converti in lista di dict e aggiungi img_url
+        results_list = []
+        for r in results:
+            v = dict(r)
+            if v.get('img'):
+                v['img_url'] = f"imgs/{table}/{v['id']}/{v['img']}"
+            else:
+                v['img_url'] = None
+            results_list.append(v)
+        results = results_list
+
+    return render_template('search.html',
+                           results=results,
+                           vehicle_type=vehicle_type,
+                           args=request.args)
 
 @app.route('/profile')
 def profile():

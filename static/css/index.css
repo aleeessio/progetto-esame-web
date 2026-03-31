@@ -1,0 +1,167 @@
+/* ---------------------------------------------------------------
+   HERO BANNER
+   --------------------------------------------------------------- */
+.hero-banner {
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--background-div) 0%, var(--background-page) 100%);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--logo-color);
+    line-height: 1;
+}
+
+.hero-sub {
+    font-size: 1.1rem;
+    color: var(--border-color);
+    max-width: 400px;
+}
+
+.hero-cta {
+    margin-top: 10px;
+    padding: 12px 32px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-div);
+    color: var(--font-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.hero-cta:hover {
+    background: var(--logo-color);
+    color: #fff;
+}
+
+/* ---------------------------------------------------------------
+   VEHICLE SELECTOR
+   --------------------------------------------------------------- */
+.vehicle-selector {
+    padding: 70px 80px;
+    text-align: center;
+}
+
+.selector-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.selector-sub {
+    color: var(--border-color);
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+}
+
+.selector-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.selector-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 28px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--background-div);
+    cursor: pointer;
+    transition: border-color 0.25s, transform 0.2s, background 0.25s;
+    user-select: none;
+}
+
+.selector-card:hover {
+    border-color: var(--logo-color);
+    transform: translateY(-3px);
+}
+
+.selector-card.selected {
+    border-color: var(--logo-color);
+    background: var(--logo-color);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.selector-icon {
+    font-size: 2.2rem;
+}
+
+.selector-label {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Bottone cerca */
+.selector-cta {
+    margin-top: 36px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+}
+
+.selector-cta.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.btn-search {
+    padding: 14px 48px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--logo-color);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.btn-search:hover {
+    opacity: 0.85;
+}
+
+/* ---------------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .selector-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .vehicle-selector {
+        padding: 50px 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .selector-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+}

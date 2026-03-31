@@ -1,11 +1,62 @@
 {% extends "base.html" %}
 
-{% block title %}
-    Home
-{% endblock title %}
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
 
 {% block content %}
-    <section class="hero">
-        <h1>INDEX</h1>
+
+    <!-- ===================== HERO BANNER ===================== -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h1 class="hero-title">OmniDrive</h1>
+            <p class="hero-sub">Find the perfect vehicle for every journey</p>
+            <a href="#vehicle-selector" class="hero-cta">Explore vehicles</a>
+        </div>
     </section>
-{% endblock content %}
+
+    <!-- ===================== VEHICLE SELECTOR ===================== -->
+    <section class="vehicle-selector" id="vehicle-selector">
+        <h2 class="selector-title">What are you looking for?</h2>
+        <p class="selector-sub">Select a category to start your search</p>
+
+        <div class="selector-grid">
+            <div class="selector-card" data-type="car">
+                <span class="selector-icon">🚗</span>
+                <span class="selector-label">Car</span>
+            </div>
+            <div class="selector-card" data-type="supercar">
+                <span class="selector-icon">🏎️</span>
+                <span class="selector-label">Supercar</span>
+            </div>
+            <div class="selector-card" data-type="bike">
+                <span class="selector-icon">🚲</span>
+                <span class="selector-label">Bike</span>
+            </div>
+            <div class="selector-card" data-type="scooter">
+                <span class="selector-icon">🛵</span>
+                <span class="selector-label">Scooter</span>
+            </div>
+            <div class="selector-card" data-type="motorcycle">
+                <span class="selector-icon">🏍️</span>
+                <span class="selector-label">Motorcycle</span>
+            </div>
+            <div class="selector-card" data-type="camper">
+                <span class="selector-icon">🚐</span>
+                <span class="selector-label">Camper</span>
+            </div>
+        </div>
+
+        <!-- Bottone cerca: appare dopo selezione -->
+        <div class="selector-cta" id="selector-cta">
+            <a href="#" id="search-btn" class="btn-search">Search</a>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
