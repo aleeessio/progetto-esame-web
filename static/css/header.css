@@ -69,14 +69,6 @@ nav a {
     min-width: 100px;
 }
 
-.b-lang {
-    background: transparent;
-    color: var(--font-color);
-    border: 0px;
-    cursor: pointer;
-    padding: 1rem;
-}
-
 .b-login {
     background: var(--background-div);
     color: var(--font-color);

@@ -210,3 +210,27 @@ LOGIN/REGISTER:
             link utili (home, search, contatti, profilo)
         DX  
             newsletter
+
+
+
+
+
+
+
+AGGIORNAMENTO 1 (2-04-2026):
+    - RESPONSIVE
+    - finire index (no emoji)
+    - sistemare FONT per tutto il sito
+    - cambiare footer (eliminare newsletter)
+    - SEARCH.html aggiustare filtri, cambiare stile (no emoji)
+    - VEHICLE.html cambiare stile (no emoji), implementare tasto "RENT" (OPZIONALE: tasto "mi piace" per salvare veicolo)(OPZIONALE: tasto back to VEHICLE_LIST.html se si è admin)
+        -nuova pagina RENT.html (dove inserire cellulare e durata noleggio)
+    - PROFILE.html informazioni generali utente, richieste attive di noleggio (OPZIONALE: veicoli salvati)
+    - CONTACT.html informazioni generali admin/autonoleggio (email, nome, cognome, cellulare, via, città etc...)
+    - PRIVACY_POLICY.html completare
+    - TERMS_CONDITIONS.html completare
+    - ADMIN.html nuovo tasto per richieste
+        - new REQUEST_LIST.html
+    - VEHICLE_LIST.html (OPZIONALE: redirect al veicolo)
+    - ADD_VEHICLE.html aggiustare tutti i filtri (renderli realistici), sistemare input img
+    - 

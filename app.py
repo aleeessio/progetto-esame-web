@@ -10,7 +10,7 @@ app.secret_key = 'temprorary-secret-key'
 
 DB_USERS_PATH = 'data.db'
 IMG_PATH = os.path.join('static', 'imgs')
-IMG_ALLOWED = {'jpg', 'pgn', 'webp', 'jpeg'}
+IMG_ALLOWED = {'jpg', 'png', 'webp', 'jpeg'}
 
 ADMIN_EMAIL = "2.2@22"
 ADMIN_PWD = "12" 
