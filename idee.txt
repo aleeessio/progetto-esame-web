@@ -223,8 +223,8 @@ AGGIORNAMENTO 1 (2-04-2026):
     - ADMIN.html nuovo tasto per richieste
         - new REQUEST_LIST.html 
     - ADD_VEHICLE.html aggiustare tutti i filtri (renderli realistici), sistemare input img
-
     - SEARCH.html aggiustare filtri
+    
     - PROFILE.html informazioni generali utente, richieste attive di noleggio 
     - CONTACT.html informazioni generali admin/autonoleggio (email, nome, cognome, cellulare, via, città etc...)
     - PRIVACY_POLICY.html completare

@@ -11,7 +11,9 @@
             <a href="{{ url_for('admin') }}" class="btn-back">Back</a>
         </div>
 
-        <form method="POST" action="{{ url_for('add_vehicle') }}" enctype="multipart/form-data">
+        <form method="POST"
+              action="{{ url_for('add_vehicle') }}"
+              enctype="multipart/form-data">
 
             <!-- Vehicle type selector -->
             <div class="form-group">
@@ -32,7 +34,11 @@
 
             <div id="image-upload-section" class="form-group" style="display:none;">
                 <label for="img">Photo</label>
-                <input type="file" id="img" name="img" accept=".png,.jpg,.jpeg,.webp" class="form-select">
+                <input type="file"
+                       id="img"
+                       name="img"
+                       accept=".png,.jpg,.jpeg,.webp"
+                       class="form-select">
             </div>
 
             <!-- Car form -->
@@ -41,15 +47,21 @@
                     <label for="brand">Brand</label>
                     <select id="brand" name="brand" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Brand</option>
+                        <option value="alfa_romeo">Alfa Romeo</option>
                         <option value="audi">Audi</option>
                         <option value="bmw">BMW</option>
+                        <option value="citroen">Citroën</option>
                         <option value="fiat">Fiat</option>
                         <option value="ford">Ford</option>
+                        <option value="honda">Honda</option>
+                        <option value="hyundai">Hyundai</option>
                         <option value="jeep">Jeep</option>
                         <option value="mercedes">Mercedes</option>
+                        <option value="opel">Opel</option>
                         <option value="peugeot">Peugeot</option>
-                        <option value="volkswagen">Volkswagen</option>
+                        <option value="renault">Renault</option>
                         <option value="toyota">Toyota</option>
+                        <option value="volkswagen">Volkswagen</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -70,32 +82,20 @@
                            name="price"
                            class="form-select"
                            min="1"
-                           max="5000"
-                           placeholder="1 - 5000"
+                           max="3000"
+                           placeholder="1 - 3000"
                            required>
                 </div>
                 <div class="form-group">
-                    <label for="color">Color</label>
-                    <select id="color" name="color" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Color</option>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="silver">Silver</option>
-                        <option value="red">Red</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="orange">Orange</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="transmission">Transmission</label>
-                    <select id="transmission" name="transmission" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Transmission Type</option>
-                        <option value="manual">Manual</option>
-                        <option value="automatic">Automatic</option>
-                        <option value="semi-automatic">Semi-Automatic</option>
-                    </select>
+                    <label for="power">Power (kW)</label>
+                    <input type="number"
+                           id="power"
+                           name="power"
+                           class="form-select"
+                           min="30"
+                           max="800"
+                           placeholder="30 - 800"
+                           required>
                 </div>
                 <div class="form-group">
                     <label for="fuel">Fuel</label>
@@ -108,15 +108,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="power">Power (kW)</label>
-                    <input type="number"
-                           id="power"
-                           name="power"
-                           class="form-select"
-                           min="1"
-                           max="2000"
-                           placeholder="1 - 2000"
-                           required>
+                    <label for="transmission">Transmission</label>
+                    <select id="transmission" name="transmission" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Transmission Type</option>
+                        <option value="manual">Manual</option>
+                        <option value="automatic">Automatic</option>
+                        <option value="semi-automatic">Semi-Automatic</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="traction">Traction</label>
@@ -125,6 +123,20 @@
                         <option value="front">Front</option>
                         <option value="rear">Rear</option>
                         <option value="all-wheel">All-Wheel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <select id="color" name="color" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Color</option>
+                        <option value="black">Black</option>
+                        <option value="blue">Blue</option>
+                        <option value="brown">Brown</option>
+                        <option value="gray">Gray</option>
+                        <option value="green">Green</option>
+                        <option value="red">Red</option>
+                        <option value="silver">Silver</option>
+                        <option value="white">White</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -148,6 +160,7 @@
                     <label for="brand">Brand</label>
                     <select id="brand" name="brand" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Brand</option>
+                        <option value="aston_martin">Aston Martin</option>
                         <option value="audi">Audi</option>
                         <option value="bmw">BMW</option>
                         <option value="bugatti">Bugatti</option>
@@ -155,6 +168,7 @@
                         <option value="jaguar">Jaguar</option>
                         <option value="lamborghini">Lamborghini</option>
                         <option value="lotus">Lotus</option>
+                        <option value="mclaren">McLaren</option>
                         <option value="mercedes">Mercedes</option>
                         <option value="pagani">Pagani</option>
                         <option value="porsche">Porsche</option>
@@ -177,33 +191,21 @@
                            id="price"
                            name="price"
                            class="form-select"
-                           min="1"
-                           max="5000"
-                           placeholder="1 - 5000"
+                           min="150"
+                           max="15000"
+                           placeholder="150 - 15000"
                            required>
                 </div>
                 <div class="form-group">
-                    <label for="color">Color</label>
-                    <select id="color" name="color" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Color</option>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="silver">Silver</option>
-                        <option value="red">Red</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="orange">Orange</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="transmission">Transmission</label>
-                    <select id="transmission" name="transmission" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Transmission Type</option>
-                        <option value="manual">Manual</option>
-                        <option value="automatic">Automatic</option>
-                        <option value="semi-automatic">Semi-Automatic</option>
-                    </select>
+                    <label for="power">Power (kW)</label>
+                    <input type="number"
+                           id="power"
+                           name="power"
+                           class="form-select"
+                           min="200"
+                           max="1500"
+                           placeholder="200 - 1500"
+                           required>
                 </div>
                 <div class="form-group">
                     <label for="fuel">Fuel</label>
@@ -216,15 +218,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="power">Power (kW)</label>
-                    <input type="number"
-                           id="power"
-                           name="power"
-                           class="form-select"
-                           min="1"
-                           max="2000"
-                           placeholder="1 - 2000"
-                           required>
+                    <label for="transmission">Transmission</label>
+                    <select id="transmission" name="transmission" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Transmission Type</option>
+                        <option value="manual">Manual</option>
+                        <option value="automatic">Automatic</option>
+                        <option value="semi-automatic">Semi-Automatic</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="traction">Traction</label>
@@ -233,6 +233,20 @@
                         <option value="front">Front</option>
                         <option value="rear">Rear</option>
                         <option value="all-wheel">All-Wheel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <select id="color" name="color" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Color</option>
+                        <option value="black">Black</option>
+                        <option value="blue">Blue</option>
+                        <option value="brown">Brown</option>
+                        <option value="gray">Gray</option>
+                        <option value="green">Green</option>
+                        <option value="red">Red</option>
+                        <option value="silver">Silver</option>
+                        <option value="white">White</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -252,14 +266,12 @@
                     <label for="inside_color">Inside Color</label>
                     <select id="inside_color" name="inside_color" class="form-select" required>
                         <option value="" disabled selected hidden>Select an Inside Color</option>
+                        <option value="beige">Beige</option>
                         <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="silver">Silver</option>
+                        <option value="brown">Brown</option>
+                        <option value="gray">Gray</option>
                         <option value="red">Red</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="orange">Orange</option>
+                        <option value="white">White</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -269,9 +281,10 @@
                             class="form-select"
                             required>
                         <option value="" disabled selected hidden>Select an Inside Material</option>
-                        <option value="leather">Leather</option>
-                        <option value="fabric">Fabric</option>
-                        <option value="vinyl">Vinyl</option>
+                        <option value="alcantara">Alcantara</option>
+                        <option value="full_leather">Full Leather</option>
+                        <option value="leather_alcantara">Leather & Alcantara</option>
+                        <option value="vegan_leather">Vegan Leather</option>
                     </select>
                 </div>
             </div>
