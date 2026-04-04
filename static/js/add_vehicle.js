@@ -18,5 +18,4 @@ function showForm(type) {
             form.querySelectorAll('input, select').forEach(field => { field.disabled = false; });
         }
     }
-
 }

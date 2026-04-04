@@ -295,18 +295,27 @@
                     <label for="type">Type</label>
                     <select id="type" name="type" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Type</option>
-                        <option value="mountain">Mountain</option>
-                        <option value="road">Road</option>
                         <option value="city">City</option>
+                        <option value="gravel">Gravel</option>
+                        <option value="mountain">Mountain (MTB)</option>
+                        <option value="road">Road</option>
+                        <option value="trekking">Trekking</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="brand">Brand</label>
                     <select id="brand" name="brand" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Brand</option>
-                        <option value="trek">Trek</option>
+                        <option value="bianchi">Bianchi</option>
+                        <option value="cannondale">Cannondale</option>
+                        <option value="canyon">Canyon</option>
+                        <option value="cube">Cube</option>
                         <option value="giant">Giant</option>
+                        <option value="orbea">Orbea</option>
+                        <option value="pinarello">Pinarello</option>
+                        <option value="santa_cruz">Santa Cruz</option>
                         <option value="specialized">Specialized</option>
+                        <option value="trek">Trek</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -326,18 +335,19 @@
                            id="price"
                            name="price"
                            class="form-select"
-                           min="1"
-                           max="500"
-                           placeholder="1 - 500"
+                           min="10"
+                           max="200"
+                           placeholder="10 - 200"
                            required>
                 </div>
                 <div class="form-group">
                     <label for="frame_size">Frame Size</label>
                     <select id="frame_size" name="frame_size" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Frame Size</option>
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
+                        <option value="s">S (Small)</option>
+                        <option value="m">M (Medium)</option>
+                        <option value="l">L (Large)</option>
+                        <option value="xl">XL (Extra Large)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -352,8 +362,8 @@
                     <label for="suspensions">Suspension</label>
                     <select id="suspensions" name="suspensions" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Suspension Type</option>
+                        <option value="rigid">Rigid</option>
                         <option value="front">Front</option>
-                        <option value="rear">Rear</option>
                         <option value="full">Full</option>
                     </select>
                 </div>
@@ -373,9 +383,16 @@
                     <label for="brand">Brand</label>
                     <select id="brand" name="brand" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Brand</option>
-                        <option value="yamaha">Yamaha</option>
+                        <option value="aprilia">Aprilia</option>
+                        <option value="bmw">BMW</option>
                         <option value="honda">Honda</option>
-                        <option value="ducati">Ducati</option>
+                        <option value="kymco">Kymco</option>
+                        <option value="peugeot">Peugeot</option>
+                        <option value="piaggio">Piaggio</option>
+                        <option value="suzuki">Suzuki</option>
+                        <option value="sym">SYM</option>
+                        <option value="vespa">Vespa</option>
+                        <option value="yamaha">Yamaha</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -395,45 +412,10 @@
                            id="price"
                            name="price"
                            class="form-select"
-                           min="1"
-                           max="1000"
-                           placeholder="1 - 1000"
+                           min="50"
+                           max="600"
+                           placeholder="50 - 600"
                            required>
-                </div>
-                <div class="form-group">
-                    <label for="color">Color</label>
-                    <select id="color" name="color" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Color</option>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="silver">Silver</option>
-                        <option value="red">Red</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="orange">Orange</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="engine">Engine</label>
-                    <select id="engine" name="engine" class="form-select" required>
-                        <option value="" disabled selected hidden>Select an Engine Type</option>
-                        <option value="50cc">50cc</option>
-                        <option value="100cc">100cc</option>
-                        <option value="125cc">125cc</option>
-                        <option value="250cc">250cc</option>
-                        <option value="300cc">300cc+</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fuel">Fuel</label>
-                    <select id="fuel" name="fuel" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Fuel Type</option>
-                        <option value="petrol">Petrol</option>
-                        <option value="diesel">Diesel</option>
-                        <option value="hybrid">Hybrid</option>
-                        <option value="electric">Electric</option>
-                    </select>
                 </div>
                 <div class="form-group">
                     <label for="power">Power (kW)</label>
@@ -442,9 +424,42 @@
                            name="power"
                            class="form-select"
                            min="1"
-                           max="2000"
-                           placeholder="1 - 2000"
+                           max="50"
+                           placeholder="1 - 50"
                            required>
+                </div>
+                <div class="form-group">
+                    <label for="engine">Engine</label>
+                    <select id="engine" name="engine" class="form-select" required>
+                        <option value="" disabled selected hidden>Select an Engine Type</option>
+                        <option value="50cc">50cc</option>
+                        <option value="125cc">125cc</option>
+                        <option value="150cc">150cc</option>
+                        <option value="300cc">300cc</option>
+                        <option value="400cc+">400cc+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fuel">Fuel</label>
+                    <select id="fuel" name="fuel" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Fuel Type</option>
+                        <option value="petrol">Petrol</option>
+                        <option value="electric">Electric</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <select id="color" name="color" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Color</option>
+                        <option value="black">Black</option>
+                        <option value="blue">Blue</option>
+                        <option value="brown">Brown</option>
+                        <option value="gray">Gray</option>
+                        <option value="green">Green</option>
+                        <option value="red">Red</option>
+                        <option value="silver">Silver</option>
+                        <option value="white">White</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="required_license">Required License</label>
@@ -453,9 +468,10 @@
                             class="form-select"
                             required>
                         <option value="" disabled selected hidden>Select a License Type</option>
-                        <option value="A1">A1</option>
-                        <option value="A2">A2</option>
-                        <option value="A">A</option>
+                        <option value="AM">AM (Moped / 50cc)</option>
+                        <option value="A1">A1 (Up to 125cc)</option>
+                        <option value="A2">A2 (Up to 35kW)</option>
+                        <option value="A">A (Unrestricted)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -475,9 +491,9 @@
                            id="storage_capacity"
                            name="storage_capacity"
                            class="form-select"
-                           min="1"
-                           max="1000"
-                           placeholder="1 - 1000"
+                           min="0"
+                           max="100"
+                           placeholder="0 - 100"
                            required>
                 </div>
                 <div class="form-group checkbox-inline">
@@ -492,9 +508,21 @@
                     <label for="brand">Brand</label>
                     <select id="brand" name="brand" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Brand</option>
-                        <option value="yamaha">Yamaha</option>
-                        <option value="honda">Honda</option>
+                        <option value="aprilia">Aprilia</option>
+                        <option value="bmw">BMW</option>
                         <option value="ducati">Ducati</option>
+                        <option value="harley_davidson">Harley-Davidson</option>
+                        <option value="honda">Honda</option>
+                        <option value="husqvarna">Husqvarna</option>
+                        <option value="indian">Indian</option>
+                        <option value="kawasaki">Kawasaki</option>
+                        <option value="ktm">KTM</option>
+                        <option value="moto_guzzi">Moto Guzzi</option>
+                        <option value="mv_agusta">MV Agusta</option>
+                        <option value="royal_enfield">Royal Enfield</option>
+                        <option value="suzuki">Suzuki</option>
+                        <option value="triumph">Triumph</option>
+                        <option value="yamaha">Yamaha</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -514,53 +542,10 @@
                            id="price"
                            name="price"
                            class="form-select"
-                           min="1"
-                           max="1000"
-                           placeholder="1 - 1000"
+                           min="100"
+                           max="2000"
+                           placeholder="100 - 2000"
                            required>
-                </div>
-                <div class="form-group">
-                    <label for="style">Style</label>
-                    <select id="style" name="style" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Style</option>
-                        <option value="sport">Sport</option>
-                        <option value="cruiser">Cruiser</option>
-                        <option value="touring">Touring</option>
-                        <option value="enduro">Enduro</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="color">Color</label>
-                    <select id="color" name="color" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Color</option>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="silver">Silver</option>
-                        <option value="red">Red</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="orange">Orange</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="engine">Engine</label>
-                    <select id="engine" name="engine" class="form-select" required>
-                        <option value="" disabled selected hidden>Select an Engine Type</option>
-                        <option value="125cc">125cc</option>
-                        <option value="250cc">250cc</option>
-                        <option value="300cc">300cc+</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fuel">Fuel</label>
-                    <select id="fuel" name="fuel" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Fuel Type</option>
-                        <option value="petrol">Petrol</option>
-                        <option value="diesel">Diesel</option>
-                        <option value="hybrid">Hybrid</option>
-                        <option value="electric">Electric</option>
-                    </select>
                 </div>
                 <div class="form-group">
                     <label for="power">Power (kW)</label>
@@ -568,10 +553,57 @@
                            id="power"
                            name="power"
                            class="form-select"
-                           min="1"
-                           max="2000"
-                           placeholder="1 - 2000"
+                           min="10"
+                           max="200"
+                           placeholder="10 - 200"
                            required>
+                </div>
+                <div class="form-group">
+                    <label for="style">Style</label>
+                    <select id="style" name="style" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Style</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="cruiser">Cruiser</option>
+                        <option value="custom">Custom</option>
+                        <option value="enduro">Enduro</option>
+                        <option value="naked">Naked</option>
+                        <option value="scrambler">Scrambler</option>
+                        <option value="sport">Sport</option>
+                        <option value="touring">Touring</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="engine">Engine</label>
+                    <select id="engine" name="engine" class="form-select" required>
+                        <option value="" disabled selected hidden>Select an Engine Type</option>
+                        <option value="125cc">125cc</option>
+                        <option value="300cc">300cc</option>
+                        <option value="600cc">600cc</option>
+                        <option value="900cc">900cc</option>
+                        <option value="1000cc+">1000cc+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fuel">Fuel</label>
+                    <select id="fuel" name="fuel" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Fuel Type</option>
+                        <option value="petrol">Petrol</option>
+                        <option value="electric">Electric</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <select id="color" name="color" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Color</option>
+                        <option value="black">Black</option>
+                        <option value="blue">Blue</option>
+                        <option value="brown">Brown</option>
+                        <option value="gray">Gray</option>
+                        <option value="green">Green</option>
+                        <option value="red">Red</option>
+                        <option value="silver">Silver</option>
+                        <option value="white">White</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="required_license">Required License</label>
@@ -580,9 +612,9 @@
                             class="form-select"
                             required>
                         <option value="" disabled selected hidden>Select a License Type</option>
-                        <option value="A1">A1</option>
-                        <option value="A2">A2</option>
-                        <option value="A">A</option>
+                        <option value="A1">A1 (Up to 125cc / 11kW)</option>
+                        <option value="A2">A2 (Up to 35kW)</option>
+                        <option value="A">A (Unrestricted)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -602,9 +634,9 @@
                            id="storage_capacity"
                            name="storage_capacity"
                            class="form-select"
-                           min="1"
-                           max="1000"
-                           placeholder="1 - 1000"
+                           min="0"
+                           max="150"
+                           placeholder="0 - 150"
                            required>
                 </div>
             </div>
@@ -615,12 +647,16 @@
                     <label for="brand">Brand</label>
                     <select id="brand" name="brand" class="form-select" required>
                         <option value="" disabled selected hidden>Select a Brand</option>
-                        <option value="adriatik">Adriatik</option>
-                        <option value="arctic">Arctic</option>
+                        <option value="adria">Adria</option>
+                        <option value="burstner">Bürstner</option>
                         <option value="carado">Carado</option>
-                        <option value="ci">CI</option>
+                        <option value="challenger">Challenger</option>
                         <option value="dethleffs">Dethleffs</option>
-                        <option value="elios">Elios</option>
+                        <option value="hymer">Hymer</option>
+                        <option value="knaus">Knaus</option>
+                        <option value="laika">Laika</option>
+                        <option value="roller_team">Roller Team</option>
+                        <option value="volkswagen">Volkswagen (Campervans)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -640,23 +676,19 @@
                            id="price"
                            name="price"
                            class="form-select"
-                           min="1"
-                           max="5000"
-                           placeholder="1 - 5000"
+                           min="1000"
+                           max="8000"
+                           placeholder="1000 - 8000"
                            required>
                 </div>
                 <div class="form-group">
-                    <label for="color">Color</label>
-                    <select id="color" name="color" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Color</option>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="silver">Silver</option>
-                        <option value="red">Red</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="orange">Orange</option>
+                    <label for="type">Type</label>
+                    <select id="type" name="type" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Type</option>
+                        <option value="campervan">Campervan</option>
+                        <option value="low_profile">Low Profile</option>
+                        <option value="overcab">Overcab</option>
+                        <option value="a_class">A-Class</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -670,12 +702,17 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="type">Type</label>
-                    <select id="type" name="type" class="form-select" required>
-                        <option value="" disabled selected hidden>Select a Type</option>
-                        <option value="standard">Standard</option>
-                        <option value="luxury">Luxury</option>
-                        <option value="compact">Compact</option>
+                    <label for="color">Color</label>
+                    <select id="color" name="color" class="form-select" required>
+                        <option value="" disabled selected hidden>Select a Color</option>
+                        <option value="black">Black</option>
+                        <option value="blue">Blue</option>
+                        <option value="brown">Brown</option>
+                        <option value="gray">Gray</option>
+                        <option value="green">Green</option>
+                        <option value="red">Red</option>
+                        <option value="silver">Silver</option>
+                        <option value="white">White</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -683,9 +720,11 @@
                     <select id="sleeping_beds" name="sleeping_beds" class="form-select" required>
                         <option value="" disabled selected hidden>Select Number of Sleeping Beds</option>
                         <option value="2">2</option>
+                        <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
-                        <option value="6+">6+</option>
+                        <option value="6">6</option>
+                        <option value="7+">7+</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -696,18 +735,19 @@
                             required>
                         <option value="" disabled selected hidden>Select Number of Approved Seats</option>
                         <option value="2">2</option>
+                        <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
-                        <option value="6+">6+</option>
+                        <option value="6">6</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="type_bathroom">Type of Bathroom</label>
                     <select id="type_bathroom" name="type_bathroom" class="form-select" required>
                         <option value="" disabled selected hidden>Select Type of Bathroom</option>
-                        <option value="shower">Shower</option>
-                        <option value="toilet">Toilet</option>
+                        <option value="none">None</option>
                         <option value="combined">Combined</option>
+                        <option value="separated">Separated</option>
                     </select>
                 </div>
                 <div class="form-group checkbox-inline">

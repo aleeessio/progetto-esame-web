@@ -218,29 +218,30 @@ LOGIN/REGISTER:
 
 
 AGGIORNAMENTO 1 (2-04-2026):
-    - VEHICLE.html implementare tasto "RENT"
-        -nuova pagina RENT.html (dove inserire cellulare e durata noleggio)
-    - ADMIN.html nuovo tasto per richieste
-        - new REQUEST_LIST.html 
-    - ADD_VEHICLE.html aggiustare tutti i filtri (renderli realistici), sistemare input img
-    - SEARCH.html aggiustare filtri
-    
-    - PROFILE.html informazioni generali utente, richieste attive di noleggio 
-    - CONTACT.html informazioni generali admin/autonoleggio (email, nome, cognome, cellulare, via, città etc...)
-    - PRIVACY_POLICY.html completare
-    - TERMS_CONDITIONS.html completare
-    - cambiare footer (eliminare newsletter)
+            - VEHICLE.html implementare tasto "RENT"
+                -nuova pagina RENT.html (dove inserire cellulare e durata noleggio)
+            - ADMIN.html nuovo tasto per richieste
+                - new REQUEST_LIST.html 
 
-    - finire index (no emoji)
-    - VEHICLE.html cambiare stile (no emoji)
-    - SEARCH.html cambiare stile (no emoji)
-    
-    - PROFILE.html (OPZIONALE: veicoli salvati)
-    - VEHICLE_LIST.html (OPZIONALE: redirect al veicolo)
-    - VEHICLE.html (OPZIONALE: tasto "mi piace" per salvare veicolo)(OPZIONALE: tasto back to VEHICLE_LIST.html se si è admin)
-    
-    - sistemare FONT per tutto il sito
-    - RESPONSIVE
+    #FATTO# - ADD_VEHICLE.html aggiustare tutti i filtri (renderli realistici), sistemare input img
+            - SEARCH.html aggiustare filtri
+            
+            - PROFILE.html informazioni generali utente, richieste attive di noleggio 
+            - CONTACT.html informazioni generali admin/autonoleggio (email, nome, cognome, cellulare, via, città etc...)
+            - PRIVACY_POLICY.html completare
+            - TERMS_CONDITIONS.html completare
+            - cambiare footer (eliminare newsletter)
 
-    - Popolare il sito con utenti e veicoli
-    - Prepararsi esposizione 12 minuti 
+            - finire index (no emoji)
+            - VEHICLE.html cambiare stile (no emoji)
+            - SEARCH.html cambiare stile (no emoji)
+            
+            - PROFILE.html (OPZIONALE: veicoli salvati)
+            - VEHICLE_LIST.html (OPZIONALE: redirect al veicolo)
+            - VEHICLE.html (OPZIONALE: tasto "mi piace" per salvare veicolo)(OPZIONALE: tasto back to VEHICLE_LIST.html se si è admin)
+            
+            - sistemare FONT per tutto il sito
+            - RESPONSIVE
+
+            - Popolare il sito con utenti e veicoli
+            - Prepararsi esposizione 12 minuti 
