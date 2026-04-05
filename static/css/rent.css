@@ -1,0 +1,88 @@
+/* ---------------------------------------------------------------
+   LAYOUT GENERALE
+   --------------------------------------------------------------- */
+.rent-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 50px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ---------------------------------------------------------------
+   MAIN — form
+   --------------------------------------------------------------- */
+.rent-form-box {
+    flex: 1;
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 40px;
+}
+
+.rent-form-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
+
+.rent-form-sub {
+    color: var(--border-color);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+}
+
+/* Date affiancate */
+.date-row {
+    display: flex;
+    gap: 16px;
+}
+
+.date-row .form-group {
+    flex: 1;
+}
+
+/* Textarea */
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-page);
+    color: var(--font-color);
+    font-size: 1rem;
+    resize: vertical;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--logo-color);
+}
+
+.optional {
+    font-size: 0.8rem;
+    color: var(--border-color);
+    font-weight: normal;
+}
+
+/* ---------------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------------- */
+@media (max-width: 800px) {
+    .rent-layout {
+        flex-direction: column;
+        padding: 30px 20px;
+    }
+
+    .rent-summary {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .date-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

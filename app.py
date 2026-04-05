@@ -159,6 +159,26 @@ def camper_db_init():
             )
         ''')
 
+def rental_db_init():
+    with db_connect() as db:
+        # db.execute('''DROP TABLE IF EXISTS rental_requests ''')
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS rental_requests (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   user_id INTEGER NOT NULL,
+                   user_name TEXT NOT NULL,
+                   user_email TEXT NOT NULL,
+                   user_phone TEXT NOT NULL,
+                   vehicle_type TEXT NOT NULL,
+                   vehicle_id INTEGER NOT NULL,
+                   vehicle_brand TEXT NOT NULL,
+                   start_date TEXT NOT NULL,
+                   end_date TEXT NOT NULL,
+                   message TEXT,
+                   status TEXT NOT NULL
+            )
+        ''')
+
 def db_init():
     user_db_init()
     car_db_init()
@@ -166,7 +186,8 @@ def db_init():
     bike_db_init()
     scooter_db_init()
     motorcycle_db_init()
-    camper_db_init()    
+    camper_db_init() 
+    rental_db_init()   
 # -------------------------------
 
 # -------------------------------
@@ -232,7 +253,7 @@ def register():
         
         if double_check:
             flash("Email already exists, login!", "error")
-            return redirect(url_for('register'))
+            return redirect(url_for('login'))
         
         ############################ End errors check ############################
         
@@ -661,6 +682,62 @@ def vehicle_detail(vehicle_type, vehicle_id):
         v_dict['img_url'] = None
 
     return render_template('vehicle.html', vehicle=v_dict, vehicle_type=vehicle_type)
+
+
+@app.route('/rent/<vehicle_type>/<int:vehicle_id>', methods=['GET', 'POST'])
+def rent(vehicle_type, vehicle_id):
+    if not session.get('user_id'):
+        flash("You have to login first!", 'error')
+        return redirect(url_for('login'))
+    
+    table = TYPE_TO_TABLE.get(vehicle_type)
+    if not table:
+        flash("Invalid vehicle type!", 'error')
+        return redirect(url_for('index'))
+    
+    with db_connect() as db:
+        vehicle = db.execute(
+            f'SELECT * FROM {table} WHERE id = ?', (vehicle_id,)
+            ).fetchone()
+    
+    if not vehicle:
+        flash("Vehicle not found!", 'error')
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip()
+        phone = request.form.get('phone', '').strip()
+        start_date = request.form.get('start_date', '').strip()
+        end_date = request.form.get('end_date', '').strip()
+        message = request.form.get('message', '').strip()
+        
+        if not phone or not start_date or not end_date:
+            flash("Please, instert all data!", 'error')
+            return redirect(url_for('rent', vehicle_type=vehicle_type, vehicle_id=vehicle_id))
+        
+        with db_connect() as db:
+            db.execute(
+                'INSERT INTO rental_requests (user_id, user_name, user_email, user_phone, vehicle_type, vehicle_id, vehicle_brand, start_date, end_date, message, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (
+                    session['user_id'],
+                    session['user_name'],
+                    email,
+                    phone,
+                    vehicle_type,
+                    vehicle_id,
+                    vehicle['brand'],
+                    start_date,
+                    end_date,
+                    message,
+                    'pending'
+                )
+            )
+            db.commit()
+        
+        flash("Rental request sent!", 'success')
+        return redirect(url_for('profile'))
+    
+    return render_template('rent.html', vehicle=dict(vehicle), vehicle_type=vehicle_type)
 
 # -------------------------------
 
