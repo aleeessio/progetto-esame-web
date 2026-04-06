@@ -745,6 +745,15 @@ def rent(vehicle_type, vehicle_id):
         flash("Vehicle not found!", 'error')
         return redirect(url_for('index'))
     
+    with db_connect() as db:
+        already_exists = db.execute(
+            'SELECT * FROM rental_requests WHERE user_id = ? AND vehicle_type = ? AND vehicle_id = ? AND (status = "pending" OR status = "approved")', (session['user_id'], vehicle_type, vehicle_id,)
+        ).fetchone()
+
+    if already_exists:
+        flash("Request already sent!", 'error')
+        return redirect(url_for('profile'))
+    
     if request.method == 'POST':
         email = request.form.get('email', '').strip()
         phone = request.form.get('phone', '').strip()
