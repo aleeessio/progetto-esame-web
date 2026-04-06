@@ -554,6 +554,39 @@ def remove_user():
     flash("User removed!", 'info')
     return redirect(url_for('user_list'))
 
+@app.route('/request_list')
+def request_list():
+    if not session.get('is_admin'):
+        flash("Access denied!", 'error')
+        return redirect(url_for('index'))
+    
+    with db_connect() as db:
+        reqs = db.execute(
+            'SELECT * FROM rental_requests ORDER BY id DESC'
+        ).fetchall()
+
+    return render_template("request_list.html", requests=reqs)
+
+@app.route('/update_req_status/<int:req_id>', methods=['POST'])
+def update_req_status(req_id):
+    if not session.get('is_admin'):
+        flash("Access denied!", 'error')
+        return redirect(url_for('index'))
+    
+    new_status = request.form.get('status')
+    if new_status not in ('pending', 'rejected', 'approved'):
+        flash("Invalid status!", 'error')
+        return redirect(url_for('request_list'))
+    
+    with db_connect() as db:
+        db.execute(
+            'UPDATE rental_requests SET status = ? WHERE id = ?', (new_status, req_id,)
+        )
+        db.commit()
+    
+    flash("Request updated!", 'success')
+    return redirect(url_for('request_list'))
+
 @app.route('/search')
 def search():
     vehicle_type = request.args.get('type', '')

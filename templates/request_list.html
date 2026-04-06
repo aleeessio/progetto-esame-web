@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Rental Requests
+{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/request_list.css') }}">
+{% endblock extra_css %}
+
+{% block content %}
+    <div class="requests-box">
+        <div class="requests-header">
+            <h2>Rental Requests</h2>
+            <a href="{{ url_for('admin') }}" class="btn-back">Back</a>
+        </div>
+
+        {% if requests %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Vehicle</th>
+                        <th>Period</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for req in requests %}
+                        <tr>
+                            <td>{{ req['id'] }}</td>
+                            <td>
+                                <div class="user-info">
+                                    <span class="user-name">{{ req['user_name'] }}</span>
+                                    <span class="user-id-text">user_id: {{ req['user_id'] }}</span>
+                                </div>
+                            </td>
+                            <td>{{ req['vehicle_brand'] }} <span class="vehicle-type-text">({{ req['vehicle_type'] }})</span></td>
+                            <td>
+                                <div class="period-info">
+                                    {{ req['start_date'] }} | {{ req['end_date'] }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="contact-info">
+                                    <span class="contact-email">{{ req['user_email'] }}</span>
+                                    <span class="contact-phone">Phone: {{ req['user_phone'] }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="status-badge-admin status-{{ req['status'] }}">
+                                    <span class="status-dot"></span>
+                                    {{ req['status']|title }}
+                                </div>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ url_for('update_req_status', req_id=req['id']) }}" class="status-form">
+                                    <select name="status" class="form-select status-select" onchange="if(confirm('Are you sure?')) this.form.submit(); return false;">
+                                        <option value="pending" {% if req['status'] == 'pending' %}selected{% endif %}>Pending</option>
+                                        <option value="approved" {% if req['status'] == 'approved' %}selected{% endif %}>Approved</option>
+                                        <option value="rejected" {% if req['status'] == 'rejected' %}selected{% endif %}>Rejected</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="empty-state">No rental requests yet.</p>
+        {% endif %}
+    </div>
+{% endblock content %}
