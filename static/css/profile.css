@@ -1,0 +1,168 @@
+/*------- MAIN -------*/
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+}
+
+/*------- PROFILE BOX -------*/
+.profile-box {
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 720px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    transition: background-color 1s ease, border-color 1s ease, box-shadow 1s ease;
+    opacity: 0;
+    animation: premiumFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.5s;
+}
+
+.profile-box h2 {
+    margin-bottom: 6px;
+    font-size: 1.6rem;
+}
+
+.profile-sub {
+    color: var(--border-color);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+    transition: color 0.3s ease;
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--font-color);
+    opacity: 0.5;
+    padding: 40px 0;
+}
+
+/*------- REQUEST CARD -------*/
+.requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.request-card {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    background: var(--background-page);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.request-card:hover {
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border-color: var(--logo-color);
+}
+
+/*------- REQUEST HEADER -------*/
+.request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.vehicle-type-badge {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--font-color);
+}
+
+/*------- STATUS BADGES -------*/
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status-pending {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #c5910e;
+}
+
+.status-pending .status-dot {
+    background-color: #FFC107;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.5);
+}
+
+.status-approved {
+    background-color: rgba(0, 200, 83, 0.12);
+    color: #008753;
+}
+
+.status-approved .status-dot {
+    background-color: #00c853;
+    box-shadow: 0 0 6px rgba(0, 200, 83, 0.5);
+}
+
+.status-rejected {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #c62828;
+}
+
+.status-rejected .status-dot {
+    background-color: #f44336;
+    box-shadow: 0 0 6px rgba(244, 67, 54, 0.5);
+}
+
+/* Dark mode status overrides */
+.dark-mode .status-pending {
+    color: #FFC107;
+}
+
+.dark-mode .status-approved {
+    color: #00c853;
+}
+
+.dark-mode .status-rejected {
+    color: #f44336;
+}
+
+/*------- DETAIL ROWS -------*/
+.request-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.92rem;
+}
+
+.detail-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--border-color);
+    min-width: 80px;
+    font-size: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.detail-value {
+    color: var(--font-color);
+    word-break: break-word;
+}

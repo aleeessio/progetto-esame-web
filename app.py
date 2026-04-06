@@ -643,7 +643,15 @@ def search():
 
 @app.route('/profile')
 def profile():
-    return render_template("profile.html")
+    if not session.get('user_id'):
+        flash("You have to login first!", 'error')
+        return redirect(url_for('login'))
+    
+    with db_connect() as db:
+        requests = db.execute(
+            'SELECT * FROM rental_requests WHERE user_id = ? ORDER BY id DESC', (session['user_id'],)
+        ).fetchall()
+    return render_template("profile.html", requests=requests)
 
 @app.route('/contact')
 def contact():
