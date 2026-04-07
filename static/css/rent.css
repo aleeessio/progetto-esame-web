@@ -18,6 +18,7 @@
     background: var(--background-div);
     border: 1px solid var(--border-color);
     border-radius: 10px;
+    width: 600px;
     padding: 40px;
 }
 
@@ -65,24 +66,4 @@ textarea:focus {
     font-size: 0.8rem;
     color: var(--border-color);
     font-weight: normal;
-}
-
-/* ---------------------------------------------------------------
-   RESPONSIVE
-   --------------------------------------------------------------- */
-@media (max-width: 800px) {
-    .rent-layout {
-        flex-direction: column;
-        padding: 30px 20px;
-    }
-
-    .rent-summary {
-        width: 100%;
-        min-width: unset;
-    }
-
-    .date-row {
-        flex-direction: column;
-        gap: 0;
-    }
 }

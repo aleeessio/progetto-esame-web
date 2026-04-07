@@ -5,12 +5,12 @@
 {% endblock title %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/rent.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/rent.css') }}">
 {% endblock extra_css %}
 
 {% block content %}
     <div class="rent-layout">
-        <!-- ===== COLONNA DESTRA: form ===== -->
         <div class="rent-form-box">
             <h2>Rental Request</h2>
             <p class="rent-form-sub">Fill in your details to confirm the request.</p>
@@ -18,15 +18,21 @@
             <form method="POST">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email"
+                    <input type="email"
+                           id="email"
+                           name="email"
                            value="{{ session.get('user_email', '') }}"
-                           placeholder="name@example.com" required>
+                           placeholder="name@example.com"
+                           required>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone"
-                           placeholder="+39 XXX XXX XXXX" required>
+                    <input type="tel"
+                           id="phone"
+                           name="phone"
+                           placeholder="+39 XXX XXX XXXX"
+                           required>
                 </div>
 
                 <div class="date-row">
@@ -41,8 +47,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Notes <span class="optional">(optional)</span></label>
-                    <textarea id="message" name="message" rows="3"
+                    <label for="message">
+                        Notes <span class="optional">(optional)</span>
+                    </label>
+                    <textarea id="message"
+                              name="message"
+                              rows="3"
                               placeholder="Any additional requests..."></textarea>
                 </div>
 

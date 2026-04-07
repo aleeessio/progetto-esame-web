@@ -55,12 +55,13 @@
                     </thead>
                     <tbody>
                         {% for item in cars %}
-                            <tr>
+                            <tr onclick="goToVehicle('{{ url_for('vehicle_detail', vehicle_type='car', vehicle_id=item['id']) }}')"
+                                style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
-                                <td class="td-delete">
+                                <td class="td-delete" onclick="event.stopPropagation();">
                                     <form method="POST" action="{{ url_for('remove_vehicle') }}">
                                         <input type="hidden" name="vehicle_type" value="cars">
                                         <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
@@ -89,12 +90,13 @@
                     </thead>
                     <tbody>
                         {% for item in supercars %}
-                            <tr>
+                            <tr onclick="goToVehicle('{{ url_for('vehicle_detail', vehicle_type='supercar', vehicle_id=item['id']) }}')"
+                                style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
-                                <td class="td-delete">
+                                <td class="td-delete" onclick="event.stopPropagation();">
                                     <form method="POST" action="{{ url_for('remove_vehicle') }}">
                                         <input type="hidden" name="vehicle_type" value="supercars">
                                         <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
@@ -123,12 +125,13 @@
                     </thead>
                     <tbody>
                         {% for item in bikes %}
-                            <tr>
+                            <tr onclick="goToVehicle('{{ url_for('vehicle_detail', vehicle_type='byke', vehicle_id=item['id']) }}')"
+                                style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
-                                <td class="td-delete">
+                                <td class="td-delete" onclick="event.stopPropagation();">
                                     <form method="POST" action="{{ url_for('remove_vehicle') }}">
                                         <input type="hidden" name="vehicle_type" value="bikes">
                                         <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
@@ -157,12 +160,13 @@
                     </thead>
                     <tbody>
                         {% for item in scooters %}
-                            <tr>
+                            <tr onclick="goToVehicle('{{ url_for('vehicle_detail', vehicle_type='scooter', vehicle_id=item['id']) }}')"
+                                style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
-                                <td class="td-delete">
+                                <td class="td-delete" onclick="event.stopPropagation();">
                                     <form method="POST" action="{{ url_for('remove_vehicle') }}">
                                         <input type="hidden" name="vehicle_type" value="scooters">
                                         <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
@@ -191,12 +195,13 @@
                     </thead>
                     <tbody>
                         {% for item in motorcycles %}
-                            <tr>
+                            <tr onclick="goToVehicle('{{ url_for('vehicle_detail', vehicle_type='motorcycle', vehicle_id=item['id']) }}')"
+                                style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
-                                <td class="td-delete">
+                                <td class="td-delete" onclick="event.stopPropagation();">
                                     <form method="POST" action="{{ url_for('remove_vehicle') }}">
                                         <input type="hidden" name="vehicle_type" value="motorcycles">
                                         <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">
@@ -225,12 +230,13 @@
                     </thead>
                     <tbody>
                         {% for item in campers %}
-                            <tr>
+                            <tr onclick="goToVehicle('{{ url_for('vehicle_detail', vehicle_type='camper', vehicle_id=item['id']) }}')"
+                                style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
-                                <td class="td-delete">
+                                <td class="td-delete" onclick="event.stopPropagation();">
                                     <form method="POST" action="{{ url_for('remove_vehicle') }}">
                                         <input type="hidden" name="vehicle_type" value="campers">
                                         <input type="hidden" name="vehicle_id" value="{{ item['id'] }}">

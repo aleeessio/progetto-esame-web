@@ -17,61 +17,125 @@
         </div>
 
         {% if requests %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>User</th>
-                        <th>Vehicle</th>
-                        <th>Period</th>
-                        <th>Contact</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for req in requests %}
+            <div class="table-responsive">
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{ req['id'] }}</td>
-                            <td>
-                                <div class="user-info">
-                                    <span class="user-name">{{ req['user_name'] }}</span>
-                                    <span class="user-id-text">user_id: {{ req['user_id'] }}</span>
-                                </div>
-                            </td>
-                            <td>{{ req['vehicle_brand'] }} <span class="vehicle-type-text">({{ req['vehicle_type'] }})</span></td>
-                            <td>
-                                <div class="period-info">
-                                    {{ req['start_date'] }} | {{ req['end_date'] }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="contact-info">
-                                    <span class="contact-email">{{ req['user_email'] }}</span>
-                                    <span class="contact-phone">Phone: {{ req['user_phone'] }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="status-badge-admin status-{{ req['status'] }}">
-                                    <span class="status-dot"></span>
-                                    {{ req['status']|title }}
-                                </div>
-                            </td>
-                            <td>
-                                <form method="POST" action="{{ url_for('update_req_status', req_id=req['id']) }}" class="status-form">
-                                    <select name="status" class="form-select status-select" onchange="if(confirm('Are you sure?')) this.form.submit(); return false;">
-                                        <option value="pending" {% if req['status'] == 'pending' %}selected{% endif %}>Pending</option>
-                                        <option value="approved" {% if req['status'] == 'approved' %}selected{% endif %}>Approved</option>
-                                        <option value="rejected" {% if req['status'] == 'rejected' %}selected{% endif %}>Rejected</option>
-                                    </select>
-                                </form>
-                            </td>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Vehicle</th>
+                            <th>Period</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                            <th>Action</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for req in requests %}
+                            <tr class="main-row">
+                                <td>{{ req['id'] }}</td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">{{ req['user_name'] }}</span>
+                                        <span class="text-muted">ID: {{ req['user_id'] }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="vehicle-info">
+                                        <div>
+                                            <a href="{{ url_for('vehicle_detail', vehicle_type=req['vehicle_type'], vehicle_id=req['vehicle_id']) }}"
+                                               class="vehicle-brand vehicle-link">{{ req['vehicle_brand'] }}</a>
+                                            <span class="text-muted">({{ req['vehicle_type']|capitalize }})</span>
+                                        </div>
+                                        <span class="text-muted">ID: {{ req['vehicle_id'] }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="period-info">
+                                        <div>{{ req['start_date'] }}</div>
+                                        <div class="text-muted">to {{ req['end_date'] }}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="contact-info">
+                                        <div class="contact-email">{{ req['user_email'] }}</div>
+                                        <div class="text-muted">{{ req['user_phone'] }}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="status-badge status-{{ req['status'] }}">
+                                        <span class="status-dot"></span>
+                                        {{ req['status']|title }}
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if req['message'] and req['message']|trim != '' %}
+                                        <button type="button"
+                                                class="btn-view-msg"
+                                                onclick="toggleMessage('msg-{{ req['id'] }}', this)">View</button>
+                                    {% else %}
+                                        <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <form method="POST"
+                                          action="{{ url_for('update_req_status', req_id=req['id']) }}"
+                                          class="status-form">
+                                        <select name="status"
+                                                class="form-select status-select"
+                                                onchange="if(confirm('Are you sure you want to update this status?')) this.form.submit(); return false;">
+                                            <option value="pending"
+                                                    {% if req['status'] == 'pending' %}selected{% endif %}>
+                                                Pending
+                                            </option>
+                                            <option value="approved"
+                                                    {% if req['status'] == 'approved' %}selected{% endif %}>
+                                                Approved
+                                            </option>
+                                            <option value="rejected"
+                                                    {% if req['status'] == 'rejected' %}selected{% endif %}>
+                                                Rejected
+                                            </option>
+                                        </select>
+                                    </form>
+                                </td>
+                            </tr>
+
+                            {% if req['message'] and req['message']|trim != '' %}
+                                <tr id="msg-{{ req['id'] }}" class="message-row">
+                                    <td colspan="8">
+                                        <div class="message-content">
+                                            <strong>User Notes:</strong>
+                                            <p>{{ req['message'] }}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% else %}
             <p class="empty-state">No rental requests yet.</p>
         {% endif %}
     </div>
 {% endblock content %}
+
+{% block extra_js %}
+    <script>
+    function toggleMessage(rowId, btnElement) {
+        const messageRow = document.getElementById(rowId);
+        
+        if (messageRow.classList.contains('show')) {
+            messageRow.classList.remove('show');
+            btnElement.textContent = 'View';
+            btnElement.classList.remove('active');
+        } else {
+            messageRow.classList.add('show');
+            btnElement.textContent = 'Hide';
+            btnElement.classList.add('active');
+        }
+    }
+    </script>
+{% endblock extra_js %}

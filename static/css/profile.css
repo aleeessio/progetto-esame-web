@@ -8,13 +8,22 @@
 }
 
 /*------- PROFILE BOX -------*/
+.mega-box {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 30px;
+    width: 100%;
+    align-items: center;
+}
+
 .profile-box {
     background: var(--background-div);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 40px;
     width: 100%;
-    max-width: 720px;
+    max-width: 1200px;
     box-shadow: 0 8px 24px var(--shadow-color);
     transition: background-color 1s ease, border-color 1s ease, box-shadow 1s ease;
     opacity: 0;
@@ -27,11 +36,40 @@
     font-size: 1.6rem;
 }
 
-.profile-sub {
+.profile-title {
+    color: var(--logo-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px !important;
+}
+
+/*------- USER INFO GRID -------*/
+.user-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 6px;
+}
+
+.info-label {
+    font-size: 0.85rem;
     color: var(--border-color);
-    font-size: 0.9rem;
-    margin-bottom: 28px;
-    transition: color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.info-value {
+    font-size: 1.1rem;
+    color: var(--font-color);
+    font-weight: 500;
 }
 
 .empty-state {

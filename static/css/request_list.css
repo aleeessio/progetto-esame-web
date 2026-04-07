@@ -88,7 +88,7 @@ tbody tr {
     transition: background-color 0.3s;
 }
 
-tbody tr:hover {
+tbody tr:not(.message-row):hover {
     background-color: var(--shadow-color);
 }
 
@@ -189,6 +189,11 @@ tbody tr:hover {
     transition: color 0.3s ease;
 }
 
+.vehicle-info {
+    display: flex;
+    flex-direction: column;
+}
+
 .vehicle-type-text {
     font-size: 0.85rem;
     color: var(--border-color);
@@ -224,11 +229,75 @@ tbody tr:hover {
     transition: color 0.3s ease;
 }
 
-/*------- RESPONSIVE -------*/
-@media (max-width: 900px) {
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
+/*------- VEHICLE LINK -------*/
+.vehicle-link {
+    text-decoration: none;
+    color: var(--font-color);
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.vehicle-link:hover {
+    color: var(--logo-color);
+    text-decoration: underline;
+}
+
+/*------- BOTTONE VIEW MESSAGE -------*/
+.btn-view-msg {
+    background: transparent;
+    border: 1px solid var(--logo-color);
+    color: var(--logo-color);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-view-msg:hover,
+.btn-view-msg.active {
+    background: var(--logo-color);
+    color: #ffffff;
+}
+
+/*------- RIGA NASCOSTA -------*/
+.message-row {
+    display: none;
+}
+
+.message-row.show {
+    display: table-row;
+}
+
+.message-row td {
+    padding: 0;
+    border-bottom: 2px solid var(--logo-color);
+    background: var(--background-page);
+}
+
+/*------- CONTENUTO DEL MESSAGGIO -------*/
+.message-content {
+    padding: 20px;
+    margin: 10px 14px 20px 14px;
+    border-left: 4px solid var(--logo-color);
+    color: var(--font-color);
+    background: var(--background-div);
+    border-radius: 0 8px 8px 0;
+    box-shadow: inset 0 0 8px var(--shadow-color);
+}
+
+.message-content strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--logo-color);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.message-content p {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 0.95rem;
 }

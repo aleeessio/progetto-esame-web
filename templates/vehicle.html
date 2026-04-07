@@ -12,8 +12,19 @@
 {% block content %}
     <div class="detail-layout">
 
-        <div class="detail-header">
-            <a href="{{ url_for('search', type=vehicle_type) }}" class="btn-back">Back to Search</a>
+        <div class="btn-box">
+            <div class="detail-header">
+                <a href="{{ url_for('search', type=vehicle_type) }}" class="btn-back">Go to Search</a>
+            </div>
+
+            {% if session.get('is_admin') %}
+                <div class="detail-header">
+                    <a href="{{ url_for('vehicle_list') }}" class="btn-back">Go to Vehicle List</a>
+                </div>
+                <div class="detail-header">
+                    <a href="{{ url_for('request_list') }}" class="btn-back">Go to Request List</a>
+                </div>
+            {% endif %}
         </div>
 
         <div class="detail-container">
@@ -265,7 +276,8 @@
                 </div>
 
                 <div class="info-footer">
-                        <a href="{{ url_for('rent', vehicle_type=vehicle_type, vehicle_id=vehicle.id) }}" class="btn-checkout">Rent</a>
+                    <a href="{{ url_for('rent', vehicle_type=vehicle_type, vehicle_id=vehicle.id) }}"
+                       class="btn-checkout">Rent</a>
                 </div>
             </div>
         </div>

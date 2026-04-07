@@ -684,7 +684,15 @@ def profile():
         requests = db.execute(
             'SELECT * FROM rental_requests WHERE user_id = ? ORDER BY id DESC', (session['user_id'],)
         ).fetchall()
-    return render_template("profile.html", requests=requests)
+
+    with db_connect() as db:
+        user_data = db.execute(
+            'SELECT id, name, email FROM users WHERE id = ? ', (session['user_id'],)
+        ).fetchone()
+
+        user_email = dict(user_data)['email'] if user_data else "Email not found"
+
+    return render_template("profile.html", requests=requests, user_email = user_email)
 
 @app.route('/contact')
 def contact():
@@ -727,6 +735,10 @@ def vehicle_detail(vehicle_type, vehicle_id):
 
 @app.route('/rent/<vehicle_type>/<int:vehicle_id>', methods=['GET', 'POST'])
 def rent(vehicle_type, vehicle_id):
+    if session.get('is_admin'):
+        flash("You are the Admin!!", 'error')
+        return redirect(url_for('request_list'))
+
     if not session.get('user_id'):
         flash("You have to login first!", 'error')
         return redirect(url_for('login'))
@@ -763,6 +775,10 @@ def rent(vehicle_type, vehicle_id):
         
         if not phone or not start_date or not end_date:
             flash("Please, instert all data!", 'error')
+            return redirect(url_for('rent', vehicle_type=vehicle_type, vehicle_id=vehicle_id))
+        
+        if start_date > end_date:
+            flash("Please, date not allowed", 'error')
             return redirect(url_for('rent', vehicle_type=vehicle_type, vehicle_id=vehicle_id))
         
         with db_connect() as db:

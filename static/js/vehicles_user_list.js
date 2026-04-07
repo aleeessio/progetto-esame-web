@@ -20,3 +20,21 @@ function showTable(vehicleType) {
         selectedTable.classList.add('active');
     }
 }
+
+//USO QUESTA FUNZIONE PER NON AVERE LA TRANSIZIONE "SPEZZATA" 
+//QUABDO PASSO DALLA PAGINE LISTA_VEICOLI ALLA PAGINA DEL VEICOLO 
+function goToVehicle(url) {
+    const overlay = document.getElementById('page-overlay');
+
+    overlay.classList.remove('is-revealed');
+    overlay.classList.add('is-covering-prep');
+
+    void overlay.offsetWidth;
+
+    overlay.classList.remove('is-covering-prep');
+    overlay.classList.add('is-covering-active');
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 300);
+}
