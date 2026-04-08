@@ -224,7 +224,7 @@ AGGIORNAMENTO 1 (2-04-2026):
     #FATTO#     - new REQUEST_LIST.html 
 
     #FATTO# - ADD_VEHICLE.html aggiustare tutti i filtri (renderli realistici), sistemare input img
-            - SEARCH.html aggiustare filtri
+    #FATTO# - SEARCH.html aggiustare filtri
             
     #FATTO# - PROFILE.html informazioni generali utente, richieste attive di noleggio 
             - CONTACT.html informazioni generali admin/autonoleggio (email, nome, cognome, cellulare, via, città etc...)
@@ -234,7 +234,9 @@ AGGIORNAMENTO 1 (2-04-2026):
 
             - finire index (no emoji)
             - VEHICLE.html cambiare stile (no emoji)
+            - VEHICLE.html mettere tutti i gli attributi dei veicoli e renderli coerenti con quelli presenti nel DB
             - SEARCH.html cambiare stile (no emoji)
+            - SEARCH.html cambiare stile dei veicoli sulla destra
             
             - PROFILE.html (OPZIONALE: veicoli salvati)
     #FATTO# - VEHICLE_LIST.html (OPZIONALE: redirect al veicolo)

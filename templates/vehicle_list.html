@@ -125,7 +125,7 @@
                     </thead>
                     <tbody>
                         {% for item in bikes %}
-                            <tr onclick="goToVehicle('{{ url_for('vehicle_detail', vehicle_type='byke', vehicle_id=item['id']) }}')"
+                            <tr onclick="goToVehicle('{{ url_for('vehicle_detail', vehicle_type='bike', vehicle_id=item['id']) }}')"
                                 style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>

@@ -607,16 +607,54 @@ def search():
             conditions.append('price <= ?')
             params.append(price_max)
 
+        # Filtri per durata in giorni
+        day_min = request.args.get('day_min')
+        day_max = request.args.get('day_max')
+        if day_min:
+            conditions.append('rent_length >= ?')
+            params.append(day_min)
+        if day_max:
+            conditions.append('rent_length <= ?')
+            params.append(day_max)
+
+        # Filtri per durata in mesi
+        month_min = request.args.get('month_min')
+        month_max = request.args.get('month_max')
+        if month_min:
+            conditions.append('rent_length >= ?')
+            params.append(month_min)
+        if month_max:
+            conditions.append('rent_length <= ?')
+            params.append(month_max)
+
+        # Filtri per potenza (se applicabile)
+        if vehicle_type in ('car', 'supercar', 'scooter', 'motorcycle'): 
+            power_min = request.args.get('power_min')
+            power_max = request.args.get('power_max')
+            if power_min:
+                conditions.append('power >= ?')
+                params.append(power_min)
+            if power_max:
+                conditions.append('power <= ?')
+                params.append(power_max)
+
         # Filtri specifici per tipo
-        if vehicle_type in ('car', 'supercar'):
-            for field in ('brand', 'color', 'transmission', 'fuel', 'traction', 'number_of_seats'):
+        if vehicle_type == 'car':
+            for field in ('brand', 'fuel', 'transmission', 'traction', 'color', 'number_of_seats'):
+                val = request.args.get(field)
+                if val:
+                    conditions.append(f'{field} = ?')
+                    params.append(val)
+
+        elif vehicle_type == 'supercar':
+            for field in ('brand', 'fuel', 'transmission', 'traction', 'color', 'number_of_seats', 'inside_color', 'inside_material'):
                 val = request.args.get(field)
                 if val:
                     conditions.append(f'{field} = ?')
                     params.append(val)
 
         elif vehicle_type == 'bike':
-            for field in ('traction', 'frame_size', 'suspensions', 'terrain'):
+            for field in ('brand', 'frame_size', 'traction', 'suspensions', 'terrain'):
                 val = request.args.get(field)
                 if val:
                     conditions.append(f'{field} = ?')
@@ -627,14 +665,14 @@ def search():
                 params.append(specific_type)
 
         elif vehicle_type == 'scooter':
-            for field in ('brand', 'engine', 'fuel', 'required_license', 'number_of_seats'):
+            for field in ('brand', 'engine', 'fuel', 'color', 'required_license', 'number_of_seats'):
                 val = request.args.get(field)
                 if val:
                     conditions.append(f'{field} = ?')
                     params.append(val)
 
         elif vehicle_type == 'motorcycle':
-            for field in ('brand', 'style', 'engine', 'fuel', 'required_license'):
+            for field in ('brand', 'style', 'engine', 'fuel', 'color', 'required_license', 'number_of_seats'):
                 val = request.args.get(field)
                 if val:
                     conditions.append(f'{field} = ?')
@@ -709,7 +747,7 @@ def terms_conditions():
 @app.route('/vehicle/<vehicle_type>/<int:vehicle_id>')
 def vehicle_detail(vehicle_type, vehicle_id):
     table = TYPE_TO_TABLE.get(vehicle_type)
-    
+
     if not table:
         flash("Tipo di veicolo non trovato.", "error")
         return redirect(url_for('search'))
