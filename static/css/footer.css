@@ -2,108 +2,144 @@
 footer {
     background-color: var(--background-footer);
     color: var(--font-color);
-    padding: 40px 80px 20px;
+    padding: 60px 80px 20px;
     font-family: Arial, sans-serif;
     transition: background-color 1s ease, color 1s ease;
     border-top: 1px solid var(--border-color);
+    margin-top: auto;
 }
 
 .footer-division {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
     gap: 60px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
-.footer-columns {
-    flex: 1;
-}
-
-/*------- SX column -------*/
+/*------- Colonne -------*/
 .footer-columns h1 {
-    color: var(--logo-color);
-    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: var(--font-color);
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.footer-columns p {
-    line-height: 1.5;
-    margin-top: 20px;
-    margin-bottom: 20px;
+/*------- Colonna Brand (SX) -------*/
+.brand-column .logo {
+    margin-bottom: 15px;
 }
 
-/*------- Centre column -------*/
+.footer-tagline {
+    line-height: 1.6;
+    color: var(--font-color);
+    opacity: 0.8;
+    margin-bottom: 25px;
+    max-width: 300px;
+}
+
+/* Icone Social */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--background-page);
+    color: var(--font-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.social-links a svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-links a:hover {
+    background-color: var(--logo-color);
+    border-color: var(--logo-color);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/*------- Colonne Link (Centro/DX) -------*/
 .footer-columns ul {
     list-style: none;
     padding: 0;
 }
 
 .footer-columns ul li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .footer-columns ul li a {
     color: var(--font-color);
+    opacity: 0.8;
     text-decoration: none;
-    transition: color 0.4s;
+    transition: all 0.3s;
+    font-size: 0.95rem;
 }
 
 .footer-columns ul li a:hover {
+    opacity: 1;
     color: var(--logo-color);
-}
-
-/*------- DX column -------*/
-.newsletter {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.newsletter input {
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background: var(--background-page);
-    color: var(--font-color);
-}
-
-.newsletter input::placeholder {
-    color: var(--border-color);
-}
-
-.newsletter button {
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    background: var(--background-div);
-    color: var(--font-color);
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    transition: background 0.4s;
-}
-
-.newsletter button:hover {
-    background: var(--logo-color);
+    padding-left: 5px;
 }
 
 /*------- Footer Bottom -------*/
 .footer-bottom {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-top: 1px solid var(--border-color);
-    padding-top: 15px;
-    font-size: 14px;
+    padding-top: 25px;
+    font-size: 0.85rem;
+    color: var(--font-color);
+    opacity: 0.7;
 }
 
 .footer-links a {
-    margin-right: 20px;
-    color: #777;
+    margin-left: 20px;
+    color: inherit;
     text-decoration: none;
-    transition: color 0.4s;
+    transition: color 0.3s;
 }
 
 .footer-links a:hover {
     color: var(--logo-color);
+}
+
+/*------- RESPONSIVE DESIGN -------*/
+@media (max-width: 768px) {
+    .footer-division {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .brand-column .logo,
+    .footer-tagline,
+    .social-links {
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .footer-links a {
+        margin: 0 10px;
+    }
 }

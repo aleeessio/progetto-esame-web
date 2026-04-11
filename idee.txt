@@ -227,10 +227,10 @@ AGGIORNAMENTO 1 (2-04-2026):
     #FATTO# - SEARCH.html aggiustare filtri
             
     #FATTO# - PROFILE.html informazioni generali utente, richieste attive di noleggio 
-            - CONTACT.html informazioni generali admin/autonoleggio (email, nome, cognome, cellulare, via, città etc...)
-            - PRIVACY_POLICY.html completare
-            - TERMS_CONDITIONS.html completare
-            - cambiare footer (eliminare newsletter)
+    #FATTO# - CONTACT.html informazioni generali admin/autonoleggio (email, nome, cognome, cellulare, via, città etc...)
+    #FATTO# - PRIVACY_POLICY.html completare
+    #FATTO# - TERMS_CONDITIONS.html completare
+    #FATTO# - cambiare footer (eliminare newsletter)
 
             - finire index (no emoji)
             - VEHICLE.html cambiare stile (no emoji)

@@ -4,8 +4,43 @@
     Privacy Policy
 {% endblock title %}
 
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock extra_css %}
+
 {% block content %}
-    <section class="hero">
-        <h1>Privacy Policy</h1>
-    </section>
+    <div class=" mega-box">
+        <div class="profile-box">
+            <h2 class="profile-title">Privacy Policy</h2>
+            <div class="info-group">
+                <span class="info-value">
+                    <strong>Last updated: 11/04/2026</strong>
+                    <br>
+                    <br>
+                    At OmniDrive, we take your privacy seriously. This Privacy Policy explains how we collect, use,
+                    and protect your personal information when you use our platform.
+                    <br>
+                    <br>
+                    <strong>1. Information We Collect:</strong>
+                    When you register an account, contact us, or book a vehicle, we collect personal details such as your name,
+                    email address, and rental history. We do not store sensitive payment information directly on our servers.
+                    <br>
+                    <br>
+                    <strong>2. How We Use Your Data:</strong>
+                    Your data is used exclusively to provide and improve our services, process your vehicle bookings,
+                    and communicate with you regarding your account or support requests.
+                    <br>
+                    <br>
+                    <strong>3. Data Protection:</strong>
+                    We implement standard security measures to protect your personal information from unauthorized
+                    access or disclosure. We will never sell your personal data to third parties.
+                    <br>
+                    <br>
+                    If you have any questions about how we handle your data, please reach out to us via our Contact page.
+                </span>
+            </div>
+        </div>
+
+    </div>
 {% endblock content %}

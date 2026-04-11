@@ -744,6 +744,11 @@ def privacy_policy():
 def terms_conditions():
     return render_template("terms_conditions.html")
 
+@app.route('/social_redirect')
+def social_redirect():
+    flash("Work in progress! Our social media channels will be available soon.", "info")
+    return redirect(request.referrer or url_for('index'))
+
 @app.route('/vehicle/<vehicle_type>/<int:vehicle_id>')
 def vehicle_detail(vehicle_type, vehicle_id):
     table = TYPE_TO_TABLE.get(vehicle_type)

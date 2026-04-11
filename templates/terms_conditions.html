@@ -4,8 +4,49 @@
     Terms and Conditions
 {% endblock title %}
 
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock extra_css %}
+
 {% block content %}
-    <section class="hero">
-        <h1>Terms and Conditions</h1>
-    </section>
+    <div class=" mega-box">
+        <div class="profile-box">
+            <h2 class="profile-title">Terms and Conditions</h2>
+            <div class="info-group">
+                <span class="info-value">
+                    <strong>Last updated: 11/04/2026</strong>
+                    <br>
+                    <br>
+                    Welcome to OmniDrive. By registering an account and using our platform, you agree to comply
+                    with and be bound by the following Terms and Conditions.
+                    <br>
+                    <br>
+                    <strong>1. User Responsibilities:</strong>
+                    To rent a vehicle through OmniDrive, you must possess a valid driver's license corresponding to the selected
+                    vehicle category. You are responsible for providing accurate information during registration and booking.
+                    <br>
+                    <br>
+                    <strong>2. Bookings and Cancellations:</strong>
+                    All rentals are subject to vehicle availability. OmniDrive reserves the right to cancel or modify bookings
+                    in case of unforeseen circumstances. Cancellation policies vary depending on the vehicle type
+                    (e.g., standard cars vs. supercars).
+                    <br>
+                    <br>
+                    <strong>3. Vehicle Usage:</strong>
+                    Vehicles must be used responsibly, in accordance with local traffic laws, and cannot be used for illegal
+                    activities, racing, or off-road driving unless specifically stated (e.g., mountain bikes).
+                    <br>
+                    <br>
+                    <strong>4. Limitation of Liability:</strong>
+                    OmniDrive serves as a platform to connect users with mobility solutions. We are not liable for direct,
+                    indirect, or incidental damages resulting from the use of our services or vehicles.
+                    <br>
+                    <br>
+                    By continuing to use OmniDrive, you acknowledge that you have read and understood these terms.
+                </span>
+            </div>
+        </div>
+
+    </div>
 {% endblock content %}

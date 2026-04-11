@@ -49,7 +49,7 @@
             <div class="sidebar-section">
                 <div class="sidebar-label">Vehicle type</div>
                 <div class="type-grid">
-                    {% set types = [('car', '🚗', 'Car'), ('supercar', '🏎️', 'Supercar'), ('bike', '🚲', 'Bike'), ('scooter', '🛵', 'Scooter'), ('motorcycle', '🏍️', 'Motorcycle'), ('camper', '🚐', 'Camper')] %}
+                    {% set types = [('car', '🚗', 'Car'), ('bike', '🚲', 'Bike'), ('supercar', '🏎️', 'Supercar'), ('scooter', '🛵', 'Scooter'), ('camper', '🚐', 'Camper'), ('motorcycle', '🏍️', 'Motorcycle')] %}
                     {% for type_val, icon, label in types %}
                         <a href="{{ url_for('search', type=type_val) }}"
                            class="type-chip {% if vehicle_type == type_val %}active{% endif %}">

@@ -32,20 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.getElementById("page-overlay");
 
     if (overlay) {
-        const previousUrl = document.referrer.split('?')[0].split('#')[0];
-        const currentUrl = window.location.href.split('?')[0].split('#')[0];
+        const isReload = performance.getEntriesByType("navigation")[0]?.type === "reload";
 
-        if (previousUrl === currentUrl && previousUrl !== "") {
-            overlay.classList.remove("is-covering-prep", "is-covering-active");
+        if (isReload) {
             overlay.style.transition = 'none';
-
-            void overlay.offsetWidth;
             overlay.classList.add("is-revealed");
 
             setTimeout(() => {
                 overlay.style.transition = '';
             }, 50);
-
         } else {
             setTimeout(() => {
                 overlay.classList.add("is-revealed");

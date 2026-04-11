@@ -4,8 +4,64 @@
     Contact
 {% endblock title %}
 
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock extra_css %}
+
 {% block content %}
-    <section class="hero">
-        <h1>CONTACT</h1>
-    </section>
+    <div class=" mega-box">
+        <div class="profile-box">
+            <h2 class="profile-title">Welcome in our platform!</h2>
+            <div class="info-group">
+                <span class="info-value">
+                    We are thrilled to have you on board. OmniDrive is your all-in-one platform for tailored mobility:
+                    whether you need an everyday car, a supercar for a special occasion, a bike to explore, or a camper for
+                    your next great adventure, you are in the right place. Browse our extensive catalog, use our advanced filters
+                    to find your perfect ride, and manage your rentals effortlessly right from this dashboard.
+                    Get ready to hit the road!
+                </span>
+            </div>
+        </div>
+        <div class="profile-box">
+            <h3 class="profile-subtitle">About Us</h3>
+            <div class="info-group">
+                <span class="info-value">
+                    It all started between lectures at Sapienza University of Rome. As two students bound by a lifelong passion
+                    for engines, sleek design, and the freedom of the open road, we constantly found ourselves dreaming of
+                    opening our own dealership. We didn't just want to hand over keys; we wanted to share the thrill of driving.
+                    <br>
+                    <br>
+                    However, we realized that the future of mobility goes beyond the walls of a traditional physical showroom.
+                    Whether it is the roar of a supercar, the daily reliability of a city car, the adventurous spirit of a camper,
+                    or the eco-friendly breeze of a bike, people need flexibility. That realization became the spark for OmniDrive.
+                    <br>
+                    <br>
+                    We poured our late-night study sessions and automotive obsession into building a digital-first platform that makes
+                    finding your perfect ride seamless, transparent, and exciting. What began as a conversation over a campus coffee
+                    has grown into a comprehensive mobility hub designed for everyone who loves the journey as much as the destination.
+                    <br>
+                    <br>
+                    Welcome to our dream, driven by yours.
+                    <br>
+                    <br>
+                    <strong>— Lorenzo Castelli & Alessio Avasilcai, Founders of OmniDrive</strong>
+                </span>
+            </div>
+        </div>
+        <div class="profile-box">
+            <h3 class="profile-subtitle">Our Contact Information</h3>
+            <div class="user-info-grid">
+                <div class="info-group">
+                    <span class="info-value">
+                        <strong>Address:</strong> Via Roma 123, 00100 Rome, Italy
+                        <br>
+                        <strong>Phone:</strong> +39 06 1234567
+                        <br>
+                        <strong>Email:</strong> info@omnidrive.com
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
