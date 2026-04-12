@@ -244,7 +244,7 @@ AGGIORNAMENTO 1 (2-04-2026):
             - VEHICLE.html (OPZIONALE: tasto "mi piace" per salvare veicolo)
     #FATTO# - VEHICLE.html (OPZIONALE: tasto back to VEHICLE_LIST.html se si è admin)
 
-            - sistemare FONT per tutto il sito
+    #FATTO# - sistemare FONT per tutto il sito
             - RESPONSIVE
 
             - Popolare il sito con utenti e veicoli

@@ -1,9 +1,49 @@
 /*------- RESET -------*/
+@font-face {
+  font-family: 'OmniSans';
+  src: url('../fonts/OmniSans-Regular.woff2') format('woff2'),
+       url('../fonts/OmniSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OmniSans';
+  src: url('../fonts/OmniSans-Bold.woff2') format('woff2'),
+       url('../fonts/OmniSans-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OmniSans';
+  src: url('../fonts/OmniSans-Black.woff2') format('woff2'),
+       url('../fonts/OmniSans-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OmniSerif';
+  src: url('../fonts/OmniSerif-Light.woff2') format('woff2'),
+       url('../fonts/OmniSerif-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OmniSerif';
+  src: url('../fonts/OmniSerif-Regular.woff2') format('woff2'),
+       url('../fonts/OmniSerif-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'OmniSans', Arial, sans-serif;
 }
 
 .main-content {
@@ -49,6 +89,7 @@ body {
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
+  font-family: 'OmniSans', sans-serif;
 }
 
 a {
@@ -69,9 +110,9 @@ form {
 
 /*-------LOGO-------*/
 .logo {
-  font-family: 'Exo 2', 'Arial', sans-serif;
+  font-family: 'OmniSans', Arial, sans-serif;
   text-transform: uppercase;
-  font-weight: 800;
+  font-weight: 900; /* OmniSans-Black */
   letter-spacing: 2px;
   font-size: 2.2rem;
   color: var(--logo-color);
@@ -110,6 +151,7 @@ form {
   letter-spacing: 2px;
   opacity: 1;
   transform: scale(1);
+  font-family: 'OmniSans', sans-serif;
 }
 
 .page-overlay.is-revealed {

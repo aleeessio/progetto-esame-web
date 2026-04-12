@@ -3,7 +3,7 @@ footer {
     background-color: var(--background-footer);
     color: var(--font-color);
     padding: 60px 80px 20px;
-    font-family: Arial, sans-serif;
+    font-family: 'OmniSans', sans-serif;
     transition: background-color 1s ease, color 1s ease;
     border-top: 1px solid var(--border-color);
     margin-top: auto;
