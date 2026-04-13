@@ -1,62 +1,131 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}
+    Home
+{% endblock title %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-{% endblock %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock extra_css %}
 
 {% block content %}
+    <div class="home-wrapper">
+        <section class="hero-modern">
+            <div class="hero-slideshow">
+                <div class="hero-slide active"
+                     style="background-image: url('{{ url_for('static', filename='imgs/hero_index/slide1.webp') }}')">
+                </div>
+                <div class="hero-slide"
+                     style="background-image: url('{{ url_for('static', filename='imgs/hero_index/slide2.webp') }}')">
+                </div>
+                <div class="hero-slide"
+                     style="background-image: url('{{ url_for('static', filename='imgs/hero_index/slide3.webp') }}')">
+                </div>
+                <div class="hero-slide"
+                     style="background-image: url('{{ url_for('static', filename='imgs/hero_index/slide4.webp') }}')">
+                </div>
+                <div class="hero-slide"
+                     style="background-image: url('{{ url_for('static', filename='imgs/hero_index/slide5.webp') }}')">
+                </div>
+                <div class="hero-slide"
+                     style="background-image: url('{{ url_for('static', filename='imgs/hero_index/slide6.webp') }}')">
+                </div>
+                <div class="hero-slide"
+                     style="background-image: url('{{ url_for('static', filename='imgs/hero_index/slide7.webp') }}')">
+                </div>
+            </div>
 
-    <!-- ===================== HERO BANNER ===================== -->
-    <section class="hero-banner">
-        <div class="hero-content">
-            <h1 class="hero-title">OmniDrive</h1>
-            <p class="hero-sub">Find the perfect vehicle for every journey</p>
-            <a href="#vehicle-selector" class="hero-cta">Explore vehicles</a>
-        </div>
-    </section>
+            <div class="hero-overlay"></div>
 
-    <!-- ===================== VEHICLE SELECTOR ===================== -->
-    <section class="vehicle-selector" id="vehicle-selector">
-        <h2 class="selector-title">What are you looking for?</h2>
-        <p class="selector-sub">Select a category to start your search</p>
+            <div class="hero-content-modern">
+                <h1 class="hero-title-modern">Start Your Journey with</h1>
+                <h1 class="hero-title-modern">OmniDrive</h1>
+                <p class="hero-sub-modern">Explore the world with the perfect vehicle for you.</p>
 
-        <div class="selector-grid">
-            <div class="selector-card" data-type="car">
-                <span class="selector-icon">🚗</span>
-                <span class="selector-label">Car</span>
-            </div>
-            <div class="selector-card" data-type="supercar">
-                <span class="selector-icon">🏎️</span>
-                <span class="selector-label">Supercar</span>
-            </div>
-            <div class="selector-card" data-type="bike">
-                <span class="selector-icon">🚲</span>
-                <span class="selector-label">Bike</span>
-            </div>
-            <div class="selector-card" data-type="scooter">
-                <span class="selector-icon">🛵</span>
-                <span class="selector-label">Scooter</span>
-            </div>
-            <div class="selector-card" data-type="motorcycle">
-                <span class="selector-icon">🏍️</span>
-                <span class="selector-label">Motorcycle</span>
-            </div>
-            <div class="selector-card" data-type="camper">
-                <span class="selector-icon">🚐</span>
-                <span class="selector-label">Camper</span>
-            </div>
-        </div>
+                <div class="floating-search-wrapper">
+                    <form action="{{ url_for('search') }}"
+                          method="GET"
+                          class="floating-search-bar">
+                        <div class="search-input-group">
+                            <label for="vehicle-type">What are you looking for?</label>
+                            <select name="type" id="vehicle-type" required>
+                                <option value="" disabled selected>Choose a category...</option>
+                                <option value="car">- Car</option>
+                                <option value="supercar">- Supercar</option>
+                                <option value="bike">- Bike</option>
+                                <option value="scooter">- Scooter</option>
+                                <option value="motorcycle">- Motorcycle</option>
+                                <option value="camper">- Camper</option>
+                            </select>
+                        </div>
 
-        <!-- Bottone cerca: appare dopo selezione -->
-        <div class="selector-cta" id="selector-cta">
-            <a href="#" id="search-btn" class="btn-search">Search</a>
-        </div>
-    </section>
+                        <div class="search-btn-wrapper">
+                            <button type="submit" class="btn-search-floating">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-{% endblock %}
+        <section class="value-prop-section">
+            <div class="value-prop-container">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="1.5"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                            <path d="M10 16l2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">Flexible Cancellation</h3>
+                    <p class="value-text">Changing your plans? No problem, cancel with ease.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="1.5"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="M9 12l2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">No Hidden Costs</h3>
+                    <p class="value-text">Total transparency. You pay exactly what you see.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="1.5"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="value-title">Premium Vehicles</h3>
+                    <p class="value-text">Each vehicle is rigorously verified for your safety.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
 
 {% block extra_js %}
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-{% endblock %}
+{% endblock extra_js %}

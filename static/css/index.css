@@ -1,167 +1,296 @@
+.main-content {
+    padding: 0 40px;
+}
+
 /* ---------------------------------------------------------------
-   HERO BANNER
+   HERO BANNER MODERN
    --------------------------------------------------------------- */
-.hero-banner {
-    height: 420px;
+
+.home-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.hero-modern {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 800px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--background-div) 0%, var(--background-page) 100%);
-    border-bottom: 1px solid var(--border-color);
-    text-align: center;
-    padding: 40px 20px;
+    background-color: #000;
+    margin: 0;
+    padding: 0 20px;
+    overflow: hidden;
 }
 
-.hero-content {
+/* ---------------------------------------------------------------
+   SLIDESHOW SFONDO
+   --------------------------------------------------------------- */
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-content-modern {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+.hero-content-modern {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    width: 100%;
+    max-width: 800px;
+    animation: premiumFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.hero-title {
-    font-size: 4rem;
+.hero-title-modern {
+    font-size: 4.5rem;
     font-weight: 800;
-    color: var(--logo-color);
-    line-height: 1;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.hero-sub {
+.hero-sub-modern {
+    font-size: 1.3rem;
+    color: #f4f4f4;
+    font-weight: 400;
+    margin-bottom: 45px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------------------------------------------------------------
+   FLOATING SEARCH BAR 
+   --------------------------------------------------------------- */
+.floating-search-wrapper {
+    width: 100%;
+    max-width: 650px;
+}
+
+.floating-search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--background-div);
+    border-radius: 50px;
+    padding: 8px 8px 8px 30px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-search-bar:hover {
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.search-input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border-right: 1px solid var(--border-color);
+    margin-right: 15px;
+    padding-right: 15px;
+}
+
+.search-input-group label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--font-color);
+    margin-bottom: 4px;
+}
+
+.search-input-group select {
+    border: none;
+    background: transparent;
     font-size: 1.1rem;
     color: var(--border-color);
-    max-width: 400px;
+    cursor: pointer;
+    outline: none;
+    font-family: inherit;
+    appearance: none;
 }
 
-.hero-cta {
-    margin-top: 10px;
-    padding: 12px 32px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background: var(--background-div);
+.search-input-group select:focus,
+.search-input-group select:valid {
     color: var(--font-color);
-    font-weight: bold;
-    text-decoration: none;
-    transition: background 0.3s;
 }
 
-.hero-cta:hover {
+.search-input-group select option {
+    background-color: var(--background-div);
+    color: var(--font-color);
+}
+
+.search-btn-wrapper {
+    flex-shrink: 0;
+}
+
+.btn-search-floating {
     background: var(--logo-color);
     color: #fff;
+    border: none;
+    border-radius: 40px;
+    padding: 16px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-search-floating:hover {
+    background: #e5533d;
+    transform: scale(1.03);
 }
 
 /* ---------------------------------------------------------------
-   VEHICLE SELECTOR
+   VALUE PROPOSITION SECTION
    --------------------------------------------------------------- */
-.vehicle-selector {
-    padding: 70px 80px;
+.value-prop-section {
+    padding: 80px 20px;
+    background: var(--background-page);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.value-prop-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
     text-align: center;
 }
 
-.selector-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 8px;
+.value-item {
+    padding: 20px;
 }
 
-.selector-sub {
-    color: var(--border-color);
-    margin-bottom: 40px;
-    font-size: 0.95rem;
-}
-
-.selector-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 16px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.selector-card {
-    display: flex;
-    flex-direction: column;
+.value-icon {
+    margin-bottom: 25px;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 28px 16px;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    background: var(--background-div);
-    cursor: pointer;
-    transition: border-color 0.25s, transform 0.2s, background 0.25s;
-    user-select: none;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 99, 71, 0.1);
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease;
 }
 
-.selector-card:hover {
-    border-color: var(--logo-color);
-    transform: translateY(-3px);
+.value-icon svg {
+    width: 36px;
+    height: 36px;
+    color: var(--logo-color);
+    transition: color 0.4s ease;
 }
 
-.selector-card.selected {
-    border-color: var(--logo-color);
+.value-item:hover .value-icon {
+    transform: translateY(-10px) scale(1.05);
     background: var(--logo-color);
+}
+
+.value-item:hover .value-icon svg {
     color: #fff;
-    transform: translateY(-3px);
 }
 
-.selector-icon {
-    font-size: 2.2rem;
+.value-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--font-color);
 }
 
-.selector-label {
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-/* Bottone cerca */
-.selector-cta {
-    margin-top: 36px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.35s ease, transform 0.35s ease;
-    pointer-events: none;
-}
-
-.selector-cta.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.btn-search {
-    padding: 14px 48px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background: var(--logo-color);
-    color: #fff;
+.value-text {
     font-size: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    transition: opacity 0.2s;
+    line-height: 1.6;
+    color: #777;
+    font-weight: 300;
 }
 
-.btn-search:hover {
-    opacity: 0.85;
+.dark-mode .value-text {
+    color: #aaa;
 }
 
 /* ---------------------------------------------------------------
-   RESPONSIVE
+   RESPONSIVE DESIGN 
    --------------------------------------------------------------- */
-@media (max-width: 900px) {
-    .selector-grid {
-        grid-template-columns: repeat(3, 1fr);
+@media (max-width: 768px) {
+    .hero-title-modern {
+        font-size: 3rem;
     }
 
-    .vehicle-selector {
-        padding: 50px 20px;
-    }
-}
-
-@media (max-width: 500px) {
-    .selector-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .floating-search-bar {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 20px;
     }
 
-    .hero-title {
-        font-size: 2.8rem;
+    .search-input-group {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        margin-right: 0;
+        padding-right: 0;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        width: 100%;
+    }
+
+    .btn-search-floating {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .value-prop-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 }

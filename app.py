@@ -306,7 +306,7 @@ def login():
             session['user_name'] = user['name']
 
             flash("Logged in!", 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('profile'))
         else:
             flash("Password incorrect!", 'error')
             return redirect(url_for('login'))

@@ -2,7 +2,7 @@
 @font-face {
   font-family: 'OmniSans';
   src: url('../fonts/OmniSans-Regular.woff2') format('woff2'),
-       url('../fonts/OmniSans-Regular.woff') format('woff');
+    url('../fonts/OmniSans-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -10,7 +10,7 @@
 @font-face {
   font-family: 'OmniSans';
   src: url('../fonts/OmniSans-Bold.woff2') format('woff2'),
-       url('../fonts/OmniSans-Bold.woff') format('woff');
+    url('../fonts/OmniSans-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
 }
@@ -18,7 +18,7 @@
 @font-face {
   font-family: 'OmniSans';
   src: url('../fonts/OmniSans-Black.woff2') format('woff2'),
-       url('../fonts/OmniSans-Black.woff') format('woff');
+    url('../fonts/OmniSans-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
 }
@@ -26,7 +26,7 @@
 @font-face {
   font-family: 'OmniSerif';
   src: url('../fonts/OmniSerif-Light.woff2') format('woff2'),
-       url('../fonts/OmniSerif-Light.woff') format('woff');
+    url('../fonts/OmniSerif-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
 }
@@ -34,7 +34,7 @@
 @font-face {
   font-family: 'OmniSerif';
   src: url('../fonts/OmniSerif-Regular.woff2') format('woff2'),
-       url('../fonts/OmniSerif-Regular.woff') format('woff');
+    url('../fonts/OmniSerif-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -112,7 +112,8 @@ form {
 .logo {
   font-family: 'OmniSans', Arial, sans-serif;
   text-transform: uppercase;
-  font-weight: 900; /* OmniSans-Black */
+  font-weight: 900;
+  /* OmniSans-Black */
   letter-spacing: 2px;
   font-size: 2.2rem;
   color: var(--logo-color);

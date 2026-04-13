@@ -29,6 +29,7 @@ btnTheme.addEventListener('click', () => {
 
 // PAGE TRANSITION LOGIC
 document.addEventListener("DOMContentLoaded", () => {
+    window.scrollTo(0, 0);
     const overlay = document.getElementById("page-overlay");
 
     if (overlay) {
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             overlay.classList.remove("is-revealed");
             overlay.classList.add("is-covering-prep");
 
-            void overlay.offsetWidth; // Forza reflow
+            void overlay.offsetWidth; // Forza reflow del browser
 
             overlay.classList.add("is-covering-active");
 

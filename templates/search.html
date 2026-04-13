@@ -15,6 +15,8 @@
             const isFromSearch = document.referrer.includes('/search');
             const hasParams = window.location.search.length > 0;
 
+            // L'utente sta applicando i filtri dentro la pagina.
+            // Nascondo istantaneamente l'overlay.
             if (isFromSearch && hasParams) {
                 const style = document.createElement('style');
                 style.id = 'instant-hide-overlay';
