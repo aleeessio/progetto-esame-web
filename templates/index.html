@@ -39,7 +39,11 @@
             <div class="hero-overlay"></div>
 
             <div class="hero-content-modern">
-                <h1 class="hero-title-modern">Start Your Journey with</h1>
+                {% if not session.user_id and not session.is_admin %}
+                    <h1 class="hero-title-modern">Start Your Journey with</h1>
+                {% else %}
+                    <h1 class="hero-title-modern">Continue Your Journey with</h1>
+                {% endif %}
                 <h1 class="hero-title-modern">OmniDrive</h1>
                 <p class="hero-sub-modern">Explore the world with the perfect vehicle for you.</p>
 
@@ -65,6 +69,74 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </section>
+
+        <section class="explore-section">
+            <div class="section-heading">
+                <h2>Choose Your Style</h2>
+                <p>Discover the perfect vehicle for your next adventure.</p>
+            </div>
+
+            <div class="bento-grid">
+
+                <a href="{{ url_for('search', type='supercar') }}"
+                   class="bento-card item-tall-left">
+                    <img src="{{ url_for('static', filename='imgs/card_index/supercar_index.webp') }}"
+                         alt="Supercar">
+                    <div class="bento-overlay">
+                        <h3>Supercar</h3>
+                        <span>Explore &rarr;</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('search', type='car') }}"
+                   class="bento-card item-small-tr">
+                    <img src="{{ url_for('static', filename='imgs/card_index/car_index.webp') }}"
+                         alt="Car">
+                    <div class="bento-overlay">
+                        <h3>Car</h3>
+                        <span>Explore &rarr;</span>
+                    </div>
+                </a>
+                <a href="{{ url_for('search', type='bike') }}"
+                   class="bento-card item-small-br">
+                    <img src="{{ url_for('static', filename='imgs/card_index/bike_index.webp') }}"
+                         alt="Bike">
+                    <div class="bento-overlay">
+                        <h3>Bike</h3>
+                        <span>Explore &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="{{ url_for('search', type='scooter') }}"
+                   class="bento-card item-small-tl">
+                    <img src="{{ url_for('static', filename='imgs/card_index/scooter_index.webp') }}"
+                         alt="Scooter">
+                    <div class="bento-overlay">
+                        <h3>Scooter</h3>
+                        <span>Explore &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="{{ url_for('search', type='motorcycle') }}"
+                   class="bento-card item-small-bl">
+                    <img src="{{ url_for('static', filename='imgs/card_index/motorcycle_index.webp') }}"
+                         alt="Motorcycle">
+                    <div class="bento-overlay">
+                        <h3>Motorcycle</h3>
+                        <span>Explore &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="{{ url_for('search', type='camper') }}"
+                   class="bento-card item-tall-right">
+                    <img src="{{ url_for('static', filename='imgs/card_index/camper_index.webp') }}"
+                         alt="Camper">
+                    <div class="bento-overlay">
+                        <h3>Camper</h3>
+                        <span>Explore &rarr;</span>
+                    </div>
+                </a>
             </div>
         </section>
 
@@ -123,6 +195,17 @@
                 </div>
             </div>
         </section>
+
+        {% if not session.user_id and not session.is_admin %}
+            <section class="home-cta">
+                <div class="cta-content">
+                    <h2>Ready to Go?</h2>
+                    <p>Join OmniDrive today and find the perfect vehicle for your next adventure.</p>
+                    <a href="{{ url_for('register') }}" class="btn-cta">Create a Free Account</a>
+
+                </div>
+            </section>
+        {% endif %}
     </div>
 {% endblock content %}
 

@@ -232,7 +232,7 @@ AGGIORNAMENTO 1 (2-04-2026):
     #FATTO# - TERMS_CONDITIONS.html completare
     #FATTO# - cambiare footer (eliminare newsletter)
 
-            - finire index (no emoji)
+    #FATTO# - finire index (no emoji)
             - VEHICLE.html cambiare stile (no emoji)
             - VEHICLE.html mettere tutti i gli attributi dei veicoli e renderli coerenti con quelli presenti nel DB
             - SEARCH.html cambiare stile (no emoji)
