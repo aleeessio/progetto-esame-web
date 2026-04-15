@@ -141,33 +141,67 @@
 }
 
 .search-input-group label {
+    margin-top: 3px;
     font-size: 0.75rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--font-color);
-    margin-bottom: 4px;
 }
 
-.search-input-group select {
-    border: none;
-    background: transparent;
+.custom-select-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-select-trigger {
     font-size: 1.1rem;
     color: var(--border-color);
-    cursor: pointer;
-    outline: none;
-    font-family: inherit;
-    appearance: none;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.search-input-group select:focus,
-.search-input-group select:valid {
+.custom-select-trigger::after {
+    content: '▼';
+    font-size: 0.8rem;
     color: var(--font-color);
+    opacity: 0.3;
 }
 
-.search-input-group select option {
-    background-color: var(--background-div);
+.custom-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--background-div);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 10px 0;
+    margin-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.custom-options.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-options li {
+    padding: 10px 20px;
+    font-size: 1rem;
     color: var(--font-color);
+    transition: background 0.2s ease;
+}
+
+.custom-options li:hover {
+    background: rgba(255, 99, 71, 0.1);
+    color: var(--logo-color);
 }
 
 .search-btn-wrapper {

@@ -24,6 +24,32 @@ cards.forEach(card => {
 
 
 document.addEventListener("DOMContentLoaded", function () {
+    // Dropdown Logic
+    const trigger = document.getElementById('custom-select-trigger');
+    const optionsList = document.getElementById('custom-options');
+    const input = document.getElementById('vehicle-type-input');
+    const options = optionsList.querySelectorAll('li');
+
+    trigger.addEventListener('click', () => {
+        optionsList.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            trigger.textContent = option.textContent;
+            input.value = option.dataset.value;
+            optionsList.classList.remove('open');
+            trigger.style.color = 'var(--font-color)';
+        });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.custom-select-wrapper')) {
+            optionsList.classList.remove('open');
+        }
+    });
+
     const slides = document.querySelectorAll(".hero-slide");
     let currentSlide = 0;
 

@@ -51,17 +51,18 @@
                     <form action="{{ url_for('search') }}"
                           method="GET"
                           class="floating-search-bar">
-                        <div class="search-input-group">
+                        <div class="search-input-group custom-select-wrapper">
                             <label for="vehicle-type">What are you looking for?</label>
-                            <select name="type" id="vehicle-type" required>
-                                <option value="" disabled selected>Choose a category...</option>
-                                <option value="car">- Car</option>
-                                <option value="supercar">- Supercar</option>
-                                <option value="bike">- Bike</option>
-                                <option value="scooter">- Scooter</option>
-                                <option value="motorcycle">- Motorcycle</option>
-                                <option value="camper">- Camper</option>
-                            </select>
+                            <div class="custom-select-trigger" id="custom-select-trigger">Choose a category...</div>
+                            <input type="hidden" name="type" id="vehicle-type-input" required>
+                            <ul class="custom-options" id="custom-options">
+                                <li data-value="car">Car</li>
+                                <li data-value="supercar">Supercar</li>
+                                <li data-value="bike">Bike</li>
+                                <li data-value="scooter">Scooter</li>
+                                <li data-value="motorcycle">Motorcycle</li>
+                                <li data-value="camper">Camper</li>
+                            </ul>
                         </div>
 
                         <div class="search-btn-wrapper">
