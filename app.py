@@ -218,10 +218,12 @@ def img_handler(db_conn, vehicle_type, vehicle_id):
 # Routes
 # -------------------------------
 
+# Home page (admin and user)
 @app.route('/')
 def index():
     return render_template("index.html")
 
+# Registration (admin and user)
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -273,7 +275,7 @@ def register():
     
     return render_template("register.html")
         
-
+# Login (admin and user)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -313,6 +315,7 @@ def login():
 
     return render_template("login.html")
 
+# Logout (admin and user)
 @app.route('/logout')
 def logout():
     session.clear()
@@ -327,9 +330,11 @@ def admin():
     
     return render_template("admin.html")
 
+# Add vehicle (admin only)
 @app.route('/add_vehicle', methods=['GET', 'POST'])
 def add_vehicle():
     if not session.get('is_admin'):
+        flash("Access denied!", 'error')
         return redirect(url_for('index'))
     
     if request.method == 'POST':
@@ -481,7 +486,8 @@ def add_vehicle():
             return redirect(url_for('add_vehicle'))
     
     return render_template("add_vehicle.html")
-    
+
+# Vehicle list (admin only)   
 @app.route('/vehicle_list')
 def vehicle_list():
     if not session.get('is_admin'):
@@ -499,6 +505,7 @@ def vehicle_list():
                            cars=cars, supercars=supercars, bikes=bikes, 
                            scooters=scooters, motorcycles=motorcycles, campers=campers)
 
+# Remove vehicle (admin only)
 @app.route('/remove_vehicle', methods=['POST'])
 def remove_vehicle():
     if not session.get('is_admin'):
@@ -526,6 +533,7 @@ def remove_vehicle():
     flash("Vehicle removed!", 'info')
     return redirect(url_for('vehicle_list'))
 
+# User list (admin only)
 @app.route('/user_list')
 def user_list():
     if not session.get('is_admin'):
@@ -538,6 +546,7 @@ def user_list():
     
     return render_template("user_list.html", users=users)
 
+# Remove user (admin only)
 @app.route('/remove_user', methods=['POST'])
 def remove_user():
     if not session.get('is_admin'):
@@ -554,6 +563,7 @@ def remove_user():
     flash("User removed!", 'info')
     return redirect(url_for('user_list'))
 
+# Rental request list (admin only)
 @app.route('/request_list')
 def request_list():
     if not session.get('is_admin'):
@@ -567,10 +577,11 @@ def request_list():
 
     return render_template("request_list.html", requests=reqs)
 
+# Remove rental request (admin and user)
 @app.route('/remove_request', methods=['POST'])
 def remove_request():
     index = request.form.get('req_id')
-
+    
     if session.get('is_admin'):
         with db_connect() as db:
             db.execute(
@@ -591,6 +602,10 @@ def remove_request():
         flash("Request removed!", 'info')
         return redirect(url_for('profile'))
 
+    flash("Access denied!", 'error')
+    return redirect(url_for('index'))
+
+# Update request status (admin only)
 @app.route('/update_req_status/<int:req_id>', methods=['POST'])
 def update_req_status(req_id):
     if not session.get('is_admin'):
@@ -611,6 +626,7 @@ def update_req_status(req_id):
     flash("Request updated!", 'success')
     return redirect(url_for('request_list'))
 
+# Search page (admin and user)
 @app.route('/search')
 def search():
     vehicle_type = request.args.get('type', '')
@@ -736,6 +752,7 @@ def search():
                            vehicle_type=vehicle_type,
                            args=request.args)
 
+# Profile page (user only)
 @app.route('/profile')
 def profile():
     if not session.get('user_id'):
@@ -756,6 +773,7 @@ def profile():
 
     return render_template("profile.html", requests=requests, user_email = user_email)
 
+# Contact, privacy policy, terms and conditions, social media redirect (admin and user)
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
@@ -773,6 +791,7 @@ def social_redirect():
     flash("Work in progress! Our social media channels will be available soon.", "info")
     return redirect(request.referrer or url_for('index'))
 
+# Vehicle detail page (admin and user)
 @app.route('/vehicle/<vehicle_type>/<int:vehicle_id>')
 def vehicle_detail(vehicle_type, vehicle_id):
     table = TYPE_TO_TABLE.get(vehicle_type)
@@ -799,7 +818,7 @@ def vehicle_detail(vehicle_type, vehicle_id):
 
     return render_template('vehicle.html', vehicle=v_dict, vehicle_type=vehicle_type)
 
-
+# Rent vehicle page (user only)
 @app.route('/rent/<vehicle_type>/<int:vehicle_id>', methods=['GET', 'POST'])
 def rent(vehicle_type, vehicle_id):
     if session.get('is_admin'):

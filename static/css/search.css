@@ -1,8 +1,16 @@
+/* ------- WRAPPER PRINCIPALE ------- */
+.search-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .search-layout {
     display: flex;
     justify-content: center;
     gap: 40px;
-    max-width: 1300px;
+    min-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
     align-items: flex-start;
@@ -22,26 +30,22 @@
     box-shadow: 0 8px 24px var(--shadow-color);
     position: sticky;
     top: 100px;
+
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
 }
 
-.sidebar-label,
-.sidebar-label-row span {
-    font-size: 1.1rem;
-    font-weight: 800;
-    margin-bottom: 16px;
-    color: var(--font-color);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: block;
+.search-sidebar::-webkit-scrollbar {
+    width: 6px;
 }
 
-.sidebar-label-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 24px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 24px;
+.search-sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 10px;
+}
+
+.search-sidebar::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .reset-link {
@@ -55,49 +59,91 @@
     text-decoration: underline;
 }
 
-/* ------- SELEZIONE TIPO (CHIPS) ------- */
-.type-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+/* ------- PREMIUM VEHICLE SELECTOR (TOP BAR CON IMMAGINI) ------- */
+.premium-vehicle-selector {
+    width: 100%;
+    max-width: 1300px;
+    margin: 20px auto 30px auto;
+    padding: 0 20px;
+    animation: premiumFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.type-chip {
+.selector-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    background: var(--background-div);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+.premium-chip {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 16px 10px;
-    background: var(--background-page);
-    border: 2px solid transparent;
-    border-radius: 12px;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 16px;
     text-decoration: none;
     color: var(--font-color);
-    transition: all 0.3s ease;
-    cursor: pointer;
+    background: var(--background-page);
+    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    position: relative;
 }
 
-.type-chip:hover {
+.chip-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.premium-chip span {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+/* INACTIVE */
+.premium-chip:hover {
+    opacity: 1;
+    transform: translateY(-4px);
+    border-color: var(--border-color);
     background: var(--background-div);
-    border-color: var(--logo-color);
-    transform: translateY(-2px);
 }
 
-.type-chip.active {
+.premium-chip:hover .chip-img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* ACTIVE */
+.premium-chip.active {
+    opacity: 1;
     background: var(--logo-color);
-    color: white;
     border-color: var(--logo-color);
-    box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+    box-shadow: 0 10px 25px rgba(255, 99, 71, 0.35);
+    transform: translateY(-4px);
 }
 
-.chip-icon {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
+.premium-chip.active .chip-img {
+    filter: grayscale(0%);
+    opacity: 0.7;
 }
 
-.chip-label {
-    font-size: 0.9rem;
-    font-weight: bold;
+.premium-chip.active span {
+    color: #fff;
 }
 
 /* ------- FORM FILTRI ------- */
@@ -167,12 +213,84 @@
     transform: translateY(-2px);
 }
 
-/* ------- AREA RISULTATI (LISTA ORIZZONTALE) ------- */
+/* ------- ACCORDION FILTERS  ------- */
+.filter-accordion {
+    border-bottom: 1px solid var(--border-color);
+    padding: 18px 0;
+}
+
+.filter-accordion:last-of-type {
+    border-bottom: none;
+}
+
+.filter-summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--font-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s;
+}
+
+.filter-summary::-webkit-details-marker {
+    display: none;
+}
+
+.filter-summary::after {
+    content: '▼';
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+    color: var(--logo-color);
+}
+
+.filter-accordion[open] .filter-summary::after {
+    transform: rotate(-180deg);
+}
+
+.filter-accordion[open] .filter-summary {
+    color: var(--logo-color);
+}
+
+.filter-content {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: premiumFadeUp 0.4s ease forwards;
+}
+
+.btn-filter {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--logo-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+}
+
+.btn-filter:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
+    background-color: #e5533d;
+}
+
+/* ------- AREA RISULTATI ------- */
 .search-results {
-    width: 850px;
-    min-width: 850px;
-    max-width: 850px;
-    flex-shrink: 0;
+    flex: 1;
+    min-width: 0;
 }
 
 .results-grid {
@@ -185,30 +303,27 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 220px;
+    height: 240px;
     background: var(--background-div);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .vehicle-card:hover {
     transform: translateX(10px);
-    box-shadow: 0 10px 30px var(--shadow-color);
+    box-shadow: 0 15px 35px var(--shadow-color);
     border-color: var(--logo-color);
 }
 
-/* Immagine a sinistra */
 .card-img {
-    width: 350px;
-    height: 220px;
+    width: 380px;
+    height: 100%;
     flex-shrink: 0;
     background: var(--background-page);
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
 }
 
 .card-img img {
@@ -216,25 +331,18 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
-    display: block;
 }
 
-.card-img-placeholder {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--border-color);
-    text-transform: uppercase;
-    text-align: center;
-    padding: 20px;
+.vehicle-card:hover .card-img img {
+    transform: scale(1.08);
 }
 
-/* Contenuto a destra */
 .card-body {
-    flex: 1;
     padding: 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex: 1;
 }
 
 .card-top {
@@ -244,6 +352,7 @@
 }
 
 .card-title {
+    text-transform: capitalize;
     font-size: 1.6rem;
     font-weight: 800;
 }
@@ -255,22 +364,29 @@
     text-align: right;
 }
 
-/* Specifiche in riga */
+.card-price span {
+    font-size: 0.9rem;
+    color: var(--font-color);
+    opacity: 0.7;
+    font-weight: 600;
+}
+
 .card-specs {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
     margin: 15px 0;
 }
 
 .card-specs span {
     background: var(--background-page);
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .btn-rent {
@@ -280,19 +396,29 @@
     background-color: transparent;
     border: 2px solid var(--logo-color);
     color: var(--logo-color);
-    border-radius: 8px;
-    font-weight: bold;
+    border-radius: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     cursor: pointer;
     transition: all 0.3s;
     text-decoration: none;
     text-align: center;
-    display: inline-block;
-    box-sizing: border-box;
 }
 
 .vehicle-card:hover .btn-rent {
     background-color: var(--logo-color);
     color: white;
+}
+
+/* ------- LABELS MICRO ------- */
+.spec-label-micro {
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    font-weight: 800;
+    opacity: 0.5;
+    letter-spacing: 0.5px;
+    margin-right: 2px;
 }
 
 /* ------- STATI VUOTI (PLACEHOLDERS) ------- */
@@ -304,6 +430,7 @@
     text-align: center;
     color: var(--font-color);
     height: 100%;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
