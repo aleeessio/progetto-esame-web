@@ -16,6 +16,11 @@
             <a href="{{ url_for('admin') }}" class="btn-back">Back</a>
         </div>
 
+        <input type="text"
+               id="search-input"
+               class="search-input"
+               placeholder="Search by ID, User, Period or Status...">
+
         {% if requests %}
             <div class="table-responsive">
                 <table>
@@ -130,19 +135,41 @@
 {% endblock content %}
 
 {% block extra_js %}
+    <!-- VIEW REQUESTS MESSAGES -->
     <script>
-    function toggleMessage(rowId, btnElement) {
-        const messageRow = document.getElementById(rowId);
-        
-        if (messageRow.classList.contains('show')) {
-            messageRow.classList.remove('show');
-            btnElement.textContent = 'View';
-            btnElement.classList.remove('active');
-        } else {
-            messageRow.classList.add('show');
-            btnElement.textContent = 'Hide';
-            btnElement.classList.add('active');
+        function toggleMessage(rowId, btnElement) {
+            const messageRow = document.getElementById(rowId);
+            
+            if (messageRow.classList.contains('show')) {
+                messageRow.classList.remove('show');
+                btnElement.textContent = 'View';
+                btnElement.classList.remove('active');
+            } else {
+                messageRow.classList.add('show');
+                btnElement.textContent = 'Hide';
+                btnElement.classList.add('active');
+            }
         }
-    }
     </script>
+
+    <!-- REQUEST SEARCH -->
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const rows = document.querySelectorAll('tbody tr');
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+
+            rows.forEach(row => {
+                let text = '';
+                for (let i = 0; i < 6; i++) {
+                    if (row.cells[i]) {
+                        text += row.cells[i].innerText.toLowerCase() + ' ';
+                    }
+                }
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        });
+    </script>
+
 {% endblock extra_js %}

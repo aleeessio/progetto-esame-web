@@ -14,7 +14,7 @@
     border-radius: 12px;
     padding: 40px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     box-shadow: 0 8px 24px var(--shadow-color);
     transition: background-color 1s ease, border-color 1s ease, box-shadow 1s ease;
     opacity: 0;
@@ -32,6 +32,24 @@
     color: var(--font-color);
     opacity: 0.5;
     padding: 40px 0;
+}
+
+/*------- SEARCH REQUESTS -------*/
+.search-input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-page);
+    color: var(--font-color);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--logo-color);
 }
 
 /*------- HEADER -------*/
