@@ -60,6 +60,12 @@
                                     </div>
                                 {% endif %}
                             </div>
+                            <div class="request-actions">
+                                <form method="POST" action="{{ url_for('remove_request') }}">
+                                    <input type="hidden" name="req_id" value="{{ req['id'] }}">
+                                    <button type="submit" class="btn-delete-text">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
