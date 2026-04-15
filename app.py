@@ -567,6 +567,23 @@ def request_list():
 
     return render_template("request_list.html", requests=reqs)
 
+@app.route('/remove_request', methods=['POST'])
+def remove_request():
+    if not session.get('is_admin'):
+        flash("Access denied!", 'error')
+        return redirect(url_for('index'))
+    
+    index = request.form.get('req_id')
+
+    with db_connect() as db:
+        db.execute(
+            'DELETE FROM rental_requests WHERE id = ?', (index,)
+        )
+        db.commit()
+
+    flash("Request removed!", 'info')
+    return redirect(url_for('request_list'))
+
 @app.route('/update_req_status/<int:req_id>', methods=['POST'])
 def update_req_status(req_id):
     if not session.get('is_admin'):

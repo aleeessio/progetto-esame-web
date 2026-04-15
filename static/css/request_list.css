@@ -93,7 +93,7 @@ tbody tr:not(.message-row):hover {
 }
 
 /*------- STATUS BADGES (ADMIN) -------*/
-.status-badge-admin {
+.status-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -102,7 +102,7 @@ tbody tr:not(.message-row):hover {
     font-size: 0.8rem;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.5px
 }
 
 .status-dot {
@@ -166,6 +166,7 @@ tbody tr:not(.message-row):hover {
     font-weight: bold;
     cursor: pointer;
     transition: border-color 0.3s;
+    min-width: 70px;
 }
 
 .status-select:focus {
@@ -300,4 +301,31 @@ tbody tr:not(.message-row):hover {
     margin: 0;
     line-height: 1.5;
     font-size: 0.95rem;
+}
+
+.td-delete {
+    width: 40px;
+    text-align: center;
+}
+
+.btn-delete {
+    display: none;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--font-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+tbody tr:not(.message-row):hover .btn-delete {
+    display: inline-block;
+}
+
+.btn-delete:hover {
+    background: #ffe0e0;
+    color: #c0392b;
+    border-color: #c0392b;
 }

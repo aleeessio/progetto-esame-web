@@ -29,6 +29,7 @@
                             <th>Status</th>
                             <th>Notes</th>
                             <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,11 +101,17 @@
                                         </select>
                                     </form>
                                 </td>
+                                <td class="td-delete">
+                                    <form method="POST" action="{{ url_for('remove_request') }}">
+                                        <input type="hidden" name="req_id" value="{{ req['id'] }}">
+                                        <button type="submit" class="btn-delete">✕</button>
+                                    </form>
+                                </td>
                             </tr>
 
                             {% if req['message'] and req['message']|trim != '' %}
                                 <tr id="msg-{{ req['id'] }}" class="message-row">
-                                    <td colspan="8">
+                                    <td colspan="9">
                                         <div class="message-content">
                                             <strong>User Notes:</strong>
                                             <p>{{ req['message'] }}</p>
