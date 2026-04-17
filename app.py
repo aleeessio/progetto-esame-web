@@ -179,6 +179,18 @@ def rental_db_init():
             )
         ''')
 
+def saved_vehicles_db_init():
+    with db_connect() as db:
+        db.execute('''
+            CREATE TABLE IF NOT EXISTS saved_vehicles (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   user_id INTEGER NOT NULL,
+                   vehicle_type TEXT NOT NULL,
+                   vehicle_id INTEGER NOT NULL,
+                   FOREIGN KEY (user_id) REFERENCES users (id)
+            )
+        ''')
+
 def db_init():
     user_db_init()
     car_db_init()
@@ -187,7 +199,8 @@ def db_init():
     scooter_db_init()
     motorcycle_db_init()
     camper_db_init() 
-    rental_db_init()   
+    rental_db_init() 
+    saved_vehicles_db_init()  
 # -------------------------------
 
 # -------------------------------
@@ -274,7 +287,8 @@ def register():
         ############################ End DB update ############################
     
     return render_template("register.html")
-        
+
+
 # Login (admin and user)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -315,6 +329,7 @@ def login():
 
     return render_template("login.html")
 
+
 # Logout (admin and user)
 @app.route('/logout')
 def logout():
@@ -329,6 +344,7 @@ def admin():
         return redirect(url_for('index'))
     
     return render_template("admin.html")
+
 
 # Add vehicle (admin only)
 @app.route('/add_vehicle', methods=['GET', 'POST'])
@@ -487,6 +503,7 @@ def add_vehicle():
     
     return render_template("add_vehicle.html")
 
+
 # Vehicle list (admin only)   
 @app.route('/vehicle_list')
 def vehicle_list():
@@ -504,6 +521,7 @@ def vehicle_list():
     return render_template("vehicle_list.html", 
                            cars=cars, supercars=supercars, bikes=bikes, 
                            scooters=scooters, motorcycles=motorcycles, campers=campers)
+
 
 # Remove vehicle (admin only)
 @app.route('/remove_vehicle', methods=['POST'])
@@ -533,6 +551,7 @@ def remove_vehicle():
     flash("Vehicle removed!", 'info')
     return redirect(url_for('vehicle_list'))
 
+
 # User list (admin only)
 @app.route('/user_list')
 def user_list():
@@ -545,6 +564,7 @@ def user_list():
         ).fetchall()
     
     return render_template("user_list.html", users=users)
+
 
 # Remove user (admin only)
 @app.route('/remove_user', methods=['POST'])
@@ -563,6 +583,7 @@ def remove_user():
     flash("User removed!", 'info')
     return redirect(url_for('user_list'))
 
+
 # Rental request list (admin only)
 @app.route('/request_list')
 def request_list():
@@ -576,6 +597,7 @@ def request_list():
         ).fetchall()
 
     return render_template("request_list.html", requests=reqs)
+
 
 # Remove rental request (admin and user)
 @app.route('/remove_request', methods=['POST'])
@@ -602,8 +624,10 @@ def remove_request():
         flash("Request removed!", 'info')
         return redirect(url_for('profile'))
 
-    flash("Access denied!", 'error')
-    return redirect(url_for('index'))
+    else:
+        flash("Access denied!", 'error')
+        return redirect(url_for('index'))
+
 
 # Update request status (admin only)
 @app.route('/update_req_status/<int:req_id>', methods=['POST'])
@@ -625,6 +649,7 @@ def update_req_status(req_id):
     
     flash("Request updated!", 'success')
     return redirect(url_for('request_list'))
+
 
 # Search page (admin and user)
 @app.route('/search')
@@ -752,6 +777,7 @@ def search():
                            vehicle_type=vehicle_type,
                            args=request.args)
 
+
 # Profile page (user only)
 @app.route('/profile')
 def profile():
@@ -759,19 +785,32 @@ def profile():
         flash("You have to login first!", 'error')
         return redirect(url_for('login'))
     
+    user_id = session['user_id']
+    saved_list = []
+
     with db_connect() as db:
-        requests = db.execute(
-            'SELECT * FROM rental_requests WHERE user_id = ? ORDER BY id DESC', (session['user_id'],)
+        favorites = db.execute(
+            'SELECT vehicle_type, vehicle_id FROM saved_vehicles WHERE user_id = ?', 
+            (user_id,)
         ).fetchall()
+        
+        for fav in favorites:
+            table = TYPE_TO_TABLE.get(fav['vehicle_type'])
+            v_data = db.execute(f'SELECT id, brand, img FROM {table} WHERE id = ?', (fav['vehicle_id'],)).fetchone()
+            
+            if v_data:
+                v_dict = dict(v_data)
+                v_dict['type'] = fav['vehicle_type'] 
+                #for the image
+                if v_dict.get('img'):
+                    v_dict['img_url'] = f"imgs/{table}/{v_dict['id']}/{v_dict['img']}"
+                saved_list.append(v_dict)
 
-    with db_connect() as db:
-        user_data = db.execute(
-            'SELECT id, name, email FROM users WHERE id = ? ', (session['user_id'],)
-        ).fetchone()
+        requests = db.execute('SELECT * FROM rental_requests WHERE user_id = ? ORDER BY id DESC', (user_id,)).fetchall()
+        user_data = db.execute('SELECT email FROM users WHERE id = ?', (user_id,)).fetchone()
 
-        user_email = dict(user_data)['email'] if user_data else "Email not found"
-
-    return render_template("profile.html", requests=requests, user_email = user_email)
+    return render_template("profile.html", requests=requests, user_email=user_data['email'], saved_vehicles=saved_list)
+    
 
 # Contact, privacy policy, terms and conditions, social media redirect (admin and user)
 @app.route('/contact')
@@ -790,6 +829,7 @@ def terms_conditions():
 def social_redirect():
     flash("Work in progress! Our social media channels will be available soon.", "info")
     return redirect(request.referrer or url_for('index'))
+
 
 # Vehicle detail page (admin and user)
 @app.route('/vehicle/<vehicle_type>/<int:vehicle_id>')
@@ -816,7 +856,45 @@ def vehicle_detail(vehicle_type, vehicle_id):
     else:
         v_dict['img_url'] = None
 
-    return render_template('vehicle.html', vehicle=v_dict, vehicle_type=vehicle_type)
+    # Controlla se il veicolo è tra i preferiti dell'utente
+    is_saved = False
+    if session.get('user_id') and not session.get('is_admin'):
+        with db_connect() as db:
+            check_fav = db.execute(
+                'SELECT id FROM saved_vehicles WHERE user_id = ? AND vehicle_type = ? AND vehicle_id = ?',
+                (session['user_id'], vehicle_type, vehicle_id)
+            ).fetchone()
+            if check_fav:
+                is_saved = True
+
+    return render_template('vehicle.html', vehicle=v_dict, vehicle_type=vehicle_type, is_saved=is_saved)
+
+# Vehicle favorite (user only)
+@app.route('/toggle_favorite/<vehicle_type>/<int:vehicle_id>', methods=['POST'])
+def toggle_favorite(vehicle_type, vehicle_id):
+    if not session.get('user_id'):
+        return {"status": "error", "message": "Login requested"}, 401
+    
+    user_id = session['user_id']
+    
+    with db_connect() as db:
+        exists = db.execute(
+            'SELECT id FROM saved_vehicles WHERE user_id = ? AND vehicle_type = ? AND vehicle_id = ?',
+            (user_id, vehicle_type, vehicle_id)
+        ).fetchone()
+        
+        if exists:
+            db.execute('DELETE FROM saved_vehicles WHERE id = ?', (exists['id'],))
+            db.commit()
+            return {"status": "removed"}
+        else:
+            db.execute(
+                'INSERT INTO saved_vehicles (user_id, vehicle_type, vehicle_id) VALUES (?, ?, ?)',
+                (user_id, vehicle_type, vehicle_id)
+            )
+            db.commit()
+            return {"status": "added"}
+
 
 # Rent vehicle page (user only)
 @app.route('/rent/<vehicle_type>/<int:vehicle_id>', methods=['GET', 'POST'])

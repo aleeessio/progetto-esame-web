@@ -10,276 +10,280 @@
 {% endblock extra_css %}
 
 {% block content %}
-    <div class="detail-layout">
+    <div class="detail-layout premium-layout">
 
         <div class="btn-box">
             <div class="detail-header">
-                <a href="{{ url_for('search', type=vehicle_type) }}" class="btn-back">Go to Search</a>
+                <a href="{{ url_for('search', type=vehicle_type) }}" class="btn-back">
+                    <svg viewBox="0 0 24 24"
+                         width="16"
+                         height="16"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         fill="none"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Search
+                </a>
             </div>
 
             {% if session.get('is_admin') %}
                 <div class="detail-header">
-                    <a href="{{ url_for('vehicle_list') }}" class="btn-back">Go to Vehicle List</a>
+                    <a href="{{ url_for('vehicle_list') }}" class="btn-back">Vehicle List</a>
                 </div>
                 <div class="detail-header">
-                    <a href="{{ url_for('request_list') }}" class="btn-back">Go to Request List</a>
+                    <a href="{{ url_for('request_list') }}" class="btn-back">Request List</a>
                 </div>
             {% endif %}
         </div>
 
-        <div class="detail-container">
+        <div class="detail-container premium-container">
             <div class="detail-image-section">
                 {% if vehicle.img_url %}
                     <img src="{{ url_for('static', filename=vehicle.img_url) }}"
                          alt="{{ vehicle.brand }}">
                 {% else %}
                     <div class="detail-img-placeholder">
-                        <span>📷</span>
                         <p>Image not available</p>
                     </div>
                 {% endif %}
             </div>
 
             <div class="detail-info-section">
+
                 <div class="info-top">
-                    <div class="vehicle-badge">{{ vehicle_type|capitalize }}</div>
-                    <h1 class="vehicle-title">{{ vehicle.brand|capitalize }}</h1>
-                    <div class="vehicle-price">
-                        €{{ vehicle.price|int }}
-                        <span>/
-                            {% if vehicle_type in ('supercar', 'bike') %}
-                                day
-                            {% else %}
-                                month
+                    <div class="title-group">
+                        <div class="vehicle-badge">{{ vehicle_type|capitalize }}</div>
+                        <h1 class="vehicle-title">{{ vehicle.brand|capitalize }}</h1>
+                    </div>
+
+                    <div class="action-group">
+                        <div class="vehicle-price">
+                            €{{ vehicle.price|int }}
+                            <span class="price-period">/
+                                {% if vehicle_type in ('supercar', 'bike') %}
+                                    day
+                                {% else %}
+                                    month
+                                {% endif %}
+                            </span>
+                        </div>
+
+                        <div class="buttons-row">
+                            {% if not session.get('is_admin') %}
+                                <button class="btn-favorite {% if is_saved %}is-saved{% endif %}"
+                                        id="btn-save-vehicle"
+                                        title="Save to favorites">
+                                    <svg viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="2"
+                                         stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         class="heart-icon">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                        </path>
+                                    </svg>
+                                </button>
                             {% endif %}
-                        </span>
+
+                            <a href="{{ url_for('rent', vehicle_type=vehicle_type, vehicle_id=vehicle.id) }}"
+                               class="btn-checkout">Rent Now</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="info-body">
                     <h3>Technical Specifications</h3>
-                    <div class="specs-grid">
+                    <div class="specs-grid premium-specs">
 
                         <div class="spec-item">
-                            <span class="spec-icon">⏱️</span>
-                            <div class="spec-data">
-                                <span class="spec-label">Min. Rent Length</span>
-                                <span class="spec-value">{{ vehicle.rent_length }}
-                                    {% if vehicle_type in ('supercar', 'bike') %}
-                                        days
-                                    {% else %}
-                                        months
-                                    {% endif %}
-                                </span>
-                            </div>
+                            <span class="spec-label">Min. Rent Length</span>
+                            <span class="spec-value">{{ vehicle.rent_length }}
+                                {% if vehicle_type in ('supercar', 'bike') %}
+                                    days
+                                {% else %}
+                                    months
+                                {% endif %}
+                            </span>
                         </div>
 
                         {% if vehicle.color %}
                             <div class="spec-item">
-                                <span class="spec-icon">🎨</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Color</span>
-                                    <span class="spec-value">{{ vehicle.color|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Color</span>
+                                <span class="spec-value">{{ vehicle.color|capitalize }}</span>
                             </div>
                         {% endif %}
 
                         {% if vehicle_type in ('car', 'supercar') %}
                             <div class="spec-item">
-                                <span class="spec-icon">⚙️</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Transmission</span><span class="spec-value">{{ vehicle.transmission|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Transmission</span>
+                                <span class="spec-value">{{ vehicle.transmission|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">⛽</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Fuel</span><span class="spec-value">{{ vehicle.fuel|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Fuel</span>
+                                <span class="spec-value">{{ vehicle.fuel|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">⚡</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Power</span><span class="spec-value">{{ vehicle.power }} kW</span>
-                                </div>
+                                <span class="spec-label">Power</span>
+                                <span class="spec-value">{{ vehicle.power }} kW</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">🛣️</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Traction</span><span class="spec-value">{{ vehicle.traction|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Traction</span>
+                                <span class="spec-value">{{ vehicle.traction|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">💺</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Seats</span><span class="spec-value">{{ vehicle.number_of_seats }}</span>
-                                </div>
+                                <span class="spec-label">Seats</span>
+                                <span class="spec-value">{{ vehicle.number_of_seats }}</span>
                             </div>
                             {% if vehicle_type == 'supercar' %}
                                 <div class="spec-item">
-                                    <span class="spec-icon">🧵</span>
-                                    <div class="spec-data">
-                                        <span class="spec-label">Interior</span><span class="spec-value">{{ vehicle.inside_color|capitalize }} {{ vehicle.inside_material|capitalize }}</span>
-                                    </div>
+                                    <span class="spec-label">Interior</span>
+                                    <span class="spec-value">{{ vehicle.inside_color|capitalize }} {{ vehicle.inside_material|capitalize }}</span>
                                 </div>
                             {% endif %}
 
                         {% elif vehicle_type == 'bike' %}
                             <div class="spec-item">
-                                <span class="spec-icon">🚲</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Type</span><span class="spec-value">{{ vehicle.type|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Type</span>
+                                <span class="spec-value">{{ vehicle.type|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">📏</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Frame Size</span><span class="spec-value">{{ vehicle.frame_size|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Frame Size</span>
+                                <span class="spec-value">{{ vehicle.frame_size|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">⚡</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Traction</span><span class="spec-value">{{ vehicle.traction|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Traction</span>
+                                <span class="spec-value">{{ vehicle.traction|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">〰️</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Suspensions</span><span class="spec-value">{{ vehicle.suspensions|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Suspensions</span>
+                                <span class="spec-value">{{ vehicle.suspensions|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">🏔️</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Terrain</span><span class="spec-value">{{ vehicle.terrain|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Terrain</span>
+                                <span class="spec-value">{{ vehicle.terrain|capitalize }}</span>
                             </div>
 
                         {% elif vehicle_type in ('scooter', 'motorcycle') %}
                             {% if vehicle.style %}
                                 <div class="spec-item">
-                                    <span class="spec-icon">🏁</span>
-                                    <div class="spec-data">
-                                        <span class="spec-label">Style</span><span class="spec-value">{{ vehicle.style|capitalize }}</span>
-                                    </div>
+                                    <span class="spec-label">Style</span>
+                                    <span class="spec-value">{{ vehicle.style|capitalize }}</span>
                                 </div>
                             {% endif %}
                             <div class="spec-item">
-                                <span class="spec-icon">🏍️</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Engine</span><span class="spec-value">{{ vehicle.engine }}</span>
-                                </div>
+                                <span class="spec-label">Engine</span>
+                                <span class="spec-value">{{ vehicle.engine }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">⛽</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Fuel</span><span class="spec-value">{{ vehicle.fuel|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Fuel</span>
+                                <span class="spec-value">{{ vehicle.fuel|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">⚡</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Power</span><span class="spec-value">{{ vehicle.power }} kW</span>
-                                </div>
+                                <span class="spec-label">Power</span>
+                                <span class="spec-value">{{ vehicle.power }} kW</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">🪪</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">License Req.</span><span class="spec-value">{{ vehicle.required_license }}</span>
-                                </div>
+                                <span class="spec-label">License Req.</span>
+                                <span class="spec-value">{{ vehicle.required_license }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">💺</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Seats</span><span class="spec-value">{{ vehicle.number_of_seats }}</span>
-                                </div>
+                                <span class="spec-label">Seats</span>
+                                <span class="spec-value">{{ vehicle.number_of_seats }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">🎒</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Storage</span><span class="spec-value">{{ vehicle.storage_capacity }} L</span>
-                                </div>
+                                <span class="spec-label">Storage</span>
+                                <span class="spec-value">{{ vehicle.storage_capacity }} L</span>
                             </div>
                             {% if vehicle.windshield is defined %}
                                 <div class="spec-item">
-                                    <span class="spec-icon">🛡️</span>
-                                    <div class="spec-data">
-                                        <span class="spec-label">Windshield</span><span class="spec-value">
-                                            {% if vehicle.windshield %}
-                                                Yes
-                                            {% else %}
-                                                No
-                                            {% endif %}
-                                        </span>
-                                    </div>
+                                    <span class="spec-label">Windshield</span>
+                                    <span class="spec-value">
+                                        {% if vehicle.windshield %}
+                                            Yes
+                                        {% else %}
+                                            No
+                                        {% endif %}
+                                    </span>
                                 </div>
                             {% endif %}
 
                         {% elif vehicle_type == 'camper' %}
                             <div class="spec-item">
-                                <span class="spec-icon">🚐</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Type</span><span class="spec-value">{{ vehicle.type|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Type</span>
+                                <span class="spec-value">{{ vehicle.type|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">⛽</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Fuel</span><span class="spec-value">{{ vehicle.fuel|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Fuel</span>
+                                <span class="spec-value">{{ vehicle.fuel|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">🛏️</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Beds</span><span class="spec-value">{{ vehicle.sleeping_beds }}</span>
-                                </div>
+                                <span class="spec-label">Beds</span>
+                                <span class="spec-value">{{ vehicle.sleeping_beds }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">💺</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Appr. Seats</span><span class="spec-value">{{ vehicle.approved_seats }}</span>
-                                </div>
+                                <span class="spec-label">Appr. Seats</span>
+                                <span class="spec-value">{{ vehicle.approved_seats }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">🚿</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Bathroom</span><span class="spec-value">{{ vehicle.type_bathroom|capitalize }}</span>
-                                </div>
+                                <span class="spec-label">Bathroom</span>
+                                <span class="spec-value">{{ vehicle.type_bathroom|capitalize }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">❄️</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">A/C</span><span class="spec-value">
-                                        {% if vehicle.climate_control %}
-                                            Yes
-                                        {% else %}
-                                            No
-                                        {% endif %}
-                                    </span>
-                                </div>
+                                <span class="spec-label">A/C</span>
+                                <span class="spec-value">
+                                    {% if vehicle.climate_control %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-icon">🐾</span>
-                                <div class="spec-data">
-                                    <span class="spec-label">Pets Allowed</span><span class="spec-value">
-                                        {% if vehicle.pets_allowed %}
-                                            Yes
-                                        {% else %}
-                                            No
-                                        {% endif %}
-                                    </span>
-                                </div>
+                                <span class="spec-label">Pets Allowed</span>
+                                <span class="spec-value">
+                                    {% if vehicle.pets_allowed %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </span>
                             </div>
                         {% endif %}
                     </div>
                 </div>
-
-                <div class="info-footer">
-                    <a href="{{ url_for('rent', vehicle_type=vehicle_type, vehicle_id=vehicle.id) }}"
-                       class="btn-checkout">Rent</a>
-                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // button saved vehicle
+        document.addEventListener("DOMContentLoaded", function() {
+            const btnSave = document.getElementById("btn-save-vehicle");
+            if (btnSave) {
+                btnSave.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    
+                    fetch(`/toggle_favorite/{{ vehicle_type }}/{{ vehicle.id }}`, {
+                        method: 'POST',
+                    })
+                    .then(response => {
+                        if (response.status === 401) {
+                            alert("You need to login first!");
+                            window.location.href = "{{ url_for('login') }}";
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.status === "added" || data.status === "removed") {
+                            this.classList.toggle("is-saved");
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 {% endblock content %}

@@ -233,7 +233,7 @@ AGGIORNAMENTO 1 (2-04-2026):
     #FATTO# - cambiare footer (eliminare newsletter)
 
     #FATTO# - finire index (no emoji)
-            - VEHICLE.html cambiare stile (no emoji)
+    #FATTO# - VEHICLE.html cambiare stile (no emoji)
     #FATTO# - VEHICLE.html mettere tutti i gli attributi dei veicoli e renderli coerenti con quelli presenti nel DB
     #FATTO# - SEARCH.html cambiare stile (no emoji)
     #FATTO# - SEARCH.html cambiare stile dei veicoli sulla destra
@@ -241,10 +241,10 @@ AGGIORNAMENTO 1 (2-04-2026):
     #FATTO# - PROFILE.html possibilità di eliminare richiesta noleggio (utente)
             - aggiustare transizione da index a search quando si preme tasto SEARCH e quando ci si logga e fa il redirect alla Profile/Admin
             
-            - PROFILE.html (OPZIONALE: veicoli salvati)
+    #FATTO# - PROFILE.html (OPZIONALE: veicoli salvati)
     #FATTO# - VEHICLE_LIST.html (OPZIONALE: redirect al veicolo)
     #FATTO# - REQUEST_LIST.html (OPZIONALE: redirect al veicolo)
-            - VEHICLE.html (OPZIONALE: tasto "mi piace" per salvare veicolo)
+    #FATTO# - VEHICLE.html (OPZIONALE: tasto "mi piace" per salvare veicolo)
     #FATTO# - VEHICLE.html (OPZIONALE: tasto back to VEHICLE_LIST.html se si è admin)
 
     #FATTO# - sistemare FONT per tutto il sito

@@ -1,4 +1,4 @@
-/*------- MAIN -------*/
+/*------- MAIN & LAYOUT -------*/
 .main-content {
     flex: 1;
     display: flex;
@@ -7,52 +7,46 @@
     padding: 60px 20px;
 }
 
-/*------- PROFILE BOX -------*/
-.mega-box {
+.profile-layout {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 30px;
     gap: 30px;
-    width: 100%;
-    align-items: center;
+    animation: premiumFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/*------- PROFILE BOXES -------*/
 .profile-box {
     background: var(--background-div);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 40px;
-    width: 100%;
-    max-width: 1200px;
+    border-radius: 16px;
+    padding: 30px;
     box-shadow: 0 8px 24px var(--shadow-color);
     transition: background-color 1s ease, border-color 1s ease, box-shadow 1s ease;
-    opacity: 0;
-    animation: premiumFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.5s;
-}
-
-.profile-box h2 {
-    margin-bottom: 15px;
-    font-size: 1.6rem;
-}
-
-.profile-box h3 {
-    margin-bottom: 6px;
-    font-size: 1.3rem;
 }
 
 .profile-title {
     color: var(--logo-color);
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 15px;
-    margin-bottom: 25px !important;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
 }
 
-.profile-subtitle {
-    color: #6c6c6c;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 15px;
-    margin-bottom: 25px !important;
+.section-title {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    color: var(--font-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.m-0 {
+    margin: 0 !important;
+    border: none;
+    padding: 0;
 }
 
 /*------- USER INFO GRID -------*/
@@ -93,18 +87,208 @@
     opacity: 1;
 }
 
+/*------- SAVED VEHICLES GRID -------*/
+.saved-vehicles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.mini-vehicle-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--background-page);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.mini-vehicle-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--logo-color);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.mini-brand-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+}
+
+.mini-brand-link:hover h4 {
+    color: var(--logo-color);
+}
+
+.mini-img-container {
+    height: 120px;
+    width: 100%;
+    background: var(--background-div);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mini-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.mini-vehicle-card:hover .mini-img-container img {
+    transform: scale(1.05);
+}
+
+.mini-img-placeholder svg {
+    width: 40px;
+    height: 40px;
+    opacity: 0.2;
+    color: var(--font-color);
+}
+
+.mini-vehicle-info {
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.mini-vehicle-info h4 {
+    margin: 0;
+    color: var(--font-color);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.mini-badge {
+    font-size: 0.7rem;
+    background: var(--border-color);
+    color: var(--font-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* ------- FAVORITE BUTTON ------- */
+.btn-favorite-mini {
+    background: transparent;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    outline: none;
+}
+
+.heart-icon-mini {
+    width: 20px;
+    height: 20px;
+    color: var(--font-color);
+    fill: transparent;
+    stroke: var(--font-color);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.btn-favorite-mini.is-saved .heart-icon-mini {
+    color: var(--logo-color);
+    fill: var(--logo-color);
+    stroke: var(--logo-color);
+    opacity: 1;
+}
+
+.btn-favorite-mini:hover .heart-icon-mini {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/*------- EMPTY STATES -------*/
 .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: var(--font-color);
+    opacity: 0.7;
+    text-align: center;
+}
+
+.empty-state svg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.empty-state-text {
     text-align: center;
     color: var(--font-color);
     opacity: 0.5;
-    padding: 40px 0;
+    padding: 20px 0;
 }
 
-/*------- REQUEST CARD -------*/
+/*------- COLLAPSIBLE RENTAL REQUESTS -------*/
+.collapsible-box {
+    padding: 0;
+}
+
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.3s ease;
+    border-radius: 16px;
+}
+
+.collapsible-header:hover {
+    background: var(--background-page);
+}
+
+.request-count {
+    color: var(--logo-color);
+    font-size: 1.1rem;
+    margin-left: 10px;
+}
+
+.toggle-arrow {
+    width: 24px;
+    height: 24px;
+    color: var(--font-color);
+    transition: transform 0.4s ease;
+}
+
+.collapsible-header.active .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.collapsible-inner {
+    padding: 0 30px 30px 30px;
+    border-top: 1px solid var(--border-color);
+}
+
+/*------- REQUEST CARDS -------*/
 .requests-list {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    padding-top: 20px;
 }
 
 .request-card {
@@ -120,7 +304,6 @@
     border-color: var(--logo-color);
 }
 
-/*------- REQUEST HEADER -------*/
 .request-header {
     display: flex;
     justify-content: space-between;
@@ -132,6 +315,34 @@
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--font-color);
+}
+
+.request-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.92rem;
+}
+
+.detail-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--border-color);
+    min-width: 80px;
+    font-size: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.detail-value {
+    color: var(--font-color);
+    word-break: break-word;
 }
 
 /*------- STATUS BADGES -------*/
@@ -184,7 +395,6 @@
     box-shadow: 0 0 6px rgba(244, 67, 54, 0.5);
 }
 
-/* Dark mode status overrides */
 .dark-mode .status-pending {
     color: #FFC107;
 }
@@ -197,37 +407,7 @@
     color: #f44336;
 }
 
-/*------- DETAIL ROWS -------*/
-.request-details {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.detail-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 0.92rem;
-}
-
-.detail-label {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--border-color);
-    min-width: 80px;
-    font-size: 0.8rem;
-    transition: color 0.3s ease;
-}
-
-.detail-value {
-    color: var(--font-color);
-    word-break: break-word;
-}
-
-/*------- CARD ACTIONS & DELETE BUTTON -------*/
-
+/*------- CARD ACTIONS & BUTTONS -------*/
 .request-actions {
     display: flex;
     justify-content: flex-end;
@@ -255,4 +435,20 @@
 .btn-delete-text:hover {
     background-color: #f44336;
     color: #ffffff;
+}
+
+.btn-outline {
+    margin-top: 15px;
+    padding: 10px 24px;
+    border: 1px solid var(--logo-color);
+    color: var(--logo-color);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-outline:hover {
+    background: var(--logo-color);
+    color: #fff;
 }

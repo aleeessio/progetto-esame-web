@@ -1,7 +1,7 @@
-/*------- MAIN LAYOUT -------*/
-.detail-layout {
+/*------- MAIN LAYOUT (Premium) -------*/
+.premium-layout {
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
     animation: premiumFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -12,11 +12,7 @@
 .btn-box {
     display: flex;
     flex-direction: row;
-    gap: 20px
-}
-
-/*------- BACK BUTTON -------*/
-.detail-header {
+    gap: 20px;
     margin-bottom: 20px;
 }
 
@@ -25,202 +21,268 @@
     align-items: center;
     gap: 8px;
     padding: 10px 16px;
-    border: 1px solid var(--border-color);
+    border: none;
     border-radius: 6px;
-    background: var(--background-div);
+    background: transparent;
     color: var(--font-color);
     font-size: 0.95rem;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
+    opacity: 0.7;
 }
 
 .detail-header .btn-back:hover {
-    background: var(--logo-color);
-    color: #fff;
-    border-color: var(--logo-color);
+    background: var(--border-color);
+    opacity: 1;
 }
 
 /*------- DETAIL CONTAINER -------*/
-.detail-container {
-    background: var(--background-div);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 8px 24px var(--shadow-color);
-    overflow: hidden;
+.premium-container {
+    background: transparent;
+    border: none;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
-    transition: background-color 1s ease, border-color 1s ease, box-shadow 1s ease;
 }
 
-/*------- IMAGE SECTION (TOP) -------*/
+/*------- IMAGE SECTION -------*/
 .detail-image-section {
     width: 100%;
+    height: 550px;
+    background: var(--background-div);
+    border-radius: 20px;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--background-page);
-    padding: 40px 20px;
-    border-bottom: 1px solid var(--border-color);
-    min-height: 300px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px var(--shadow-color);
 }
 
 .detail-image-section img {
-    max-width: 100%;
-    max-height: 450px;
-    object-fit: contain;
-    border-radius: 8px;
-    filter: drop-shadow(0 10px 15px var(--shadow-color));
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.detail-image-section:hover img {
+    transform: scale(1.02);
 }
 
 .detail-img-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     color: var(--border-color);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-.detail-img-placeholder span {
-    font-size: 4rem;
-    margin-bottom: 10px;
-}
-
-/*------- INFO SECTION (BOTTOM) -------*/
+/*------- INFO SECTION -------*/
 .detail-info-section {
-    padding: 40px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
 }
 
 /*------- INFO TOP (Title & Price) -------*/
 .info-top {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 25px;
+    padding-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.title-group {
+    max-width: 60%;
 }
 
 .vehicle-badge {
     display: inline-block;
-    background: var(--logo-color);
-    color: #fff;
+    background: var(--font-color);
+    color: var(--background-page);
     padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: bold;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-bottom: 15px;
 }
 
 .vehicle-title {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    font-family: 'OmniSans', sans-serif;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-family: 'OmniSans', 'Exo 2', sans-serif;
+    font-weight: 800;
+    color: var(--font-color);
+    margin: 0;
+}
+
+.action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.vehicle-price {
+    font-size: 2.8rem;
     font-weight: 800;
     color: var(--font-color);
 }
 
-.vehicle-price {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--logo-color);
-}
-
-.vehicle-price span {
-    font-size: 1.1rem;
+.price-period {
+    font-size: 1.2rem;
     color: var(--font-color);
-    opacity: 0.6;
-    font-weight: normal;
+    opacity: 0.5;
+    font-weight: 400;
 }
 
-/*------- TECHNICAL SPECS -------*/
-.info-body h3 {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    text-align: center;
-    color: var(--font-color);
-}
-
-.specs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
-
-.spec-item {
+.buttons-row {
     display: flex;
-    align-items: center;
     gap: 15px;
-    background: var(--background-page);
-    padding: 18px;
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.spec-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px var(--shadow-color);
-    border-color: var(--logo-color);
-}
-
-.spec-icon {
-    font-size: 1.8rem;
-    background: var(--background-div);
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    border: 1px solid var(--border-color);
 }
 
-.spec-data {
+/*------- FAVORITE BUTTON -------*/
+.btn-favorite {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-right: 15px;
+    cursor: pointer;
     display: flex;
-    flex-direction: column;
-}
-
-.spec-label {
-    font-size: 0.85rem;
-    color: var(--font-color);
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-}
-
-.spec-value {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--font-color);
-}
-
-/*------- FOOTER / CHECKOUT BUTTON -------*/
-.info-footer {
-    margin-top: 20px;
-    display: flex;
+    align-items: center;
     justify-content: center;
+    transition: transform 0.2s ease;
+    outline: none;
 }
 
+.heart-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--font-color);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    fill: transparent;
+    stroke: var(--font-color);
+    opacity: 0.6;
+}
+
+.btn-favorite:hover .heart-icon {
+    opacity: 1;
+    color: var(--logo-color);
+    transform: scale(1.1);
+}
+
+.btn-favorite.is-saved .heart-icon {
+    opacity: 1;
+    color: var(--logo-color);
+    fill: var(--logo-color);
+    stroke: var(--logo-color);
+    transform: scale(1.1);
+}
+
+.btn-favorite:active .heart-icon {
+    transform: scale(0.9);
+}
+
+/*------- CHECKOUT BUTTON -------*/
 .btn-checkout {
     background: var(--logo-color);
     color: #fff;
     border: none;
-    padding: 16px 48px;
-    font-size: 1.2rem;
+    padding: 16px 40px;
+    font-size: 1.1rem;
     font-weight: bold;
     border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
 }
 
 .btn-checkout:hover {
     background: #e5533d;
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 99, 71, 0.5);
+}
+
+/*------- TECHNICAL SPECS -------*/
+.info-body h3 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    color: var(--font-color);
+    opacity: 0.6;
+}
+
+.premium-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    column-gap: 60px;
+    row-gap: 20px;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    background: transparent;
+    transition: opacity 0.3s ease;
+}
+
+.spec-item:hover {
+    opacity: 0.6;
+}
+
+.spec-label {
+    font-size: 0.95rem;
+    color: var(--font-color);
+    opacity: 0.7;
+    font-weight: 400;
+}
+
+.spec-value {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--font-color);
+    text-align: right;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .info-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .action-group {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .detail-image-section {
+        height: 350px;
+    }
+
+    .vehicle-title {
+        font-size: 2.5rem;
+    }
+
+    .buttons-row {
+        width: 100%;
+    }
+
+    .btn-checkout {
+        flex: 1;
+        text-align: center;
+    }
 }
