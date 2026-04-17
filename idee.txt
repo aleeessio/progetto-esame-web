@@ -234,7 +234,7 @@ AGGIORNAMENTO 1 (2-04-2026):
 
     #FATTO# - finire index (no emoji)
             - VEHICLE.html cambiare stile (no emoji)
-            - VEHICLE.html mettere tutti i gli attributi dei veicoli e renderli coerenti con quelli presenti nel DB
+    #FATTO# - VEHICLE.html mettere tutti i gli attributi dei veicoli e renderli coerenti con quelli presenti nel DB
     #FATTO# - SEARCH.html cambiare stile (no emoji)
     #FATTO# - SEARCH.html cambiare stile dei veicoli sulla destra
 
