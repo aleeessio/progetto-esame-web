@@ -31,6 +31,8 @@ TYPE_TO_TABLE = {
 def db_connect():
     conn = sqlite3.connect(DB_USERS_PATH)
     conn.row_factory = sqlite3.Row
+    # Enabling foreign keys
+    conn.execute('PRAGMA foreign_keys = ON')
     return conn 
 
 def user_db_init():
@@ -187,7 +189,7 @@ def saved_vehicles_db_init():
                    user_id INTEGER NOT NULL,
                    vehicle_type TEXT NOT NULL,
                    vehicle_id INTEGER NOT NULL,
-                   FOREIGN KEY (user_id) REFERENCES users (id)
+                   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
             )
         ''')
 
@@ -538,9 +540,14 @@ def remove_vehicle():
         flash("Tipo di veicolo non valido!", 'error')
         return redirect(url_for('vehicle_list'))
 
+    inv_types = {v : k for k,v in TYPE_TO_TABLE.items()}
+
     with db_connect() as db:
         db.execute(
             f'DELETE FROM {vehicle_type} WHERE id = ?', (vehicle_id,)
+        )
+        db.execute(
+            'DELETE FROM saved_vehicles WHERE vehicle_type = ? AND vehicle_id = ?', (inv_types.get(vehicle_type), vehicle_id,)
         )
         db.commit()
 
