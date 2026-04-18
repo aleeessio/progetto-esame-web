@@ -540,7 +540,28 @@
 
                                 <div class="card-body">
                                     <div class="card-top">
-                                        <div class="card-title">{{ v.get('brand', vehicle_type|title) }}</div>
+                                        <div class="card-title-group">
+                                            <div class="card-title">{{ v.get('brand', vehicle_type|title) }}</div>
+
+                                            {% if not session.get('is_admin') %}
+                                                <button class="btn-favorite-search {% if v.id in saved_vehicle_ids %}is-saved{% endif %}"
+                                                        data-type="{{ vehicle_type }}"
+                                                        data-id="{{ v.id }}"
+                                                        title="Toggle favorite">
+                                                    <svg viewBox="0 0 24 24"
+                                                         fill="none"
+                                                         stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round"
+                                                         class="heart-icon-search">
+                                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            {% endif %}
+                                        </div>
+
                                         <div class="card-price">
                                             €{{ v.price|int }}
                                             <span>/
@@ -592,4 +613,31 @@
             </section>
         </div>
     </div>
+
+    <script>
+        // Favorite toggle logic for search results
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.btn-favorite-search').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation(); 
+
+                    const vType = this.getAttribute('data-type');
+                    const vId = this.getAttribute('data-id');
+
+                    fetch(`/toggle_favorite/${vType}/${vId}`, { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "redirect") {
+                            window.location.href = data.url;
+                        } 
+                        else if (data.status === "added" || data.status === "removed") {
+                            this.classList.toggle("is-saved");
+                        }
+                    })
+                    .catch(err => console.error(err));
+                });
+            });
+        });
+    </script>
 {% endblock content %}

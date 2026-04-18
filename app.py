@@ -772,10 +772,20 @@ def search():
             results_list.append(v)
         results = results_list
 
+    saved_vehicle_ids = []
+    if session.get('user_id') and not session.get('is_admin') and vehicle_type:
+        with db_connect() as db:
+            saved = db.execute(
+                'SELECT vehicle_id FROM saved_vehicles WHERE user_id = ? AND vehicle_type = ?',
+                (session['user_id'], vehicle_type)
+            ).fetchall()
+            saved_vehicle_ids = [s['vehicle_id'] for s in saved]
+
     return render_template('search.html',
                            results=results,
                            vehicle_type=vehicle_type,
-                           args=request.args)
+                           args=request.args,
+                           saved_vehicle_ids=saved_vehicle_ids)
 
 
 # Profile page (user only)
@@ -873,7 +883,8 @@ def vehicle_detail(vehicle_type, vehicle_id):
 @app.route('/toggle_favorite/<vehicle_type>/<int:vehicle_id>', methods=['POST'])
 def toggle_favorite(vehicle_type, vehicle_id):
     if not session.get('user_id'):
-        return {"status": "error", "message": "Login requested"}, 401
+        flash("Login required to save favorites!", "error")
+        return {"status": "redirect", "url": url_for('login')}
     
     user_id = session['user_id']
     

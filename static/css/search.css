@@ -357,6 +357,51 @@
     font-weight: 800;
 }
 
+.card-title-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-favorite-search {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    transition: transform 0.2s ease;
+}
+
+.heart-icon-search {
+    width: 24px;
+    height: 24px;
+    color: var(--font-color);
+    fill: transparent;
+    stroke: var(--font-color);
+    opacity: 0.3;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-favorite-search:hover .heart-icon-search {
+    transform: scale(1.15);
+    opacity: 1;
+    color: var(--logo-color);
+}
+
+.btn-favorite-search.is-saved .heart-icon-search {
+    color: var(--logo-color);
+    fill: var(--logo-color);
+    stroke: var(--logo-color);
+    opacity: 1;
+}
+
+.btn-favorite-search:active .heart-icon-search {
+    transform: scale(0.9);
+}
+
 .card-price {
     font-size: 1.8rem;
     color: var(--logo-color);

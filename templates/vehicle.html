@@ -270,18 +270,15 @@
                     fetch(`/toggle_favorite/{{ vehicle_type }}/{{ vehicle.id }}`, {
                         method: 'POST',
                     })
-                    .then(response => {
-                        if (response.status === 401) {
-                            alert("You need to login first!");
-                            window.location.href = "{{ url_for('login') }}";
-                        }
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(data => {
-                        if (data.status === "added" || data.status === "removed") {
+                        if (data.status === "redirect") {
+                            window.location.href = data.url;
+                        } 
+                        else if (data.status === "added" || data.status === "removed") {
                             this.classList.toggle("is-saved");
                         }
-                    });
+                    })
                 });
             }
         });
