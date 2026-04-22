@@ -106,7 +106,11 @@
         </section>
 
         <div class="search-layout" id="search-content">
-            <aside class="search-sidebar">
+            <button class="mobile-filter-toggle" id="mobile-filter-btn" aria-label="Toggle filters">
+                    <span><aside class="search-sidebar">#x1F39B; Filters</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <aside class="search-sidebar" id="search-sidebar">
                 {% if vehicle_type %}
                     <form method="GET" action="{{ url_for('search') }}" class="filter-form">
                         <input type="hidden" name="type" value="{{ vehicle_type }}">

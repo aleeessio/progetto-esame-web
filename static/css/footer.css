@@ -143,3 +143,24 @@ footer {
         margin: 0 10px;
     }
 }
+/* ============================================================
+   EXTRA MOBILE FIXES
+   ============================================================ */
+@media (max-width: 480px) {
+    footer {
+        padding: 40px 20px 20px;
+    }
+
+    .footer-division {
+        gap: 24px;
+    }
+
+    .footer-bottom {
+        font-size: 0.78rem;
+    }
+
+    .footer-links a {
+        margin: 0 8px;
+        font-size: 0.78rem;
+    }
+}

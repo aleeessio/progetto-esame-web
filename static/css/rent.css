@@ -67,3 +67,22 @@ textarea:focus {
     color: var(--border-color);
     font-weight: normal;
 }
+/* ============================================================
+   RESPONSIVE FIXES
+   ============================================================ */
+@media (max-width: 768px) {
+    .rent-layout {
+        flex-direction: column;
+        padding: 30px 16px;
+        gap: 20px;
+    }
+
+    .rent-form-box {
+        width: 100%;
+        padding: 24px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .date-row { flex-direction: column; gap: 0; }
+}

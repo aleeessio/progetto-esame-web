@@ -6,7 +6,7 @@ header {
     box-shadow: 0 4px 12px var(--shadow-color);
     transition: background-color 1s ease, color 1s ease, box-shadow 1s ease;
     position: relative;
-    z-index: 10;
+    z-index: 1000;
 }
 
 .header-container {
@@ -35,20 +35,25 @@ nav a {
 }
 
 .btn-theme {
-    background-color: var(--background-div);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 42px;
+    height: 42px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.2s;
+}
+
+.btn-theme:hover {
+    background: var(--border-color);
 }
 
 .btn-theme svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     color: var(--icon-color);
     transition: color 0.4s ease;
 }
@@ -56,7 +61,7 @@ nav a {
 .v-divider {
     border-left: 1px solid var(--border-color);
     align-self: stretch;
-    margin: 0 15px;
+    margin: 0 5px;
 }
 
 .btn {
@@ -66,7 +71,7 @@ nav a {
     text-decoration: none;
     display: inline-block;
     text-align: center;
-    min-width: 100px;
+    min-width: 90px;
 }
 
 .b-login {
@@ -75,10 +80,7 @@ nav a {
     border: 1px solid var(--border-color);
     transition: background 0.4s;
 }
-
-.b-login:hover {
-    background: var(--logo-color);
-}
+.b-login:hover { background: var(--logo-color); color: #fff; }
 
 .b-register {
     background: var(--background-div);
@@ -86,18 +88,146 @@ nav a {
     border: 1px solid var(--border-color);
     transition: background 0.4s;
 }
-
-.b-register:hover {
-    background: var(--logo-color);
-}
+.b-register:hover { background: var(--logo-color); color: #fff; }
 
 .b-profile {
     background: var(--logo-color);
-    color: var(--font-color);
-    border: 1px solid var(--border-color);
+    color: #fff;
+    border: 1px solid var(--logo-color);
     transition: background 0.4s;
 }
+.b-profile:hover { background: #ad230b; }
 
-.b-profile:hover {
-    background: #ad230b;
+/* ============================================================
+   USER ICON DROPDOWN (Skyscanner-style person icon)
+   ============================================================ */
+.user-menu-wrapper {
+    position: relative;
+}
+
+.btn-user-icon {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-user-icon:hover {
+    background: var(--logo-color);
+    border-color: var(--logo-color);
+}
+
+.btn-user-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--font-color);
+    pointer-events: none;
+}
+
+.btn-user-icon:hover svg { color: #fff; }
+
+/* Logged-in indicator dot */
+.btn-user-icon.is-logged::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    background: var(--logo-color);
+    border-radius: 50%;
+    border: 2px solid var(--background-header);
+}
+
+/* Dropdown panel */
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 190px;
+    background: var(--background-div);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 16px 40px var(--shadow-color);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.97);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 9999;
+}
+
+.user-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    color: var(--font-color);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.user-dropdown a:last-child { border-bottom: none; }
+
+.user-dropdown a:hover {
+    background: rgba(255, 99, 71, 0.08);
+    color: var(--logo-color);
+}
+
+.user-dropdown a svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 4px 0;
+}
+
+/* ============================================================
+   RESPONSIVE — ≤ 768px: show user icon, hide desktop auth
+   ============================================================ */
+@media (max-width: 768px) {
+    header { padding: 12px 16px; }
+
+    .desktop-nav-auth { display: none !important; }
+    .v-divider { display: none; }
+
+    .btn-user-icon { display: flex !important; }
+
+    nav { gap: 8px; }
+
+    .logo { font-size: 1.5rem !important; }
+}
+
+/* ============================================================
+   DESKTOP — ≥ 769px: keep original layout, hide user icon
+   ============================================================ */
+@media (min-width: 769px) {
+    .desktop-nav-auth {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn-user-icon { display: none !important; }
 }

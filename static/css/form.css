@@ -127,3 +127,10 @@
 .btn-submit:hover {
     background: var(--logo-color);
 }
+/* ============================================================
+   EXTRA MOBILE FIXES
+   ============================================================ */
+@media (max-width: 480px) {
+    .main-content { padding: 30px 12px; }
+    .form-box { padding: 24px 16px; border-radius: 10px; }
+}
