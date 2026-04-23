@@ -107,10 +107,10 @@
 
         <div class="search-layout" id="search-content">
             <button class="mobile-filter-toggle" id="mobile-filter-btn" aria-label="Toggle filters">
-                    <span><aside class="search-sidebar">#x1F39B; Filters</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
-                <aside class="search-sidebar" id="search-sidebar">
+                <span>Filters</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <aside class="search-sidebar" id="search-sidebar">
                 {% if vehicle_type %}
                     <form method="GET" action="{{ url_for('search') }}" class="filter-form">
                         <input type="hidden" name="type" value="{{ vehicle_type }}">
@@ -643,5 +643,18 @@
                 });
             });
         });
+
+        // Mobile filter toggle
+        const filterBtn = document.getElementById('mobile-filter-btn');
+        const sidebar = document.getElementById('search-sidebar');
+
+        if (filterBtn && sidebar) {
+            filterBtn.addEventListener('click', function() {
+                this.classList.toggle('open');
+                const isOpen = this.classList.contains('open');
+                this.setAttribute('aria-expanded', isOpen);
+                sidebar.classList.toggle('mobile-open');
+            });
+        }
     </script>
 {% endblock content %}
