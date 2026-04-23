@@ -452,19 +452,54 @@
     background: var(--logo-color);
     color: #fff;
 }
+
 /* ============================================================
    EXTRA MOBILE FIXES
    ============================================================ */
 @media (max-width: 600px) {
-    .main-content { padding: 30px 12px; }
-    .profile-box { padding: 20px 16px; }
-    .profile-title { font-size: 1.4rem; }
-    .user-info-grid { flex-direction: column; gap: 16px; }
-    .saved-vehicles-grid { grid-template-columns: repeat(2, 1fr); }
-    .collapsible-header { padding: 20px 16px; }
-    .collapsible-inner { padding: 0 16px 20px; }
+    .main-content {
+        padding: 30px 12px;
+    }
+
+    .profile-box {
+        padding: 20px 16px;
+    }
+
+    .profile-title {
+        font-size: 1.4rem;
+    }
+
+    .user-info-grid {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .saved-vehicles-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .mini-img-container {
+        height: 160px;
+    }
+
+    .mini-vehicle-info {
+        padding: 12px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .collapsible-header {
+        padding: 20px 16px;
+    }
+
+    .collapsible-inner {
+        padding: 0 16px 20px;
+    }
 }
 
 @media (max-width: 380px) {
-    .saved-vehicles-grid { grid-template-columns: 1fr; }
+    .saved-vehicles-grid {
+        grid-template-columns: 1fr;
+    }
 }

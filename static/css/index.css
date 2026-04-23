@@ -468,16 +468,51 @@
 /* ---------------------------------------------------------------
    RESPONSIVE DESIGN 
    --------------------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+
+    .hero-slideshow,
+    .hero-overlay {
+        display: none !important;
+    }
+
+    .hero-modern {
+        background: var(--logo-color);
+        height: auto;
+        min-height: 350px;
+        width: calc(100% - 30px);
+        margin: 15px;
+        border-radius: 24px;
+        padding: 40px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        overflow: visible;
+    }
+
+    .hero-content-modern {
+        width: 100%;
+    }
+
     .hero-title-modern {
-        font-size: 3rem;
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        text-align: center
+    }
+
+    .hero-sub-modern {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+        text-align: center;
     }
 
     .floating-search-bar {
-        flex-direction: column;
-        border-radius: 20px;
-        padding: 20px;
+        padding: 15px;
+        gap: 10px;
     }
+}
+
+@media (max-width: 768px) {
 
     .search-input-group {
         border-right: none;
@@ -513,11 +548,13 @@
         font-size: 2rem;
     }
 }
+
 /* ============================================================
    ADDITIONAL RESPONSIVE FIXES
    ============================================================ */
 
 @media (max-width: 480px) {
+
     .hero-title-modern {
         font-size: 2.2rem;
     }
@@ -572,6 +609,12 @@
         grid-auto-rows: 200px;
         gap: 12px;
     }
-    .bento-card { grid-area: auto !important; }
-    .bento-overlay h3 { font-size: 1.4rem; }
+
+    .bento-card {
+        grid-area: auto !important;
+    }
+
+    .bento-overlay h3 {
+        font-size: 1.4rem;
+    }
 }
