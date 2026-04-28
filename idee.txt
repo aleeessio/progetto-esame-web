@@ -249,7 +249,11 @@ AGGIORNAMENTO 1 (2-04-2026):
 
     #FATTO# - sistemare FONT per tutto il sito
             - RESPONSIVE
+                - vedere alcuni casi di search
 
             - Inserire commenti
+                -(HTML) search, add_vehicle, admin, request_list, user_list, vehicle_list, vehicle
+                -(CSS) admin, checkbox, flash, header, request_list, user_list, vehicle
+
             - Popolare il sito con utenti e veicoli
             - Prepararsi esposizione 12 minuti 

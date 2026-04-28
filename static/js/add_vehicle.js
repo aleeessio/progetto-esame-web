@@ -1,3 +1,4 @@
+// SHOW THE CORRECT FORM BASED ON THE SELECTED VEHICLE TYPE
 function showForm(type) {
 
     const imageSection = document.getElementById('image-upload-section');

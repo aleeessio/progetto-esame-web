@@ -453,10 +453,8 @@
     color: #fff;
 }
 
-/* ============================================================
-   EXTRA MOBILE FIXES
-   ============================================================ */
-@media (max-width: 600px) {
+/*------- RESPONSIVE DESIGN 900px -------*/
+@media (max-width: 900px) {
     .main-content {
         padding: 30px 12px;
     }
@@ -498,6 +496,7 @@
     }
 }
 
+/*------- RESPONSIVE DESIGN 380px -------*/
 @media (max-width: 380px) {
     .saved-vehicles-grid {
         grid-template-columns: 1fr;

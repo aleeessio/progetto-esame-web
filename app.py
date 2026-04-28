@@ -35,6 +35,7 @@ def db_connect():
     conn.execute('PRAGMA foreign_keys = ON')
     return conn 
 
+# User
 def user_db_init():
     with db_connect() as db:
         db.execute('''
@@ -46,6 +47,7 @@ def user_db_init():
             )
         ''')
 
+# Car
 def car_db_init():
     with db_connect() as db:
         db.execute('''
@@ -63,7 +65,7 @@ def car_db_init():
                    img TEXT
             )
         ''')
-
+# Supercar
 def supercar_db_init():
     with db_connect() as db:
         db.execute('''
@@ -84,6 +86,7 @@ def supercar_db_init():
             )
         ''')
 
+# Bike
 def bike_db_init():
     with db_connect() as db:
         db.execute('''
@@ -101,6 +104,7 @@ def bike_db_init():
             )
         ''')
 
+# Scooter
 def scooter_db_init():
     with db_connect() as db:
         db.execute('''
@@ -121,6 +125,7 @@ def scooter_db_init():
             )
         ''')
 
+# Motorcycle
 def motorcycle_db_init():
     with db_connect() as db:
         db.execute('''
@@ -141,6 +146,7 @@ def motorcycle_db_init():
             )
         ''')
 
+# Camper
 def camper_db_init():
     with db_connect() as db:
         db.execute('''
@@ -161,6 +167,7 @@ def camper_db_init():
             )
         ''')
 
+# Rental
 def rental_db_init():
     with db_connect() as db:
         # db.execute('''DROP TABLE IF EXISTS rental_requests ''')
@@ -181,6 +188,7 @@ def rental_db_init():
             )
         ''')
 
+# Saved Vehicles
 def saved_vehicles_db_init():
     with db_connect() as db:
         db.execute('''
@@ -358,7 +366,7 @@ def add_vehicle():
     if request.method == 'POST':
         vehicle_type = request.form.get('vehicle_type')
 
-        #CAR
+        # Car
         if vehicle_type == "car":
             brand = request.form.get('brand')
             rent_length = request.form.get('rent_length')
@@ -381,7 +389,7 @@ def add_vehicle():
             flash("Car added!", 'success')
             return redirect(url_for('add_vehicle'))
         
-        #SUPERCAR
+        #S Supercar
         if vehicle_type == "supercar":
             brand = request.form.get('brand')
             rent_length = request.form.get('rent_length')
@@ -406,7 +414,7 @@ def add_vehicle():
             flash("SuperCar added!", 'success')
             return redirect(url_for('add_vehicle'))
 
-        #BIKE
+        # Bike
         if vehicle_type == "bike":
             bike_type = request.form.get('type')
             brand = request.form.get('brand')
@@ -428,7 +436,7 @@ def add_vehicle():
             flash("Bike added!", 'success')
             return redirect(url_for('add_vehicle'))
         
-        #SCOOTER
+        # Scooter
         if vehicle_type == "scooter":
             brand = request.form.get('brand')
             rent_length = request.form.get('rent_length')
@@ -453,7 +461,7 @@ def add_vehicle():
             flash("Scooter added!", 'success')
             return redirect(url_for('add_vehicle'))
         
-        #MOTORCYCLE
+        # Motorcycle
         if vehicle_type == "motorcycle":
             brand = request.form.get('brand')
             rent_length = request.form.get('rent_length')
@@ -478,7 +486,7 @@ def add_vehicle():
             flash("Motorcycle added!", 'success')
             return redirect(url_for('add_vehicle'))
         
-        #CAMPER
+        # Camper
         if vehicle_type == "camper":
             brand = request.form.get('brand')
             rent_length = request.form.get('rent_length')
@@ -669,7 +677,7 @@ def search():
         conditions = []
         params     = []
 
-        # Filtri comuni a tutti i veicoli
+        # Filters for all vehicles
         price_min = request.args.get('price_min')
         price_max = request.args.get('price_max')
         if price_min:
@@ -679,7 +687,7 @@ def search():
             conditions.append('price <= ?')
             params.append(price_max)
 
-        # Filtri per durata in giorni
+        # Filters for rent_lenght (days)
         day_min = request.args.get('day_min')
         day_max = request.args.get('day_max')
         if day_min:
@@ -689,7 +697,7 @@ def search():
             conditions.append('rent_length <= ?')
             params.append(day_max)
 
-        # Filtri per durata in mesi
+        # Filters for rent_lenght (months)
         month_min = request.args.get('month_min')
         month_max = request.args.get('month_max')
         if month_min:
@@ -699,7 +707,7 @@ def search():
             conditions.append('rent_length <= ?')
             params.append(month_max)
 
-        # Filtri per potenza (se applicabile)
+        # Filters for power 
         if vehicle_type in ('car', 'supercar', 'scooter', 'motorcycle'): 
             power_min = request.args.get('power_min')
             power_max = request.args.get('power_max')
@@ -710,7 +718,7 @@ def search():
                 conditions.append('power <= ?')
                 params.append(power_max)
 
-        # Filtri specifici per tipo
+        # Car filters
         if vehicle_type == 'car':
             for field in ('brand', 'fuel', 'transmission', 'traction', 'color', 'number_of_seats'):
                 val = request.args.get(field)
@@ -718,6 +726,7 @@ def search():
                     conditions.append(f'{field} = ?')
                     params.append(val)
 
+        # Supercar filters
         elif vehicle_type == 'supercar':
             for field in ('brand', 'fuel', 'transmission', 'traction', 'color', 'number_of_seats', 'inside_color', 'inside_material'):
                 val = request.args.get(field)
@@ -725,6 +734,7 @@ def search():
                     conditions.append(f'{field} = ?')
                     params.append(val)
 
+        # Bike filters
         elif vehicle_type == 'bike':
             for field in ('brand', 'frame_size', 'traction', 'suspensions', 'terrain'):
                 val = request.args.get(field)
@@ -736,6 +746,7 @@ def search():
                 conditions.append('type = ?')
                 params.append(specific_type)
 
+        # Scooter filters
         elif vehicle_type == 'scooter':
             for field in ('brand', 'engine', 'fuel', 'color', 'required_license', 'number_of_seats'):
                 val = request.args.get(field)
@@ -743,6 +754,7 @@ def search():
                     conditions.append(f'{field} = ?')
                     params.append(val)
 
+        # Motorcycle filters
         elif vehicle_type == 'motorcycle':
             for field in ('brand', 'style', 'engine', 'fuel', 'color', 'required_license', 'number_of_seats'):
                 val = request.args.get(field)
@@ -750,6 +762,7 @@ def search():
                     conditions.append(f'{field} = ?')
                     params.append(val)
 
+        # Camper filters
         elif vehicle_type == 'camper':
             for field in ('brand', 'fuel', 'sleeping_beds', 'approved_seats', 'type_bathroom'):
                 val = request.args.get(field)
@@ -768,7 +781,7 @@ def search():
                 f'SELECT * FROM {table} {where}', params
             ).fetchall()
 
-        # Converti in lista di dict e aggiungi img_url
+        # Change in list of dict and add img_url
         results_list = []
         for r in results:
             v = dict(r)
@@ -866,14 +879,14 @@ def vehicle_detail(vehicle_type, vehicle_id):
         flash("Veicolo non trovato.", "error")
         return redirect(url_for('search'))
 
-    # Converti in dizionario per poter aggiungere l'URL dell'immagine se serve
+    # dict for the image URL if needed
     v_dict = dict(vehicle)
     if v_dict.get('img'):
         v_dict['img_url'] = f"imgs/{table}/{v_dict['id']}/{v_dict['img']}"
     else:
         v_dict['img_url'] = None
 
-    # Controlla se il veicolo è tra i preferiti dell'utente
+    # Control if the vehicle is in user's favorites
     is_saved = False
     if session.get('user_id') and not session.get('is_admin'):
         with db_connect() as db:

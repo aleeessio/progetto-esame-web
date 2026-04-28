@@ -1,34 +1,33 @@
-/* ---------------------------------------------------------------
-   LAYOUT GENERALE
-   --------------------------------------------------------------- */
+/*------- MAIN / FORM -------*/
 .rent-layout {
+    flex: 1;
     display: flex;
-    align-items: flex-start;
-    gap: 40px;
-    padding: 50px 80px;
-    max-width: 1100px;
-    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
 }
 
-/* ---------------------------------------------------------------
-   MAIN — form
-   --------------------------------------------------------------- */
 .rent-form-box {
-    flex: 1;
     background: var(--background-div);
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    width: 600px;
+    border-radius: 12px;
     padding: 40px;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    transition: background-color 1s ease, border-color 1s ease, box-shadow 1s ease;
+    opacity: 0;
+    animation: premiumFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.5s;
 }
 
 .rent-form-box h2 {
-    font-size: 1.5rem;
-    margin-bottom: 6px;
+    margin-bottom: 30px;
+    font-size: 1.6rem;
 }
 
 .rent-form-sub {
-    color: var(--border-color);
+    color: var(--logo-color);
     font-size: 0.9rem;
     margin-bottom: 28px;
 }
@@ -67,9 +66,8 @@ textarea:focus {
     color: var(--border-color);
     font-weight: normal;
 }
-/* ============================================================
-   RESPONSIVE FIXES
-   ============================================================ */
+
+/* *------- RESPONSIVE DESIGN 768px ------- */
 @media (max-width: 768px) {
     .rent-layout {
         flex-direction: column;
@@ -83,6 +81,10 @@ textarea:focus {
     }
 }
 
+/* *------- RESPONSIVE DESIGN 480px ------- */
 @media (max-width: 480px) {
-    .date-row { flex-direction: column; gap: 0; }
+    .date-row {
+        flex-direction: column;
+        gap: 0;
+    }
 }

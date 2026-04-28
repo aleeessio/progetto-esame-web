@@ -111,3 +111,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+//MOBILE USER MENU
+(function () {
+    const toggleBtn = document.getElementById('user-menu-toggle');
+    const dropdown = document.getElementById('user-dropdown');
+    if (!toggleBtn || !dropdown) return;
+
+    toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target) && e.target !== toggleBtn) {
+            dropdown.classList.remove('open');
+        }
+    });
+})();

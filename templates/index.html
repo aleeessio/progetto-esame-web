@@ -11,6 +11,7 @@
 
 {% block content %}
     <div class="home-wrapper">
+        <!-- Slideshow Section -->
         <section class="hero-modern">
             <div class="hero-slideshow">
                 <div class="hero-slide active"
@@ -73,6 +74,7 @@
             </div>
         </section>
 
+        <!-- Grid Vehicle Section -->
         <section class="explore-section">
             <div class="section-heading">
                 <h2>Choose Your Style</h2>
@@ -138,6 +140,7 @@
             </div>
         </section>
 
+        <!-- Value Proposition Section -->
         <section class="value-prop-section">
             <div class="value-prop-container">
                 <div class="value-item">
@@ -195,6 +198,7 @@
         </section>
 
         {% if not session.user_id and not session.is_admin %}
+            <!-- Registration Section-->
             <section class="home-cta">
                 <div class="cta-content">
                     <h2>Ready to Go?</h2>

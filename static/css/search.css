@@ -1,4 +1,4 @@
-/* ------- WRAPPER PRINCIPALE ------- */
+/* ------- WRAPPER ------- */
 .search-wrapper {
     width: 100%;
     display: flex;
@@ -19,7 +19,7 @@
     box-sizing: border-box;
 }
 
-/* ------- SIDEBAR FILTRI ------- */
+/* ------- SIDEBAR FILTERS ------- */
 .search-sidebar {
     width: 300px;
     min-width: 280px;
@@ -36,12 +36,18 @@
     overflow-y: auto;
 }
 
-.search-sidebar::-webkit-scrollbar { width: 5px; }
+.search-sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
 .search-sidebar::-webkit-scrollbar-thumb {
     background-color: var(--border-color);
     border-radius: 10px;
 }
-.search-sidebar::-webkit-scrollbar-track { background: transparent; }
+
+.search-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
 
 .reset-link {
     font-size: 0.85rem;
@@ -49,9 +55,12 @@
     text-decoration: none;
     font-weight: bold;
 }
-.reset-link:hover { text-decoration: underline; }
 
-/* ------- PREMIUM VEHICLE SELECTOR (category chips) ------- */
+.reset-link:hover {
+    text-decoration: underline;
+}
+
+/* ------- PREMIUM VEHICLE SELECTOR ------- */
 .premium-vehicle-selector {
     width: 100%;
     max-width: 1300px;
@@ -113,6 +122,7 @@
     border-color: var(--border-color);
     background: var(--background-div);
 }
+
 .premium-chip:hover .chip-img {
     filter: grayscale(0%);
     opacity: 1;
@@ -126,8 +136,15 @@
     box-shadow: 0 8px 22px rgba(255, 99, 71, 0.35);
     transform: translateY(-4px);
 }
-.premium-chip.active .chip-img { filter: grayscale(0%); opacity: 0.7; }
-.premium-chip.active span { color: #fff; }
+
+.premium-chip.active .chip-img {
+    filter: grayscale(0%);
+    opacity: 0.7;
+}
+
+.premium-chip.active span {
+    color: #fff;
+}
 
 /* ------- MOBILE FILTERS TOGGLE ------- */
 .mobile-filter-toggle {
@@ -148,7 +165,10 @@
     transition: background 0.3s;
 }
 
-.mobile-filter-toggle:hover { background: var(--logo-color); color: #fff; }
+.mobile-filter-toggle:hover {
+    background: var(--logo-color);
+    color: #fff;
+}
 
 .mobile-filter-toggle svg {
     width: 18px;
@@ -157,10 +177,14 @@
     flex-shrink: 0;
 }
 
-.mobile-filter-toggle.open svg { transform: rotate(180deg); }
+.mobile-filter-toggle.open svg {
+    transform: rotate(180deg);
+}
 
 /* ------- FORM FILTRI ------- */
-.filter-group { margin-bottom: 18px; }
+.filter-group {
+    margin-bottom: 18px;
+}
 
 .filter-group label {
     display: block;
@@ -183,7 +207,11 @@
     transition: border-color 0.3s;
     appearance: none;
 }
-.filter-select:focus { outline: none; border-color: var(--logo-color); }
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--logo-color);
+}
 
 .price-range {
     display: flex;
@@ -207,7 +235,10 @@
     border-bottom: 1px solid var(--border-color);
     padding: 16px 0;
 }
-.filter-accordion:last-of-type { border-bottom: none; }
+
+.filter-accordion:last-of-type {
+    border-bottom: none;
+}
 
 .filter-summary {
     list-style: none;
@@ -222,15 +253,25 @@
     align-items: center;
     transition: color 0.3s;
 }
-.filter-summary::-webkit-details-marker { display: none; }
+
+.filter-summary::-webkit-details-marker {
+    display: none;
+}
+
 .filter-summary::after {
     content: '▼';
     font-size: 0.65rem;
     transition: transform 0.3s ease;
     color: var(--logo-color);
 }
-.filter-accordion[open] .filter-summary::after { transform: rotate(-180deg); }
-.filter-accordion[open] .filter-summary { color: var(--logo-color); }
+
+.filter-accordion[open] .filter-summary::after {
+    transform: rotate(-180deg);
+}
+
+.filter-accordion[open] .filter-summary {
+    color: var(--logo-color);
+}
 
 .filter-content {
     padding-top: 16px;
@@ -256,13 +297,14 @@
     margin-top: 18px;
     box-shadow: 0 4px 15px rgba(255, 99, 71, 0.28);
 }
+
 .btn-filter:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
     background-color: #e5533d;
 }
 
-/* ------- AREA RISULTATI ------- */
+/* ------- RESULTS AREA ------- */
 .search-results {
     flex: 1;
     min-width: 0;
@@ -285,6 +327,7 @@
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .vehicle-card:hover {
     transform: translateX(8px);
     box-shadow: 0 12px 30px var(--shadow-color);
@@ -299,13 +342,17 @@
     overflow: hidden;
     position: relative;
 }
+
 .card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
 }
-.vehicle-card:hover .card-img img { transform: scale(1.07); }
+
+.vehicle-card:hover .card-img img {
+    transform: scale(1.07);
+}
 
 .card-body {
     padding: 20px;
@@ -356,8 +403,19 @@
     opacity: 0.3;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.btn-favorite-search:hover .heart-icon-search { transform: scale(1.15); opacity: 1; color: var(--logo-color); }
-.btn-favorite-search.is-saved .heart-icon-search { color: var(--logo-color); fill: var(--logo-color); stroke: var(--logo-color); opacity: 1; }
+
+.btn-favorite-search:hover .heart-icon-search {
+    transform: scale(1.15);
+    opacity: 1;
+    color: var(--logo-color);
+}
+
+.btn-favorite-search.is-saved .heart-icon-search {
+    color: var(--logo-color);
+    fill: var(--logo-color);
+    stroke: var(--logo-color);
+    opacity: 1;
+}
 
 .card-price {
     font-size: 1.5rem;
@@ -366,7 +424,13 @@
     text-align: right;
     white-space: nowrap;
 }
-.card-price span { font-size: 0.85rem; color: var(--font-color); opacity: 0.7; font-weight: 600; }
+
+.card-price span {
+    font-size: 0.85rem;
+    color: var(--font-color);
+    opacity: 0.7;
+    font-weight: 600;
+}
 
 .card-specs {
     display: flex;
@@ -374,6 +438,7 @@
     gap: 8px;
     margin: 10px 0;
 }
+
 .card-specs span {
     background: var(--background-page);
     padding: 5px 10px;
@@ -401,7 +466,11 @@
     text-align: center;
     font-size: 0.85rem;
 }
-.vehicle-card:hover .btn-rent { background-color: var(--logo-color); color: white; }
+
+.vehicle-card:hover .btn-rent {
+    background-color: var(--logo-color);
+    color: white;
+}
 
 /* ------- LABELS MICRO ------- */
 .spec-label-micro {
@@ -413,7 +482,7 @@
     margin-right: 2px;
 }
 
-/* ------- STATI VUOTI ------- */
+/* ------- EMPTY STATE ------- */
 .results-placeholder {
     background: var(--background-div);
     border: 1px dashed var(--border-color);
@@ -427,20 +496,32 @@
     align-items: center;
     justify-content: center;
 }
-.placeholder-icon { font-size: 3.5rem; margin-bottom: 16px; opacity: 0.5; }
-.results-placeholder h3 { font-size: 1.4rem; margin-bottom: 8px; }
-.results-placeholder p { opacity: 0.6; }
 
-/* ============================================================
-   RESPONSIVE — ≤ 1024px: sidebar stacks
-   ============================================================ */
+.placeholder-icon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.results-placeholder h3 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.results-placeholder p {
+    opacity: 0.6;
+}
+
+/*------- RESPONSIVE DESIGN 1024px -------*/
 @media (max-width: 1024px) {
     .selector-container {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
     }
 
-    .chip-img { height: 70px; }
+    .chip-img {
+        height: 70px;
+    }
 
     .search-layout {
         flex-direction: column;
@@ -455,7 +536,6 @@
         position: static;
         max-height: none;
         overflow: visible;
-        /* Collapsed by default on mobile */
         display: none;
     }
 
@@ -469,9 +549,7 @@
     }
 }
 
-/* ============================================================
-   RESPONSIVE — ≤ 640px: cards stack vertically
-   ============================================================ */
+/*------- RESPONSIVE DESIGN 640px -------*/
 @media (max-width: 640px) {
     .vehicle-card {
         flex-direction: column;
@@ -483,18 +561,26 @@
         height: 180px;
     }
 
-    .card-body { padding: 14px; }
+    .card-body {
+        padding: 14px;
+    }
 
-    .card-title { font-size: 1.2rem; }
+    .card-title {
+        font-size: 1.2rem;
+    }
 
-    .card-price { font-size: 1.3rem; }
+    .card-price {
+        font-size: 1.3rem;
+    }
 
     .btn-rent {
         align-self: stretch;
         text-align: center;
     }
 
-    .vehicle-card:hover { transform: none; }
+    .vehicle-card:hover {
+        transform: none;
+    }
 
     .selector-container {
         grid-template-columns: repeat(2, 1fr);
@@ -502,17 +588,33 @@
         gap: 10px;
     }
 
-    .chip-img { height: 60px; }
-    .premium-chip span { font-size: 0.78rem; }
+    .chip-img {
+        height: 60px;
+    }
+
+    .premium-chip span {
+        font-size: 0.78rem;
+    }
 }
 
+/*------- RESPONSIVE DESIGN 400px -------*/
 @media (max-width: 400px) {
     .selector-container {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
         padding: 10px;
     }
-    .chip-img { height: 50px; }
-    .premium-chip { padding: 8px 4px; gap: 6px; }
-    .premium-chip span { font-size: 0.7rem; }
+
+    .chip-img {
+        height: 50px;
+    }
+
+    .premium-chip {
+        padding: 8px 4px;
+        gap: 6px;
+    }
+
+    .premium-chip span {
+        font-size: 0.7rem;
+    }
 }

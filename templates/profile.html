@@ -12,6 +12,7 @@
 {% block content %}
     <div class="mega-box profile-layout">
 
+        <!-- User Info -->
         <div class="profile-box">
             <h2 class="profile-title">Welcome, {{ session.user_name }}!</h2>
             <div class="user-info-grid">
@@ -30,9 +31,9 @@
             </div>
         </div>
 
+        <!-- Saved Vehicles -->
         <div class="profile-box">
             <h2 class="section-title">Saved Vehicles</h2>
-
             {% if saved_vehicles %}
                 <div class="saved-vehicles-grid">
                     {% for vehicle in saved_vehicles %}
@@ -98,6 +99,7 @@
             {% endif %}
         </div>
 
+        <!-- Rental Requests -->
         <div class="profile-box collapsible-box">
             <div class="collapsible-header" id="requests-toggle">
                 <h2 class="section-title m-0">
@@ -140,7 +142,7 @@
                                         </div>
                                         {% if req['message'] %}
                                             <div class="detail-row">
-                                                <span class="detail-label">Note:</span>
+                                                <span class="detail-label">Notes:</span>
                                                 <span class="detail-value">{{ req['message'] }}</span>
                                             </div>
                                         {% endif %}
@@ -161,46 +163,8 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Collapsible section for rental requests
-        document.addEventListener("DOMContentLoaded", function() {
-            const toggleBtn = document.getElementById('requests-toggle');
-            const content = document.getElementById('requests-content');
-            
-            if(toggleBtn && content) {
-                toggleBtn.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null; 
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px"; 
-                    }
-                });
-            }
-        });
-    </script>
-
-    <script>
-    // Heart button functionality for mini cards
-    document.querySelectorAll('.btn-favorite-mini').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const vType = this.getAttribute('data-type');
-            const vId = this.getAttribute('data-id');
-            const card = this.closest('.mini-vehicle-card');
-
-            fetch(`/toggle_favorite/${vType}/${vId}`, { method: 'POST' })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "removed") {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.9)';
-                    setTimeout(() => card.remove(), 300);
-                }
-            });
-        });
-    });
-    </script>
 {% endblock content %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock extra_js %}

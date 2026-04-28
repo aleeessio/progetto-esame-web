@@ -53,24 +53,6 @@
     border-color: var(--logo-color);
 }
 
-.btn-submit {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background: var(--background-div);
-    color: var(--font-color);
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.4s;
-}
-
-.btn-submit:hover {
-    background: var(--logo-color);
-}
-
 .login-link {
     text-align: center;
     margin-top: 20px;

@@ -2,10 +2,7 @@
     padding: 0 40px;
 }
 
-/* ---------------------------------------------------------------
-   HERO BANNER MODERN
-   --------------------------------------------------------------- */
-
+/*------- HOME WRAPPER -------*/
 .home-wrapper {
     display: flex;
     flex-direction: column;
@@ -26,9 +23,7 @@
     overflow: hidden;
 }
 
-/* ---------------------------------------------------------------
-   SLIDESHOW SFONDO
-   --------------------------------------------------------------- */
+/*------- SLIDESHOW -------*/
 .hero-slideshow {
     position: absolute;
     top: 0;
@@ -107,9 +102,7 @@
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* ---------------------------------------------------------------
-   FLOATING SEARCH BAR 
-   --------------------------------------------------------------- */
+/*------- SEARCH BAR -------*/
 .floating-search-wrapper {
     width: 100%;
     max-width: 650px;
@@ -225,9 +218,7 @@
     transform: scale(1.03);
 }
 
-/* ---------------------------------------------------------------
-   VALUE PROPOSITION SECTION
-   --------------------------------------------------------------- */
+/*------- VALUE PROPOSITION SECTION -------*/
 .value-prop-section {
     padding: 80px 20px;
     background: var(--background-page);
@@ -294,9 +285,7 @@
     color: #aaa;
 }
 
-/* ---------------------------------------------------------------
-   EXPLORE CATEGORIES (Bento Grid)
-   --------------------------------------------------------------- */
+/*------- GRID VEHICLE -------*/
 .explore-section {
     padding: 80px 20px;
     background-color: var(--background-page);
@@ -422,9 +411,7 @@
     transform: translateX(0);
 }
 
-/* ---------------------------------------------------------------
-   FINAL CALL TO ACTION (CTA)
-   --------------------------------------------------------------- */
+/*------- REGISTRATION -------*/
 .home-cta {
     padding: 100px 20px;
     text-align: center;
@@ -465,9 +452,7 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* ---------------------------------------------------------------
-   RESPONSIVE DESIGN 
-   --------------------------------------------------------------- */
+/*------- RESPONSIVE DESIGN 1024px -------*/
 @media (max-width: 1024px) {
 
     .hero-slideshow,
@@ -512,6 +497,7 @@
     }
 }
 
+/*------- RESPONSIVE DESIGN 768px -------*/
 @media (max-width: 768px) {
 
     .search-input-group {
@@ -549,10 +535,25 @@
     }
 }
 
-/* ============================================================
-   ADDITIONAL RESPONSIVE FIXES
-   ============================================================ */
+/*------- RESPONSIVE DESIGN 600px -------*/
+@media (max-width: 600px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: none;
+        grid-auto-rows: 200px;
+        gap: 12px;
+    }
 
+    .bento-card {
+        grid-area: auto !important;
+    }
+
+    .bento-overlay h3 {
+        font-size: 1.4rem;
+    }
+}
+
+/*------- RESPONSIVE DESIGN 480px -------*/
 @media (max-width: 480px) {
 
     .hero-title-modern {
@@ -598,23 +599,5 @@
     .value-prop-container {
         grid-template-columns: 1fr;
         gap: 20px;
-    }
-}
-
-/* Bento grid mobile fixes */
-@media (max-width: 600px) {
-    .bento-grid {
-        grid-template-columns: 1fr;
-        grid-template-areas: none;
-        grid-auto-rows: 200px;
-        gap: 12px;
-    }
-
-    .bento-card {
-        grid-area: auto !important;
-    }
-
-    .bento-overlay h3 {
-        font-size: 1.4rem;
     }
 }

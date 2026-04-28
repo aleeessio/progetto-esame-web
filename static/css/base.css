@@ -1,4 +1,4 @@
-/*------- RESET -------*/
+/*------- FONT -------*/
 @font-face {
   font-family: 'OmniSans';
   src: url('../fonts/OmniSans-Regular.woff2') format('woff2'),
@@ -58,7 +58,7 @@
   --background-footer: #ffffff;
   --font-color: #1a1a1a;
   --logo-color: #FF6347;
-  --border-color: #e0e0e0;
+  --border-color: #c0c0c0;
   --icon-color: #1a1a1a;
   --success-color: #00c853;
   --error-color: #f44336;
@@ -79,6 +79,7 @@
   --shadow-color: rgba(0, 0, 0, 0.4);
 }
 
+/*------- BODY -------*/
 body {
   background-color: var(--background-page);
   color: var(--font-color);
@@ -113,7 +114,6 @@ form {
   font-family: 'OmniSans', Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 900;
-  /* OmniSans-Black */
   letter-spacing: 2px;
   font-size: 2.2rem;
   color: var(--logo-color);
@@ -169,6 +169,7 @@ form {
   transform: translateY(0);
 }
 
+/*------- BOXES ANIMATION -------*/
 @keyframes premiumFadeUp {
   0% {
     opacity: 0;

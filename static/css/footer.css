@@ -16,7 +16,7 @@ footer {
     margin-bottom: 50px;
 }
 
-/*------- Colonne -------*/
+/*------- COLUMNS -------*/
 .footer-columns h1 {
     font-size: 1.2rem;
     color: var(--font-color);
@@ -26,7 +26,7 @@ footer {
     letter-spacing: 1px;
 }
 
-/*------- Colonna Brand (SX) -------*/
+/*------- BRAND COLUMN (LEFT) -------*/
 .brand-column .logo {
     margin-bottom: 15px;
 }
@@ -39,7 +39,6 @@ footer {
     max-width: 300px;
 }
 
-/* Icone Social */
 .social-links {
     display: flex;
     gap: 15px;
@@ -70,7 +69,7 @@ footer {
     transform: translateY(-3px);
 }
 
-/*------- Colonne Link (Centro/DX) -------*/
+/*------- COLUMNS LINKS (CENTER/RIGHT) -------*/
 .footer-columns ul {
     list-style: none;
     padding: 0;
@@ -94,7 +93,7 @@ footer {
     padding-left: 5px;
 }
 
-/*------- Footer Bottom -------*/
+/*------- FOOTER BOTTOM -------*/
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -117,8 +116,8 @@ footer {
     color: var(--logo-color);
 }
 
-/*------- RESPONSIVE DESIGN -------*/
-@media (max-width: 768px) {
+/*------- RESPONSIVE DESIGN 900px -------*/
+@media (max-width: 900px) {
     .footer-division {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -143,9 +142,8 @@ footer {
         margin: 0 10px;
     }
 }
-/* ============================================================
-   EXTRA MOBILE FIXES
-   ============================================================ */
+
+/*------- RESPONSIVE DESIGN 480px -------*/
 @media (max-width: 480px) {
     footer {
         padding: 40px 20px 20px;
