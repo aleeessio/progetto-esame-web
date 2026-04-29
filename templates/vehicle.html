@@ -12,6 +12,7 @@
 {% block content %}
     <div class="detail-layout premium-layout">
 
+        <!-- Button Box -->
         <div class="btn-box">
             <div class="detail-header">
                 <a href="{{ url_for('search', type=vehicle_type) }}" class="btn-back">
@@ -40,6 +41,7 @@
         </div>
 
         <div class="detail-container premium-container">
+            <!-- Vehicle Image -->
             <div class="detail-image-section">
                 {% if vehicle.img_url %}
                     <img src="{{ url_for('static', filename=vehicle.img_url) }}"
@@ -51,8 +53,9 @@
                 {% endif %}
             </div>
 
+            <!-- Vehicle Info -->
             <div class="detail-info-section">
-
+                <!-- Vehicle Name, Price, Rent Length, Button rent -->
                 <div class="info-top">
                     <div class="title-group">
                         <div class="vehicle-badge">{{ vehicle_type|capitalize }}</div>
@@ -96,6 +99,7 @@
                     </div>
                 </div>
 
+                <!-- Vehicle Specs -->
                 <div class="info-body">
                     <h3>Technical Specifications</h3>
                     <div class="specs-grid premium-specs">

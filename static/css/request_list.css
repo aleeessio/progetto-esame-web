@@ -347,3 +347,159 @@ tbody tr:not(.message-row):hover .btn-delete {
     color: #c0392b;
     border-color: #c0392b;
 }
+
+/*------- RESPONSIVE DESIGN 1024px -------*/
+@media (max-width: 1024px) {
+    .requests-box {
+        padding: 25px 15px;
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    thead th,
+    tbody td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .status-badge {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+
+    .status-select {
+        font-size: 0.8rem;
+    }
+}
+
+/*------- RESPONSIVE DESIGN 768px -------*/
+@media (max-width: 768px) {
+    .main-content {
+        padding: 30px 10px;
+    }
+
+    thead {
+        display: none;
+    }
+
+    table,
+    tbody,
+    tr,
+    td {
+        display: block;
+        width: 100%;
+        white-space: normal;
+    }
+
+    tbody tr.main-row {
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        background: var(--background-div);
+        padding: 15px;
+        box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    tbody td {
+        border: none;
+        padding: 12px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    tbody td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    tbody td::before {
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: var(--logo-color);
+        margin-right: 15px;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    tbody tr.main-row td:nth-child(1)::before {
+        content: "ID";
+    }
+
+    tbody tr.main-row td:nth-child(2)::before {
+        content: "User";
+    }
+
+    tbody tr.main-row td:nth-child(3)::before {
+        content: "Vehicle";
+    }
+
+    tbody tr.main-row td:nth-child(4)::before {
+        content: "Period";
+    }
+
+    tbody tr.main-row td:nth-child(5)::before {
+        content: "Contact";
+    }
+
+    tbody tr.main-row td:nth-child(6)::before {
+        content: "Status";
+    }
+
+    tbody tr.main-row td:nth-child(7)::before {
+        content: "Notes";
+    }
+
+    tbody tr.main-row td:nth-child(8)::before {
+        content: "Action";
+    }
+
+    tbody tr.main-row td:nth-child(9) {
+        justify-content: flex-end;
+        border-top: 1px dashed var(--border-color);
+        margin-top: 10px;
+    }
+
+    .user-info,
+    .vehicle-info,
+    .contact-info {
+        align-items: flex-end;
+        text-align: right;
+    }
+
+    .period-info {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+    }
+
+    .btn-delete {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid #f44336;
+        color: #f44336;
+    }
+
+    .message-row td {
+        display: block;
+        border: none;
+        padding: 0;
+    }
+
+    .message-row td::before {
+        display: none;
+    }
+
+    .message-content {
+        margin: 10px 0 0 0;
+        border-radius: 8px;
+    }
+}

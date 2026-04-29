@@ -1,21 +1,37 @@
-// FIlTER SIDEBAR TOGGLE FOR MOBILE
+// Favorite toggle logic for search results
 document.addEventListener("DOMContentLoaded", function () {
-    const filterBtn = document.getElementById("mobile-filter-btn");
-    const sidebar = document.getElementById("search-sidebar");
+    document.querySelectorAll('.btn-favorite-search').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-    if (filterBtn && sidebar) {
-        filterBtn.addEventListener("click", function () {
-            const isExpanded = this.getAttribute("aria-expanded") === "true";
-            this.setAttribute("aria-expanded", !isExpanded);
-            sidebar.classList.toggle("active");
-        });
+            const vType = this.getAttribute('data-type');
+            const vId = this.getAttribute('data-id');
 
-        // Close sidebar when clicking outside
-        document.addEventListener("click", function (e) {
-            if (!sidebar.contains(e.target) && !filterBtn.contains(e.target)) {
-                sidebar.classList.remove("active");
-                filterBtn.setAttribute("aria-expanded", "false");
-            }
+            fetch(`/toggle_favorite/${vType}/${vId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "redirect") {
+                        window.location.href = data.url;
+                    }
+                    else if (data.status === "added" || data.status === "removed") {
+                        this.classList.toggle("is-saved");
+                    }
+                })
+                .catch(err => console.error(err));
         });
-    }
+    });
 });
+
+// Mobile filter toggle
+const filterBtn = document.getElementById('mobile-filter-btn');
+const sidebar = document.getElementById('search-sidebar');
+
+if (filterBtn && sidebar) {
+    filterBtn.addEventListener('click', function () {
+        this.classList.toggle('open');
+        const isOpen = this.classList.contains('open');
+        this.setAttribute('aria-expanded', isOpen);
+        sidebar.classList.toggle('mobile-open');
+    });
+}

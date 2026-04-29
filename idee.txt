@@ -248,12 +248,9 @@ AGGIORNAMENTO 1 (2-04-2026):
     #FATTO# - VEHICLE.html (OPZIONALE: tasto back to VEHICLE_LIST.html se si è admin)
 
     #FATTO# - sistemare FONT per tutto il sito
-            - RESPONSIVE
-                - vedere alcuni casi di search
+    #FATTO# - RESPONSIVE
 
-            - Inserire commenti
-                -(HTML) search, add_vehicle, admin, request_list, user_list, vehicle_list, vehicle
-                -(CSS) admin, checkbox, flash, header, request_list, user_list, vehicle
+    #FATTO# - Inserire commenti
 
             - Popolare il sito con utenti e veicoli
             - Prepararsi esposizione 12 minuti 

@@ -29,6 +29,7 @@
 	transform: translateY(-40px);
 }
 
+/*------- COLOR -------*/
 .flash-message.success {
 	background-color: rgba(0, 200, 83, 0.9);
 	color: #fff;
@@ -51,6 +52,7 @@
 	animation: slideUpFlash 0.4s ease-in forwards;
 }
 
+/*------- ANIMATIONS -------*/
 @keyframes slideDownFlash {
 	to {
 		opacity: 1;
@@ -65,8 +67,7 @@
 	}
 }
 
-
-/* Pulsanti nei flash */
+/*------- CLOSE BUTTON -------*/
 .close-btn {
 	background: none;
 	border: none;

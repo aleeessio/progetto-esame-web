@@ -18,11 +18,13 @@
             <a href="{{ url_for('admin') }}" class="btn-back">Back</a>
         </div>
 
+        <!-- Search -->
         <input type="text"
                id="search-input"
                class="search-input"
                placeholder="Search by ID, name or email...">
 
+        <!-- User List -->
         {% if users %}
             <table>
                 <thead>

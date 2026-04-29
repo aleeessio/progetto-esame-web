@@ -1,4 +1,4 @@
-/*------- MAIN LAYOUT (Premium) -------*/
+/*------- MAIN LAYOUT -------*/
 .premium-layout {
     width: 100%;
     max-width: 1200px;
@@ -263,7 +263,7 @@
     text-align: right;
 }
 
-/* RESPONSIVE */
+/*------- RESPONSIVE DESIGN 768px  -------*/
 @media (max-width: 768px) {
     .info-top {
         flex-direction: column;
@@ -293,9 +293,7 @@
     }
 }
 
-/* ============================================================
-   EXTRA MOBILE FIXES
-   ============================================================ */
+/*------- RESPONSIVE DESIGN 480px  -------*/
 @media (max-width: 480px) {
     .premium-layout {
         padding: 16px 12px;

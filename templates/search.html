@@ -58,6 +58,7 @@
 
 {% block content %}
     <div class="search-wrapper">
+        <!-- VEHICLE SELECTOR -->
         <section class="premium-vehicle-selector">
             <div class="selector-container">
                 <a href="{{ url_for('search', type='car') }}"
@@ -105,6 +106,7 @@
             </div>
         </section>
 
+        <!-- FILTERS -->
         <div class="search-layout" id="search-content">
             <button class="mobile-filter-toggle"
                     id="mobile-filter-btn"
@@ -128,6 +130,7 @@
                                 <a href="{{ url_for('search', type=vehicle_type) }}" class="reset-link">Reset All</a>
                             </div>
 
+                            <!-- Price and Rent Lenght (all vehicles) -->
                             <details class="filter-accordion" open>
                                 <summary class="filter-summary">Price & Rent</summary>
                                 <div class="filter-content">
@@ -192,6 +195,7 @@
                                 <summary class="filter-summary">Main Specs</summary>
                                 <div class="filter-content">
 
+                                    <!-- Brands (all vehicles) -->
                                     <div class="filter-group">
                                         <label>Brand</label>
                                         <select name="brand" class="filter-select">
@@ -224,6 +228,7 @@
                                         </select>
                                     </div>
 
+                                    <!-- Type (bikes, campers) -->
                                     {% if vehicle_type == 'bike' %}
                                         <div class="filter-group">
                                             <label>Type</label>
@@ -252,6 +257,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Power (car, supercar, scooter, motorcycle) -->
                                     {% if vehicle_type in ('car', 'supercar', 'scooter', 'motorcycle') %}
                                         <div class="filter-group">
                                             <label>Power (KW)</label>
@@ -271,6 +277,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Engine (scooter, motorcycle) -->
                                     {% if vehicle_type in ('scooter', 'motorcycle') %}
                                         <div class="filter-group">
                                             <label>Engine</label>
@@ -296,6 +303,7 @@
                                 <summary class="filter-summary">Details & Comfort</summary>
                                 <div class="filter-content">
 
+                                    <!-- Style (motorcycle) -->
                                     {% if vehicle_type == 'motorcycle' %}
                                         <div class="filter-group">
                                             <label>Style</label>
@@ -308,6 +316,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Fuel (car, supercar, scooter, motorcycle, camper) -->
                                     {% if vehicle_type in ('car', 'supercar', 'scooter', 'motorcycle', 'camper') %}
                                         <div class="filter-group">
                                             <label>Fuel</label>
@@ -326,6 +335,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Transmission (car, supercar) -->
                                     {% if vehicle_type in ('car', 'supercar') %}
                                         <div class="filter-group">
                                             <label>Transmission</label>
@@ -339,6 +349,7 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
+                                        <!-- Traction (car, supercar) -->
                                         <div class="filter-group">
                                             <label>Traction</label>
                                             <select name="traction" class="filter-select">
@@ -350,6 +361,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Color (car, supercar, scooter, motorcycle, camper) -->
                                     {% if vehicle_type in ('car', 'supercar', 'scooter', 'motorcycle', 'camper') %}
                                         <div class="filter-group">
                                             <label>Color</label>
@@ -362,6 +374,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Number Of Seats (car, supercar, scooter, motorcycle) -->
                                     {% if vehicle_type in ('car', 'supercar', 'scooter', 'motorcycle') %}
                                         <div class="filter-group">
                                             <label>Number of Seats</label>
@@ -386,6 +399,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Inside Color/Material (supercar) -->
                                     {% if vehicle_type == 'supercar' %}
                                         <div class="filter-group">
                                             <label>Inside Color</label>
@@ -413,6 +427,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Frame Size (Bike) -->
                                     {% if vehicle_type == 'bike' %}
                                         <div class="filter-group">
                                             <label>Frame Size</label>
@@ -426,6 +441,7 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
+                                        <!-- Traction (Bike) -->
                                         <div class="filter-group">
                                             <label>Traction</label>
                                             <select name="traction" class="filter-select">
@@ -435,6 +451,7 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
+                                        <!-- Suspension (Bike) -->
                                         <div class="filter-group">
                                             <label>Suspension</label>
                                             <select name="suspensions" class="filter-select">
@@ -447,6 +464,7 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
+                                        <!-- Terrain (Bike) -->
                                         <div class="filter-group">
                                             <label>Terrain</label>
                                             <select name="terrain" class="filter-select">
@@ -458,6 +476,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- License (Scooter, Motorcycle) -->
                                     {% if vehicle_type in ('scooter', 'motorcycle') %}
                                         <div class="filter-group">
                                             <label>License</label>
@@ -482,6 +501,7 @@
                                         </div>
                                     {% endif %}
 
+                                    <!-- Sleeping Beds (Camper) -->
                                     {% if vehicle_type == 'camper' %}
                                         <div class="filter-group">
                                             <label>Sleeping Beds</label>
@@ -495,6 +515,7 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
+                                        <!-- Approved Seats (Camper) -->
                                         <div class="filter-group">
                                             <label>Approved Seats</label>
                                             <select name="approved_seats" class="filter-select">
@@ -507,6 +528,7 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
+                                        <!-- Bathroom (Camper) -->
                                         <div class="filter-group">
                                             <label>Bathroom</label>
                                             <select name="type_bathroom" class="filter-select">
@@ -530,6 +552,7 @@
                 {% endif %}
             </aside>
 
+            <!-- RESULTS AREA -->
             <section class="search-results">
                 {% if not vehicle_type %}
                     <div class="results-placeholder">
@@ -577,7 +600,7 @@
                                         <div class="card-price">
                                             €{{ v.price|int }}
                                             <span>/
-                                                {% if vehicle_type in ('supercar', 'bike') %}
+                                                {% if vehicle_type in ('supercar', 'bike', 'motorcycle') %}
                                                     day
                                                 {% else %}
                                                     month
@@ -625,44 +648,8 @@
             </section>
         </div>
     </div>
-
-    <script>
-        // Favorite toggle logic for search results
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll('.btn-favorite-search').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation(); 
-
-                    const vType = this.getAttribute('data-type');
-                    const vId = this.getAttribute('data-id');
-
-                    fetch(`/toggle_favorite/${vType}/${vId}`, { method: 'POST' })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === "redirect") {
-                            window.location.href = data.url;
-                        } 
-                        else if (data.status === "added" || data.status === "removed") {
-                            this.classList.toggle("is-saved");
-                        }
-                    })
-                    .catch(err => console.error(err));
-                });
-            });
-        });
-
-        // Mobile filter toggle
-        const filterBtn = document.getElementById('mobile-filter-btn');
-        const sidebar = document.getElementById('search-sidebar');
-
-        if (filterBtn && sidebar) {
-            filterBtn.addEventListener('click', function() {
-                this.classList.toggle('open');
-                const isOpen = this.classList.contains('open');
-                this.setAttribute('aria-expanded', isOpen);
-                sidebar.classList.toggle('mobile-open');
-            });
-        }
-    </script>
 {% endblock content %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock extra_js %}
