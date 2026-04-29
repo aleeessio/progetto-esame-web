@@ -56,14 +56,15 @@
                 <div class="info-top">
                     <div class="title-group">
                         <div class="vehicle-badge">{{ vehicle_type|capitalize }}</div>
-                        <h1 class="vehicle-title">{{ vehicle.brand|capitalize }}</h1>
+                        <h1 class="vehicle-model">{{ vehicle.model|capitalize }}</h1>
+                        <span class="vehicle-title">{{ vehicle.brand|capitalize }}</span>
                     </div>
 
                     <div class="action-group">
                         <div class="vehicle-price">
                             €{{ vehicle.price|int }}
                             <span class="price-period">/
-                                {% if vehicle_type in ('supercar', 'bike') %}
+                                {% if vehicle_type in ('supercar', 'bike', 'motorcycle') %}
                                     day
                                 {% else %}
                                     month
@@ -102,7 +103,7 @@
                         <div class="spec-item">
                             <span class="spec-label">Min. Rent Length</span>
                             <span class="spec-value">{{ vehicle.rent_length }}
-                                {% if vehicle_type in ('supercar', 'bike') %}
+                                {% if vehicle_type in ('supercar', 'bike', 'motorcycle') %}
                                     days
                                 {% else %}
                                     months

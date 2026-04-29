@@ -371,15 +371,23 @@
 }
 
 .card-title {
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--font-color);
+    opacity: 0.7;
     text-transform: capitalize;
-    font-size: 1.4rem;
-    font-weight: 800;
 }
 
 .card-title-group {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.vehicle-model {
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    font-weight: 800;
 }
 
 .btn-favorite-search {
@@ -531,8 +539,8 @@
     }
 
     .search-results {
-       	width: 100%;
-     }
+        width: 100%;
+    }
 
     .search-sidebar {
         width: 100%;

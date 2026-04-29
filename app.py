@@ -54,6 +54,7 @@ def car_db_init():
             CREATE TABLE IF NOT EXISTS cars (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    brand TEXT NOT NULL,
+                   model TEXT NOT NULL,
                    rent_length INTEGER NOT NULL,
                    price REAL NOT NULL,
                    color TEXT NOT NULL,
@@ -72,6 +73,7 @@ def supercar_db_init():
             CREATE TABLE IF NOT EXISTS supercars (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    brand TEXT NOT NULL,
+                   model TEXT NOT NULL,
                    rent_length INTEGER NOT NULL,
                    price REAL NOT NULL,
                    color TEXT NOT NULL,
@@ -94,6 +96,7 @@ def bike_db_init():
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    type TEXT NOT NULL,
                    brand TEXT NOT NULL,
+                   model TEXT NOT NULL,
                    rent_length INTEGER NOT NULL,
                    price REAL NOT NULL,
                    frame_size TEXT NOT NULL,
@@ -111,6 +114,7 @@ def scooter_db_init():
             CREATE TABLE IF NOT EXISTS scooters (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    brand TEXT NOT NULL,
+                   model TEXT NOT NULL,
                    rent_length INTEGER NOT NULL,
                    price REAL NOT NULL,
                    color TEXT NOT NULL,
@@ -132,6 +136,7 @@ def motorcycle_db_init():
             CREATE TABLE IF NOT EXISTS motorcycles (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    brand TEXT NOT NULL,
+                   model TEXT NOT NULL,
                    rent_length INTEGER NOT NULL,
                    price REAL NOT NULL,
                    style TEXT NOT NULL,
@@ -153,6 +158,7 @@ def camper_db_init():
             CREATE TABLE IF NOT EXISTS campers (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    brand TEXT NOT NULL,
+                   model TEXT NOT NULL,
                    rent_length INTEGER NOT NULL,
                    price REAL NOT NULL,
                    color TEXT NOT NULL,
@@ -369,6 +375,7 @@ def add_vehicle():
         # Car
         if vehicle_type == "car":
             brand = request.form.get('brand')
+            model = request.form.get('model')
             rent_length = request.form.get('rent_length')
             price = request.form.get('price')
             color = request.form.get('color')
@@ -380,7 +387,7 @@ def add_vehicle():
 
             with db_connect() as db:
                 data = db.execute(
-                    'INSERT INTO cars (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats)
+                    'INSERT INTO cars (brand, model, rent_length, price, color, transmission, fuel, power, traction, number_of_seats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, model, rent_length, price, color, transmission, fuel, power, traction, number_of_seats)
                 )
 
                 curr_id = data.lastrowid
@@ -392,6 +399,7 @@ def add_vehicle():
         #S Supercar
         if vehicle_type == "supercar":
             brand = request.form.get('brand')
+            model = request.form.get('model')
             rent_length = request.form.get('rent_length')
             price = request.form.get('price')
             color = request.form.get('color')
@@ -405,7 +413,7 @@ def add_vehicle():
 
             with db_connect() as db:
                 data = db.execute(
-                    'INSERT INTO supercars (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats, inside_color, inside_material) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, transmission, fuel, power, traction, number_of_seats, inside_color, inside_material)
+                    'INSERT INTO supercars (brand, model, rent_length, price, color, transmission, fuel, power, traction, number_of_seats, inside_color, inside_material) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, model, rent_length, price, color, transmission, fuel, power, traction, number_of_seats, inside_color, inside_material)
                 )
 
                 curr_id = data.lastrowid
@@ -418,6 +426,7 @@ def add_vehicle():
         if vehicle_type == "bike":
             bike_type = request.form.get('type')
             brand = request.form.get('brand')
+            model = request.form.get('model')
             rent_length = request.form.get('rent_length')
             price = request.form.get('price')
             frame_size = request.form.get('frame_size')
@@ -427,7 +436,7 @@ def add_vehicle():
 
             with db_connect() as db:
                 data = db.execute(
-                    'INSERT INTO bikes (type, brand, rent_length, price, frame_size, traction, suspensions, terrain) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (bike_type, brand, rent_length, price, frame_size, traction, suspensions, terrain)
+                    'INSERT INTO bikes (type, brand, model, rent_length, price, frame_size, traction, suspensions, terrain) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', (bike_type, brand, model, rent_length, price, frame_size, traction, suspensions, terrain)
                 )
 
                 curr_id = data.lastrowid
@@ -439,6 +448,7 @@ def add_vehicle():
         # Scooter
         if vehicle_type == "scooter":
             brand = request.form.get('brand')
+            model = request.form.get('model')
             rent_length = request.form.get('rent_length')
             price = request.form.get('price')
             color = request.form.get('color')
@@ -452,7 +462,7 @@ def add_vehicle():
 
             with db_connect() as db:
                 data = db.execute(
-                    'INSERT INTO scooters (brand, rent_length, price, color, engine, fuel, power, required_license, number_of_seats, storage_capacity, windshield) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, engine, fuel, power, required_license, number_of_seats, storage_capacity, windshield)
+                    'INSERT INTO scooters (brand, model, rent_length, price, color, engine, fuel, power, required_license, number_of_seats, storage_capacity, windshield) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, model, rent_length, price, color, engine, fuel, power, required_license, number_of_seats, storage_capacity, windshield)
                 )
 
                 curr_id = data.lastrowid
@@ -464,6 +474,7 @@ def add_vehicle():
         # Motorcycle
         if vehicle_type == "motorcycle":
             brand = request.form.get('brand')
+            model = request.form.get('model')
             rent_length = request.form.get('rent_length')
             price = request.form.get('price')
             style = request.form.get('style')
@@ -477,7 +488,7 @@ def add_vehicle():
 
             with db_connect() as db:
                 data = db.execute(
-                    'INSERT INTO motorcycles (brand, rent_length, price, style, color, engine, fuel, power, required_license, number_of_seats, storage_capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, style, color, engine, fuel, power, required_license, number_of_seats, storage_capacity)
+                    'INSERT INTO motorcycles (brand, model, rent_length, price, style, color, engine, fuel, power, required_license, number_of_seats, storage_capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, model, rent_length, price, style, color, engine, fuel, power, required_license, number_of_seats, storage_capacity)
                 )
 
                 curr_id = data.lastrowid
@@ -489,6 +500,7 @@ def add_vehicle():
         # Camper
         if vehicle_type == "camper":
             brand = request.form.get('brand')
+            model = request.form.get('model')
             rent_length = request.form.get('rent_length')
             price = request.form.get('price')
             color = request.form.get('color')
@@ -502,7 +514,7 @@ def add_vehicle():
 
             with db_connect() as db:
                 data = db.execute(
-                    'INSERT INTO campers (brand, rent_length, price, color, fuel, type, sleeping_beds, approved_seats, type_bathroom, climate_control, pets_allowed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, rent_length, price, color, fuel, camper_type, sleeping_beds, approved_seats, type_bathroom, climate_control, pets_allowed)
+                    'INSERT INTO campers (brand, model, rent_length, price, color, fuel, type, sleeping_beds, approved_seats, type_bathroom, climate_control, pets_allowed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (brand, model, rent_length, price, color, fuel, camper_type, sleeping_beds, approved_seats, type_bathroom, climate_control, pets_allowed)
                 )
 
                 curr_id = data.lastrowid
@@ -521,12 +533,12 @@ def vehicle_list():
         return redirect(url_for('index'))
     
     with db_connect() as db:
-        cars = db.execute('SELECT id, brand, rent_length, price FROM cars').fetchall()
-        supercars = db.execute('SELECT id, brand, rent_length, price FROM supercars').fetchall()
-        bikes = db.execute('SELECT id, brand, rent_length, price FROM bikes').fetchall()
-        scooters = db.execute('SELECT id, brand, rent_length, price FROM scooters').fetchall()
-        motorcycles = db.execute('SELECT id, brand, rent_length, price FROM motorcycles').fetchall()
-        campers = db.execute('SELECT id, brand, rent_length, price FROM campers').fetchall()
+        cars = db.execute('SELECT id, brand, model, rent_length, price FROM cars').fetchall()
+        supercars = db.execute('SELECT id, brand, model, rent_length, price FROM supercars').fetchall()
+        bikes = db.execute('SELECT id, brand, model, rent_length, price FROM bikes').fetchall()
+        scooters = db.execute('SELECT id, brand, model, rent_length, price FROM scooters').fetchall()
+        motorcycles = db.execute('SELECT id, brand, model, rent_length, price FROM motorcycles').fetchall()
+        campers = db.execute('SELECT id, brand, model, rent_length, price FROM campers').fetchall()
     
     return render_template("vehicle_list.html", 
                            cars=cars, supercars=supercars, bikes=bikes, 

@@ -106,9 +106,16 @@
         </section>
 
         <div class="search-layout" id="search-content">
-            <button class="mobile-filter-toggle" id="mobile-filter-btn" aria-label="Toggle filters">
+            <button class="mobile-filter-toggle"
+                    id="mobile-filter-btn"
+                    aria-label="Toggle filters">
                 <span>Filters</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
             </button>
             <aside class="search-sidebar" id="search-sidebar">
                 {% if vehicle_type %}
@@ -142,7 +149,7 @@
                                         </div>
                                     </div>
 
-                                    {% if vehicle_type in ('supercar','bike') %}
+                                    {% if vehicle_type in ('supercar','bike','motorcycle') %}
                                         <div class="filter-group">
                                             <label>Rent Length (Days)</label>
                                             <div class="price-range">
@@ -545,7 +552,8 @@
                                 <div class="card-body">
                                     <div class="card-top">
                                         <div class="card-title-group">
-                                            <div class="card-title">{{ v.get('brand', vehicle_type|title) }}</div>
+                                            <div class="vehicle-model">{{ v.get("model") }}</div>
+                                            <span class="card-title">{{ v.get('brand', vehicle_type|title) }}</span>
 
                                             {% if not session.get('is_admin') %}
                                                 <button class="btn-favorite-search {% if v.id in saved_vehicle_ids %}is-saved{% endif %}"

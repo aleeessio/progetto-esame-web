@@ -40,7 +40,7 @@
         <input type="text"
                id="search-input"
                class="search-input"
-               placeholder="Search by ID, brand, rent length or price...">
+               placeholder="Search by ID, brand, model, rent length or price...">
 
         <div id="table-car" class="vehicle-table-container active">
             {% if cars %}
@@ -49,8 +49,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Brand</th>
-                            <th>Rent Length</th>
-                            <th>Price</th>
+                            <th>Model</th>
+                            <th>Rent Length (Months)</th>
+                            <th>Monthly Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,6 +60,7 @@
                                 style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
+                                <td>{{ item['model'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
                                 <td class="td-delete" onclick="event.stopPropagation();">
@@ -84,8 +86,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Brand</th>
-                            <th>Rent Length</th>
-                            <th>Price</th>
+                            <th>Model</th>
+                            <th>Rent Length (Days)</th>
+                            <th>Daily Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,6 +97,7 @@
                                 style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
+                                <td>{{ item['model'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
                                 <td class="td-delete" onclick="event.stopPropagation();">
@@ -119,8 +123,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Brand</th>
-                            <th>Rent Length</th>
-                            <th>Price</th>
+                            <th>Model</th>
+                            <th>Rent Length (Days)</th>
+                            <th>Daily Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,6 +134,7 @@
                                 style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
+                                <td>{{ item['model'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
                                 <td class="td-delete" onclick="event.stopPropagation();">
@@ -154,8 +160,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Brand</th>
-                            <th>Rent Length</th>
-                            <th>Price</th>
+                            <th>Model</th>
+                            <th>Rent Length (Months)</th>
+                            <th>Monthly Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -164,6 +171,7 @@
                                 style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
+                                <td>{{ item['model'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
                                 <td class="td-delete" onclick="event.stopPropagation();">
@@ -189,8 +197,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Brand</th>
-                            <th>Rent Length</th>
-                            <th>Price</th>
+                            <th>Model</th>
+                            <th>Rent Length (Days)</th>
+                            <th>Daily Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -199,6 +208,7 @@
                                 style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
+                                <td>{{ item['model'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
                                 <td class="td-delete" onclick="event.stopPropagation();">
@@ -224,8 +234,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Brand</th>
-                            <th>Rent Length</th>
-                            <th>Price</th>
+                            <th>Model</th>
+                            <th>Rent Length (Months)</th>
+                            <th>Monthly Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -234,6 +245,7 @@
                                 style="cursor: pointer">
                                 <td>{{ item['id'] }}</td>
                                 <td>{{ item['brand'] }}</td>
+                                <td>{{ item['model'] }}</td>
                                 <td>{{ item['rent_length'] }}</td>
                                 <td>{{ item['price'] }}</td>
                                 <td class="td-delete" onclick="event.stopPropagation();">

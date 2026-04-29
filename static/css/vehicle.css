@@ -115,9 +115,15 @@
 }
 
 .vehicle-title {
+    font-weight: 300;
+    font-size: 2.1rem;
+    color: var(--font-color);
+    opacity: 0.7;
+}
+
+.vehicle-model {
     font-size: 3.5rem;
     line-height: 1.1;
-    font-family: 'OmniSans', 'Exo 2', sans-serif;
     font-weight: 800;
     color: var(--font-color);
     margin: 0;
@@ -286,15 +292,39 @@
         text-align: center;
     }
 }
+
 /* ============================================================
    EXTRA MOBILE FIXES
    ============================================================ */
 @media (max-width: 480px) {
-    .premium-layout { padding: 16px 12px; }
-    .vehicle-title { font-size: 2rem; }
-    .vehicle-price { font-size: 2rem; }
-    .detail-image-section { height: 240px; border-radius: 14px; }
-    .premium-specs { grid-template-columns: 1fr; column-gap: 0; }
-    .btn-checkout { padding: 13px 24px; font-size: 1rem; }
-    .detail-info-section { padding: 0 4px; }
+    .premium-layout {
+        padding: 16px 12px;
+    }
+
+    .vehicle-title {
+        font-size: 2rem;
+    }
+
+    .vehicle-price {
+        font-size: 2rem;
+    }
+
+    .detail-image-section {
+        height: 240px;
+        border-radius: 14px;
+    }
+
+    .premium-specs {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
+
+    .btn-checkout {
+        padding: 13px 24px;
+        font-size: 1rem;
+    }
+
+    .detail-info-section {
+        padding: 0 4px;
+    }
 }
