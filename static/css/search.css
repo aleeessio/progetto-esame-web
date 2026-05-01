@@ -571,24 +571,44 @@
 
     .card-img {
         width: 100%;
-        height: 180px;
+        height: 200px;
     }
 
     .card-body {
-        padding: 14px;
+        padding: 16px;
     }
 
-    .card-title {
+    .card-top {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .card-title-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .vehicle-model {
         font-size: 1.2rem;
     }
 
     .card-price {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .card-price span {
+        display: block;
+        font-size: 0.75rem;
     }
 
     .btn-rent {
         align-self: stretch;
         text-align: center;
+        margin-top: 15px;
     }
 
     .vehicle-card:hover {
