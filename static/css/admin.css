@@ -14,7 +14,7 @@
     border-radius: 12px;
     padding: 40px;
     width: 100%;
-    max-width: 560px;
+    max-width: 1000px;
     box-shadow: 0 8px 24px var(--shadow-color);
     transition: background-color 1s ease, border-color 1s ease, box-shadow 1s ease;
     opacity: 0;
@@ -29,27 +29,123 @@
 
 /*------- BUTTONS -------*/
 .admin-buttons {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
 }
 
-.btn-submit {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background: var(--background-div);
-    color: var(--font-color);
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
+.buttons-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
     text-decoration: none;
-    text-align: center;
     display: block;
-    transition: background 0.4s;
+    height: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.4s ease;
 }
 
-.btn-submit:hover {
-    background: var(--logo-color);
+.buttons-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.buttons-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.buttons-overlay h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.buttons-overlay span {
+    font-weight: 600;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: all 0.4s ease;
+    color: var(--logo-color);
+}
+
+.buttons-card:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.buttons-card:hover img {
+    transform: scale(1.08);
+}
+
+.buttons-card:hover .buttons-overlay span {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/*------- RESPONSIVE DESIGN 1024px -------*/
+@media (max-width: 1024px) {
+    .admin-box {
+        padding: 30px;
+    }
+}
+
+/*------- RESPONSIVE DESIGN 768px -------*/
+@media (max-width: 768px) {
+    .admin-buttons {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .admin-box {
+        padding: 25px;
+    }
+
+    .admin-box h2 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+
+    .buttons-overlay h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/*------- RESPONSIVE DESIGN 480px -------*/
+@media (max-width: 480px) {
+    .main-content {
+        padding: 30px 15px;
+    }
+
+    .admin-box {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .admin-buttons {
+        gap: 15px;
+    }
+
+    .buttons-card {
+        min-height: 180px;
+    }
+
+    .buttons-overlay {
+        padding: 20px;
+    }
+
+    .buttons-overlay h3 {
+        font-size: 1.3rem;
+    }
 }

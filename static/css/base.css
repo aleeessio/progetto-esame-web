@@ -52,17 +52,17 @@
 
 /*------- COLORS -------*/
 :root {
-  --background-page: #f4f4f4;
-  --background-div: #ffffff;
-  --background-header: #ffffff;
-  --background-footer: #ffffff;
+  --background-page: #E5E7EB;
+  --background-div: #F3F4F6;
+  --background-header: #F3F4F6;
+  --background-footer: #D1D5DB;
   --font-color: #1a1a1a;
   --logo-color: #FF6347;
-  --border-color: #c0c0c0;
+  --border-color: #D1D5DB;
   --icon-color: #1a1a1a;
   --success-color: #00c853;
   --error-color: #f44336;
-  --shadow-color: rgba(0, 0, 0, 0.08);
+  --shadow-color: rgba(0, 0, 0, 0.12);
 }
 
 .dark-mode {

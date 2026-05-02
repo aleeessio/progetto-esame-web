@@ -58,6 +58,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             slides[currentSlide].classList.add("active");
 
-        }, 6000);
+        }, 4000);
     }
 });

@@ -13,10 +13,42 @@
     <div class="admin-box">
         <h2>Admin Dashboard</h2>
         <div class="admin-buttons">
-            <a href="{{ url_for('add_vehicle') }}" class="btn-submit">Add Vehicle</a>
-            <a href="{{ url_for('vehicle_list') }}" class="btn-submit">List Vehicles</a>
-            <a href="{{ url_for('user_list') }}" class="btn-submit">List Users</a>
-            <a href="{{ url_for('request_list') }}" class="btn-submit">List Requests</a>
+            <a href="{{ url_for('add_vehicle') }}" class="buttons-card">
+                <img src="{{ url_for('static', filename='imgs/card_admin/add_vehicle.webp') }}"
+                     alt="Supercar">
+                <div class="buttons-overlay">
+                    <h3>Add New Vehicle</h3>
+                    <span>Add &rarr;</span>
+                </div>
+            </a>
+            <a href="{{ url_for('vehicle_list') }}" class="buttons-card">
+                <img src="{{ url_for('static', filename='imgs/card_admin/vehicle_list.jpeg') }}"
+                     alt="Supercar">
+
+                <div class="buttons-overlay">
+                    <h3>Vehicle List</h3>
+                    <span>View &rarr;</span>
+                </div>
+            </a>
+            <a href="{{ url_for('user_list') }}" class="buttons-card">
+                <img src="{{ url_for('static', filename='imgs/card_admin/user_list.jpeg') }}"
+                     alt="Supercar">
+
+                <div class="buttons-overlay">
+                    <h3>User List</h3>
+                    <span>View &rarr;</span>
+                </div>
+            </a>
+            <a href="{{ url_for('request_list') }}" class="buttons-card">
+                <img src="{{ url_for('static', filename='imgs/card_admin/request_list.jpg') }}"
+                     alt="Supercar">
+
+                <div class="buttons-overlay">
+                    <h3>Request List</h3>
+                    <span>View &rarr;</span>
+                </div>
+            </a>
+
         </div>
     </div>
 {% endblock content %}
