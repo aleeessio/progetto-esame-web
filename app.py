@@ -66,6 +66,7 @@ def car_db_init():
                    img TEXT
             )
         ''')
+
 # Supercar
 def supercar_db_init():
     with db_connect() as db:
@@ -176,7 +177,6 @@ def camper_db_init():
 # Rental
 def rental_db_init():
     with db_connect() as db:
-        # db.execute('''DROP TABLE IF EXISTS rental_requests ''')
         db.execute('''
             CREATE TABLE IF NOT EXISTS rental_requests (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -353,6 +353,7 @@ def logout():
     flash("Logged out!", 'success')
     return redirect(url_for('index'))
 
+# Admin dashboard (admin only)
 @app.route('/admin')
 def admin():
     if not session.get('is_admin'):

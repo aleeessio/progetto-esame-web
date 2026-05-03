@@ -254,3 +254,41 @@ AGGIORNAMENTO 1 (2-04-2026):
 
             - Popolare il sito con utenti e veicoli
             - Prepararsi esposizione 12 minuti 
+
+
+
+
+PREPARAZIONE PRESENTAZIONE:
+
+    PRIMA PARTE = USER: (6 minuti circa)
+        Index: 
+            Breve panoramica sul sito
+            Possibilità di cambiare tema 
+            Menu a tendina e Bento Grid per scegliere tipologia di veicolo
+            Possibilità di registrarsi e successivamente di loggarsi
+        Profilo: informazioni generali
+        Search:
+            - Cards per scegliere tipologia veicolo
+            - Filtraggio personalizzato in base alla tipologia di veicolo
+            - Risultati della ricerca (Cuore)
+        Veicolo: informazioni generali (Cuore), tasto rent 
+        Rent Request: inviare richiesta di noleggio
+        Profilo: Veicoli preferiti (interattivo), richieste noleggio attive
+
+    SECONDA PARTE = ADMIN: (4 minuti circa)
+        Add Vehicle: aggiunta veicoli con campi diversi per ogni tipologia di veicolo
+        Vehicle List / User List: 
+            - tutti i veicoli divisi per tipologia
+            - ricerca live tramite js 
+            - riga interattiva (redirect to vehicle)
+            - possibilità di eliminazione veicolo
+        Request List: 
+            - informazioni generali
+            - brand interattivo
+            - possibilità di vedere le nome_utente
+            - possibilità di cambiare lo stato della richiesta
+            - possibilità di eliminare la richiesta
+
+    TERZA PARTE = FOOTER e RESPONSIVE: (2 minuti circa)
+        Footer: panoramica generale + contatti, tc, pp
+        RESPONSIVE in generale
