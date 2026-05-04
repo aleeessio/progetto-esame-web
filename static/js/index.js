@@ -1,41 +1,29 @@
-// SELECTOR CARDS LOGIC
-const cards = document.querySelectorAll('.selector-card');
-const cta = document.getElementById('selector-cta');
-const searchBtn = document.getElementById('search-btn');
-
-let selected = null;
-
-cards.forEach(card => {
-    card.addEventListener('click', () => {
-        cards.forEach(c => c.classList.remove('selected'));
-
-        card.classList.add('selected');
-        selected = card.dataset.type;
-
-        searchBtn.href = `/search?type=${selected}`;
-
-        cta.classList.add('visible');
-    });
-});
-
 //VEHICLE TYPE DROPDOWN + SLIDESHOW
 document.addEventListener("DOMContentLoaded", function () {
     // Dropdown Logic
     const trigger = document.getElementById('custom-select-trigger');
     const optionsList = document.getElementById('custom-options');
-    const input = document.getElementById('vehicle-type-input');
     const options = optionsList.querySelectorAll('li');
+    const searchLinkBtn = document.getElementById('search-link-btn');
 
-    trigger.addEventListener('click', () => {
+    const baseSearchUrl = "/search?type=";
+
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
         optionsList.classList.toggle('open');
     });
 
     options.forEach(option => {
         option.addEventListener('click', () => {
+            const selectedVehicle = option.dataset.value;
+
             trigger.textContent = option.textContent;
-            input.value = option.dataset.value;
-            optionsList.classList.remove('open');
             trigger.style.color = 'var(--font-color)';
+
+            if (searchLinkBtn) {
+                searchLinkBtn.href = baseSearchUrl + selectedVehicle;
+            }
+            optionsList.classList.remove('open');
         });
     });
 

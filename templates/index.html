@@ -49,13 +49,11 @@
                 <p class="hero-sub-modern">Explore the world with the perfect vehicle for you.</p>
 
                 <div class="floating-search-wrapper">
-                    <form action="{{ url_for('search') }}"
-                          method="GET"
-                          class="floating-search-bar">
+                    <div class="floating-search-bar">
                         <div class="search-input-group custom-select-wrapper">
                             <label for="vehicle-type">What are you looking for?</label>
                             <div class="custom-select-trigger" id="custom-select-trigger">Choose a category...</div>
-                            <input type="hidden" name="type" id="vehicle-type-input" required>
+
                             <ul class="custom-options" id="custom-options">
                                 <li data-value="car">Car</li>
                                 <li data-value="supercar">Supercar</li>
@@ -65,11 +63,12 @@
                                 <li data-value="camper">Camper</li>
                             </ul>
                         </div>
-
                         <div class="search-btn-wrapper">
-                            <button type="submit" class="btn-search-floating">Search</button>
+                            <a href="{{ url_for('search') }}"
+                               id="search-link-btn"
+                               class="btn-search-floating">Search</a>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </section>

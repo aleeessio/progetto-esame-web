@@ -49,8 +49,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    const links = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"])');
+    // Intercept form submissions
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            if (!overlay) return;
 
+            e.preventDefault();
+
+            overlay.style.transition = '';
+            overlay.classList.remove("is-revealed");
+            overlay.classList.add("is-covering-prep");
+
+            void overlay.offsetWidth; // Forza il reflow del browser
+
+            overlay.classList.add("is-covering-active");
+
+            setTimeout(() => {
+                form.submit();
+            }, 320);
+        });
+    });
+
+    // Intercept link clicks
+    const links = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"])');
     links.forEach(link => {
         link.addEventListener('click', (e) => {
             if (!overlay) return;
