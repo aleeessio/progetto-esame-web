@@ -124,7 +124,9 @@
                                 <div class="request-card">
                                     <div class="request-header">
                                         <div class="request-title">
-                                            <span class="vehicle-type-badge">{{ req['vehicle_brand'] }}</span>
+                                            <a href="{{ url_for('vehicle_detail', vehicle_type=req['vehicle_type'], vehicle_id=req['vehicle_id']) }}"
+                                               class="vehicle-model-badge">{{ req['vehicle_model'] }}</a>
+                                            <span class="vehicle-type-badge">{{ req['vehicle_brand'] | capitalize }}</span>
                                         </div>
                                         <div class="status-badge status-{{ req['status'] }}">
                                             <span class="status-dot"></span>

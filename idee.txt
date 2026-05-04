@@ -239,7 +239,7 @@ AGGIORNAMENTO 1 (2-04-2026):
     #FATTO# - SEARCH.html cambiare stile dei veicoli sulla destra
 
     #FATTO# - PROFILE.html possibilità di eliminare richiesta noleggio (utente)
-            - aggiustare transizione da index a search quando si preme tasto SEARCH e quando ci si logga e fa il redirect alla Profile/Admin
+    #FATTO# - aggiustare transizione da index a search quando si preme tasto SEARCH e quando ci si logga e fa il redirect alla Profile/Admin
             
     #FATTO# - PROFILE.html (OPZIONALE: veicoli salvati)
     #FATTO# - VEHICLE_LIST.html (OPZIONALE: redirect al veicolo)

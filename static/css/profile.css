@@ -311,10 +311,22 @@
     margin-bottom: 16px;
 }
 
-.vehicle-type-badge {
+.vehicle-model-badge {
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--font-color);
+    text-decoration: none;
+}
+
+.vehicle-model-badge:hover {
+    color: var(--logo-color);
+}
+
+.vehicle-type-badge {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #777;
+    padding-left: 20px;
 }
 
 .request-details {
@@ -334,7 +346,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--border-color);
+    color: #777;
     min-width: 80px;
     font-size: 0.8rem;
     transition: color 0.3s ease;

@@ -849,7 +849,20 @@ def profile():
                     v_dict['img_url'] = f"imgs/{table}/{v_dict['id']}/{v_dict['img']}"
                 saved_list.append(v_dict)
 
-        requests = db.execute('SELECT * FROM rental_requests WHERE user_id = ? ORDER BY id DESC', (user_id,)).fetchall()
+        # per passare anche il modello del veicolo e non cambiare tutto il database
+        raw_requests = db.execute('SELECT * FROM rental_requests WHERE user_id = ? ORDER BY id DESC', (user_id,)).fetchall()
+        requests = []
+        for req in raw_requests:
+            req_dict = dict(req) 
+            table = TYPE_TO_TABLE.get(req_dict['vehicle_type'])
+            if table:
+                v_data = db.execute(f'SELECT model FROM {table} WHERE id = ?', (req_dict['vehicle_id'],)).fetchone()
+                req_dict['vehicle_model'] = v_data['model'] if v_data else 'Modello Sconosciuto'
+            else:
+                req_dict['vehicle_model'] = ''
+                
+            requests.append(req_dict)
+            
         user_data = db.execute('SELECT email FROM users WHERE id = ?', (user_id,)).fetchone()
 
     return render_template("profile.html", requests=requests, user_email=user_data['email'], saved_vehicles=saved_list)
