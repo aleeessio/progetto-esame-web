@@ -266,7 +266,7 @@ def register():
         check_nullness = [len(name), len(email), len(password), len(repeat_password)]
 
         if 0 in check_nullness:
-            flash("Riempi ogni campo!", "error")
+            flash("Please fill in all fields!", "error")
             return redirect(url_for('register'))
         
         if password != repeat_password:
@@ -558,7 +558,7 @@ def remove_vehicle():
     allowed_tables = ['cars', 'supercars', 'bikes', 'scooters', 'motorcycles', 'campers']
     
     if vehicle_type not in allowed_tables:
-        flash("Tipo di veicolo non valido!", 'error')
+        flash("Vehicle type not allowed!", 'error')
         return redirect(url_for('vehicle_list'))
 
     inv_types = {v : k for k,v in TYPE_TO_TABLE.items()}
@@ -893,7 +893,7 @@ def vehicle_detail(vehicle_type, vehicle_id):
     table = TYPE_TO_TABLE.get(vehicle_type)
 
     if not table:
-        flash("Tipo di veicolo non trovato.", "error")
+        flash("Vehicle type not allowed!", "error")
         return redirect(url_for('search'))
 
     with db_connect() as db:
@@ -902,10 +902,10 @@ def vehicle_detail(vehicle_type, vehicle_id):
         ).fetchone()
 
     if not vehicle:
-        flash("Veicolo non trovato.", "error")
+        flash("Vehicle not found!", "error")
         return redirect(url_for('search'))
 
-    # dict for the image URL if needed
+    # dict for the image URL
     v_dict = dict(vehicle)
     if v_dict.get('img'):
         v_dict['img_url'] = f"imgs/{table}/{v_dict['id']}/{v_dict['img']}"

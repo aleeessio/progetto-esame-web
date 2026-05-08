@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// 3. FIX TASTO INDIETRO (Bfcache)
+// FIX TASTO INDIETRO (Bfcache)
 window.addEventListener("pageshow", (event) => {
     if (event.persisted) {
         const overlay = document.getElementById("page-overlay");
