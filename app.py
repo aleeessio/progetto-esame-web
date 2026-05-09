@@ -12,8 +12,8 @@ DB_USERS_PATH = 'data.db'
 IMG_PATH = os.path.join('static', 'imgs')
 IMG_ALLOWED = {'jpg', 'png', 'webp', 'jpeg'}
 
-ADMIN_EMAIL = "2.2@22"
-ADMIN_PWD = "12" 
+ADMIN_EMAIL = "admin.superuser@omnidrive.com"
+ADMIN_PWD = "20_Maggio_2026" 
 
 TYPE_TO_TABLE = {
     'car':        'cars',
@@ -1032,3 +1032,4 @@ def rent(vehicle_type, vehicle_id):
 if __name__ == '__main__':
     db_init()
     app.run(debug=True, port=1234)
+    #app.run(host='0.0.0.0', port=1234)

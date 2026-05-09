@@ -92,6 +92,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
+    max-height: 380px;
+    overflow-y: auto;
+    padding-right: 8px;
 }
 
 .mini-vehicle-card {
@@ -289,6 +292,10 @@
     flex-direction: column;
     gap: 16px;
     padding-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
+    padding-bottom: 10px;
 }
 
 .request-card {
@@ -463,6 +470,28 @@
 .btn-outline:hover {
     background: var(--logo-color);
     color: #fff;
+}
+
+/*------- CUSTOM SCROLLBARS FOR PROFILE -------*/
+.saved-vehicles-grid::-webkit-scrollbar,
+.requests-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.saved-vehicles-grid::-webkit-scrollbar-track,
+.requests-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.saved-vehicles-grid::-webkit-scrollbar-thumb,
+.requests-list::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+.saved-vehicles-grid::-webkit-scrollbar-thumb:hover,
+.requests-list::-webkit-scrollbar-thumb:hover {
+    background: var(--logo-color);
 }
 
 /*------- RESPONSIVE DESIGN 900px -------*/
