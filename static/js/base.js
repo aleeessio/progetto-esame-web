@@ -55,6 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener('submit', (e) => {
             if (!overlay) return;
 
+            if (form.classList.contains('filter-form')) return; //for filter form in search, no transition, just submit
+
             e.preventDefault();
 
             overlay.style.transition = '';

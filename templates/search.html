@@ -7,7 +7,9 @@
 {% block extra_css %}
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/search.css') }}">
+{% endblock extra_css %}
 
+{% block content %}
     <!--evita la presenza dell'overlay nella pagina quando si sceglie il veicolo e NON blocca l'animazione quando si esce/entra dalla/nella pagina-->
     {% if request.args %}
         <script>
@@ -54,9 +56,7 @@
         })();
         </script>
     {% endif %}
-{% endblock extra_css %}
 
-{% block content %}
     <div class="search-wrapper">
         <!-- VEHICLE SELECTOR -->
         <section class="premium-vehicle-selector">
