@@ -79,6 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
         link.addEventListener('click', (e) => {
             if (!overlay) return;
 
+            if (window.location.pathname.includes('/search') && link.href.includes('social_redirect')) return; //for social links in SEARCH, no transition, just submit
+
             const targetBaseUrl = link.href.split('?')[0].split('#')[0];
             const currentBaseUrl = window.location.href.split('?')[0].split('#')[0];
 
