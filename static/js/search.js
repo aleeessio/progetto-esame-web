@@ -35,3 +35,10 @@ if (filterBtn && sidebar) {
         sidebar.classList.toggle('mobile-open');
     });
 }
+
+// Sort without eliminating filters
+function applySort(sortValue) {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('sort', sortValue);
+    window.location.search = urlParams.toString();
+}

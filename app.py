@@ -686,6 +686,18 @@ def search():
     table        = TYPE_TO_TABLE.get(vehicle_type)
     results      = []
 
+    # For order 
+    sort_by = request.args.get('sort', 'id_desc')
+    order_map = {
+        'price_asc':  'ORDER BY price ASC',
+        'price_desc': 'ORDER BY price DESC',
+        'model_asc':  'ORDER BY model ASC',
+        'brand_asc': 'ORDER BY brand ASC',
+        'id_desc':    'ORDER BY id DESC'
+    }
+    order_clause = order_map.get(sort_by, 'ORDER BY id DESC')
+
+    # For filters
     if table:
         conditions = []
         params     = []
@@ -787,12 +799,9 @@ def search():
                 conditions.append('type = ?')
                 params.append(specific_type)
 
-        where = 'WHERE ' + ' AND '.join(conditions) if conditions else ''
-
+        where_clause = 'WHERE ' + ' AND '.join(conditions) if conditions else ''
         with db_connect() as db:
-            results = db.execute(
-                f'SELECT * FROM {table} {where}', params
-            ).fetchall()
+            results = db.execute(f'SELECT * FROM {table} {where_clause} {order_clause}', params).fetchall()
 
         # Change in list of dict and add img_url
         results_list = []
@@ -818,7 +827,8 @@ def search():
                            results=results,
                            vehicle_type=vehicle_type,
                            args=request.args,
-                           saved_vehicle_ids=saved_vehicle_ids)
+                           saved_vehicle_ids=saved_vehicle_ids,
+                           sort_by=sort_by)
 
 
 # Profile page (user only)

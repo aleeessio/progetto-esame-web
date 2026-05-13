@@ -327,6 +327,51 @@
     background: transparent;
 }
 
+/* ------- Order area ------- */
+.results-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 5px;
+}
+
+.results-count {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.sort-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sort-control label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0.6;
+    text-transform: uppercase;
+}
+
+.sort-dropdown {
+    background: var(--background-div);
+    color: var(--font-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.sort-dropdown:focus {
+    border-color: var(--logo-color);
+    box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.2);
+}
+
+/* ------- Results Grid ------- */
 .results-grid {
     display: flex;
     flex-direction: column;
@@ -555,7 +600,7 @@
         align-items: stretch;
     }
 
-	.search-results {
+    .search-results {
         width: 100%;
         max-height: calc(100vh - 180px);
         overflow-y: auto;
@@ -584,6 +629,22 @@
 
 /*------- RESPONSIVE DESIGN 640px -------*/
 @media (max-width: 640px) {
+    .results-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .sort-control {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .sort-dropdown {
+        flex: 1;
+        max-width: 200px;
+    }
+
     .vehicle-card {
         flex-direction: column;
         height: auto;

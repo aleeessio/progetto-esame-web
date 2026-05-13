@@ -201,7 +201,7 @@
                                         <select name="brand" class="filter-select">
                                             <option value="">All Brands</option>
                                             {% if vehicle_type == 'car' %}
-                                                {% for b in ['alfa romeo','audi','bmw','citroen','fiat','ford','honda','hyundai','jeep','mercedes','opel','peugeot','renault','toyota','volkswagen'] %}
+                                                {% for b in ['alfa romeo','audi','bmw','citroen','fiat','ford','honda','hyundai','jeep','mercedes','opel','peugeot','renault','tesla','toyota','volkswagen'] %}
                                                     <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|title }}</option>
                                                 {% endfor %}
                                             {% elif vehicle_type == 'supercar' %}
@@ -209,19 +209,19 @@
                                                     <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|title }}</option>
                                                 {% endfor %}
                                             {% elif vehicle_type == 'bike' %}
-                                                {% for b in ['bianchi', 'cannondale', 'canyon', 'cube', 'giant', 'orbea', 'pinarello', 'santa cruz', 'specialized', 'trek'] %}
+                                                {% for b in ['bianchi','cube','focus','elops','triban','genesis','rockrider'] %}
                                                     <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|title }}</option>
                                                 {% endfor %}
                                             {% elif vehicle_type == 'scooter' %}
-                                                {% for b in ['aprilia', 'bmw', 'honda', 'kymco', 'peugeot', 'piaggio', 'suzuki', 'sym', 'vespa', 'yamaha'] %}
+                                                {% for b in ['aprilia','bmw','honda','kymco','peugeot','piaggio','suzuki','sym','vespa','yamaha'] %}
                                                     <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|title }}</option>
                                                 {% endfor %}
                                             {% elif vehicle_type == 'motorcycle' %}
-                                                {% for b in ['aprilia', 'bmw', 'ducati', 'harley davidson', 'honda', 'husqvarna', 'indian', 'kawasaki', 'ktm', 'moto guzzi', 'mv agusta', 'royal enfield', 'suzuki', 'triumph', 'yamaha'] %}
+                                                {% for b in ['aprilia','bmw','ducati','harley davidson','honda','kawasaki','ktm','moto guzzi','suzuki','yamaha'] %}
                                                     <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|title }}</option>
                                                 {% endfor %}
                                             {% elif vehicle_type == 'camper' %}
-                                                {% for b in ['adria', 'burstner', 'carado', 'challenger', 'dethleffs', 'hymer', 'knaus', 'laika', 'roller team', 'volkswagen'] %}
+                                                {% for b in ['adria','burstner','carado','challenger','dethleffs','hymer','knaus','laika','roller team','volkswagen'] %}
                                                     <option value="{{ b }}" {% if args.get('brand') == b %}selected{% endif %}>{{ b|title }}</option>
                                                 {% endfor %}
                                             {% endif %}
@@ -554,6 +554,26 @@
 
             <!-- RESULTS AREA -->
             <section class="search-results">
+                <!-- Order area -->
+                <div class="results-toolbar">
+                    <div class="results-count">
+                        {% if results %}<strong>{{ results|length }}</strong> vehicles found{% endif %}
+                    </div>
+                    <div class="sort-control">
+                        <label for="sort-select">Order by:</label>
+                        <select id="sort-select"
+                                class="sort-dropdown"
+                                onchange="applySort(this.value)">
+                            <option value="id_desc" {% if sort_by == 'id_desc' %}selected{% endif %}>Most Recent</option>
+                            <option value="model_asc" {% if sort_by == 'model_asc' %}selected{% endif %}>Model: A-Z</option>
+                            <option value="brand_asc" {% if sort_by == 'brand_asc' %}selected{% endif %}>Brand: A-Z</option>
+                            <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                            <option value="price_desc"
+                                    {% if sort_by == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+
+                        </select>
+                    </div>
+                </div>
                 {% if not vehicle_type %}
                     <div class="results-placeholder">
                         <h3>Start Your Search</h3>
