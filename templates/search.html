@@ -601,8 +601,7 @@
                                             {% if not session.get('is_admin') %}
                                                 <button class="btn-favorite-search {% if v.id in saved_vehicle_ids %}is-saved{% endif %}"
                                                         data-type="{{ vehicle_type }}"
-                                                        data-id="{{ v.id }}"
-                                                        title="Toggle favorite">
+                                                        data-id="{{ v.id }}">
                                                     <svg viewBox="0 0 24 24"
                                                          fill="none"
                                                          stroke="currentColor"
