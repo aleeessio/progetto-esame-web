@@ -74,139 +74,142 @@
         </section>
 
         <!-- Grid Vehicle Section -->
-        <section class="explore-section">
-            <div class="section-heading">
-                <h2>Choose Your Style</h2>
-                <p>Discover the perfect vehicle for your next adventure.</p>
-            </div>
-
-            <div class="bento-grid">
-
-                <a href="{{ url_for('search', type='supercar') }}"
-                   class="bento-card item-tall-left">
-                    <img src="{{ url_for('static', filename='imgs/card_index_search/supercar.webp') }}"
-                         alt="Supercar">
-                    <div class="bento-overlay">
-                        <h3>Supercar</h3>
-                        <span>Explore &rarr;</span>
-                    </div>
-                </a>
-                <a href="{{ url_for('search', type='car') }}"
-                   class="bento-card item-small-tr">
-                    <img src="{{ url_for('static', filename='imgs/card_index_search/car.webp') }}"
-                         alt="Car">
-                    <div class="bento-overlay">
-                        <h3>Car</h3>
-                        <span>Explore &rarr;</span>
-                    </div>
-                </a>
-                <a href="{{ url_for('search', type='bike') }}"
-                   class="bento-card item-small-br">
-                    <img src="{{ url_for('static', filename='imgs/card_index_search/bike.webp') }}"
-                         alt="Bike">
-                    <div class="bento-overlay">
-                        <h3>Bike</h3>
-                        <span>Explore &rarr;</span>
-                    </div>
-                </a>
-                <a href="{{ url_for('search', type='scooter') }}"
-                   class="bento-card item-small-tl">
-                    <img src="{{ url_for('static', filename='imgs/card_index_search/scooter.webp') }}"
-                         alt="Scooter">
-                    <div class="bento-overlay">
-                        <h3>Scooter</h3>
-                        <span>Explore &rarr;</span>
-                    </div>
-                </a>
-                <a href="{{ url_for('search', type='motorcycle') }}"
-                   class="bento-card item-small-bl">
-                    <img src="{{ url_for('static', filename='imgs/card_index_search/motorcycle.webp') }}"
-                         alt="Motorcycle">
-                    <div class="bento-overlay">
-                        <h3>Motorcycle</h3>
-                        <span>Explore &rarr;</span>
-                    </div>
-                </a>
-                <a href="{{ url_for('search', type='camper') }}"
-                   class="bento-card item-tall-right">
-                    <img src="{{ url_for('static', filename='imgs/card_index_search/camper.webp') }}"
-                         alt="Camper">
-                    <div class="bento-overlay">
-                        <h3>Camper</h3>
-                        <span>Explore &rarr;</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Value Proposition Section -->
-        <section class="value-prop-section">
-            <div class="value-prop-container">
-                <div class="value-item">
-                    <div class="value-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="1.5"
-                             stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                            <path d="M10 16l2 2 4-4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="value-title">Flexible Cancellation</h3>
-                    <p class="value-text">Changing your plans? No problem, cancel with ease.</p>
+        <div class="foto-div">
+            <section class="explore-section">
+                <div class="section-heading">
+                    <h2>Choose Your Style</h2>
+                    <p>Discover the perfect vehicle for your next adventure.</p>
                 </div>
-                <div class="value-item">
-                    <div class="value-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="1.5"
-                             stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            <path d="M9 12l2 2 4-4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="value-title">No Hidden Costs</h3>
-                    <p class="value-text">Total transparency. You pay exactly what you see.</p>
-                </div>
-                <div class="value-item">
-                    <div class="value-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="1.5"
-                             stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <circle cx="12" cy="8" r="7"></circle>
-                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
-                        </svg>
-                    </div>
-                    <h3 class="value-title">Premium Vehicles</h3>
-                    <p class="value-text">Each vehicle is rigorously verified for your safety.</p>
-                </div>
-            </div>
-        </section>
 
-        {% if not session.user_id and not session.is_admin %}
-            <!-- Registration Section-->
-            <section class="home-cta">
-                <div class="cta-content">
-                    <h2>Ready to Go?</h2>
-                    <p>Join OmniDrive today and find the perfect vehicle for your next adventure.</p>
-                    <a href="{{ url_for('register') }}" class="btn-cta">Create a Free Account</a>
+                <div class="bento-grid">
 
+                    <a href="{{ url_for('search', type='supercar') }}"
+                       class="bento-card item-tall-left">
+                        <img src="{{ url_for('static', filename='imgs/card_index_search/supercar.webp') }}"
+                             alt="Supercar">
+                        <div class="bento-overlay">
+                            <h3>Supercar</h3>
+                            <span>Explore &rarr;</span>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('search', type='car') }}"
+                       class="bento-card item-small-tr">
+                        <img src="{{ url_for('static', filename='imgs/card_index_search/car.webp') }}"
+                             alt="Car">
+                        <div class="bento-overlay">
+                            <h3>Car</h3>
+                            <span>Explore &rarr;</span>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('search', type='bike') }}"
+                       class="bento-card item-small-br">
+                        <img src="{{ url_for('static', filename='imgs/card_index_search/bike.webp') }}"
+                             alt="Bike">
+                        <div class="bento-overlay">
+                            <h3>Bike</h3>
+                            <span>Explore &rarr;</span>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('search', type='scooter') }}"
+                       class="bento-card item-small-tl">
+                        <img src="{{ url_for('static', filename='imgs/card_index_search/scooter.webp') }}"
+                             alt="Scooter">
+                        <div class="bento-overlay">
+                            <h3>Scooter</h3>
+                            <span>Explore &rarr;</span>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('search', type='motorcycle') }}"
+                       class="bento-card item-small-bl">
+                        <img src="{{ url_for('static', filename='imgs/card_index_search/motorcycle.webp') }}"
+                             alt="Motorcycle">
+                        <div class="bento-overlay">
+                            <h3>Motorcycle</h3>
+                            <span>Explore &rarr;</span>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('search', type='camper') }}"
+                       class="bento-card item-tall-right">
+                        <img src="{{ url_for('static', filename='imgs/card_index_search/camper.webp') }}"
+                             alt="Camper">
+                        <div class="bento-overlay">
+                            <h3>Camper</h3>
+                            <span>Explore &rarr;</span>
+                        </div>
+                    </a>
                 </div>
             </section>
-        {% endif %}
+
+            <!-- Value Proposition Section -->
+
+            <section class="value-prop-section">
+                <div class="value-prop-container">
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.5"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                <path d="M10 16l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="value-title">Flexible Cancellation</h3>
+                        <p class="value-text">Changing your plans? No problem, cancel with ease.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.5"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <path d="M9 12l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="value-title">No Hidden Costs</h3>
+                        <p class="value-text">Total transparency. You pay exactly what you see.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.5"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="7"></circle>
+                                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="value-title">Premium Vehicles</h3>
+                        <p class="value-text">Each vehicle is rigorously verified for your safety.</p>
+                    </div>
+                </div>
+            </section>
+
+            {% if not session.user_id and not session.is_admin %}
+                <!-- Registration Section-->
+                <section class="home-cta">
+                    <div class="cta-content">
+                        <h2>Ready to Go?</h2>
+                        <p>Join OmniDrive today and find the perfect vehicle for your next adventure.</p>
+                        <a href="{{ url_for('register') }}" class="btn-cta">Create a Free Account</a>
+
+                    </div>
+                </section>
+            {% endif %}
+        </div>
     </div>
 {% endblock content %}
 
