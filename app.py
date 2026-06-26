@@ -13,7 +13,7 @@ IMG_PATH = os.path.join('static', 'imgs')
 IMG_ALLOWED = {'jpg', 'png', 'webp', 'jpeg'}
 
 ADMIN_EMAIL = "admin.superuser@omnidrive.com"
-ADMIN_PWD = "20_Maggio_2026" 
+ADMIN_PWD = "admin" 
 
 TYPE_TO_TABLE = {
     'car':        'cars',
